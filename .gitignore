@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+data/
+.env
+.DS_Store
+*.egg-info/
+dist/
+build/
+smoke_no_db_report.json
+smoke_report.json
+restore_report.json
+.vscode/mcp.json

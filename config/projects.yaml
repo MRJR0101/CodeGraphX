@@ -1,0 +1,22 @@
+projects:
+  - name: PyToolbelt
+    root: C:/Dev/PROJECTS/00_PyToolbelt
+    exclude:
+      - .venv
+      - __pycache__
+      - node_modules
+      - dist
+      - build
+
+  - name: UniFlow
+    root: C:/Dev/PROJECTS/UniFlow
+    exclude:
+      - .venv
+      - __pycache__
+      - node_modules
+
+  - name: TaskRunner
+    root: C:/Dev/PROJECTS/TaskRunner
+    exclude:
+      - .venv
+      - __pycache__

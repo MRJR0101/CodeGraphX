@@ -1,0 +1,6 @@
+# Requirements for codegraphx
+# Auto-generated from actual imports
+# Date: 2026-02-09 09:19:47
+
+# No external dependencies required
+# This project uses only Python standard library

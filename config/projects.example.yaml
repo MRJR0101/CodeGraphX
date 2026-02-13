@@ -1,0 +1,15 @@
+projects:
+  - name: DemoPython
+    root: C:/path/to/python_project
+    exclude:
+      - .venv
+      - __pycache__
+      - dist
+      - build
+
+  - name: DemoJS
+    root: C:/path/to/javascript_project
+    exclude:
+      - node_modules
+      - dist
+      - build

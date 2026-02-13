@@ -1,0 +1,3 @@
+projects:
+  - name: DemoA
+    root: tests/fixtures/mini_repos/python_pkg_a
