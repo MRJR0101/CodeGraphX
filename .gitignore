@@ -1,13 +1,28 @@
-.venv/
+# Python
 __pycache__/
-*.pyc
-data/
-.env
-.DS_Store
-*.egg-info/
-dist/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual envs
+.venv/
+venv/
+*/.venv/
+
+# Build artifacts
 build/
-smoke_no_db_report.json
-smoke_report.json
-restore_report.json
-.vscode/mcp.json
+dist/
+*.egg-info/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.*

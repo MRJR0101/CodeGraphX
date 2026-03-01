@@ -17,7 +17,7 @@ try:
     import tree_sitter_language_pack as _tslp
     tslp = _tslp
 except Exception:  # noqa: BLE001
-    pass
+    tslp = None
 
 
 PY_IMPORT_RE = re.compile(r"^\s*(?:from\s+([a-zA-Z0-9_\.]+)\s+import|import\s+([a-zA-Z0-9_\.]+))")
@@ -177,13 +177,9 @@ def _parse_python_with_treesitter(
     )
 
 
-def _parse_python(file_text: str) -> tuple[list[dict[str, Any]], list[str], list[str], list[dict[str, Any]], int]:
-    if PY_TS_PARSER is not None:
-        try:
-            return _parse_python_with_treesitter(file_text)
-        except Exception:  # noqa: BLE001
-            pass
-
+def _parse_python_with_ast(
+    file_text: str,
+) -> tuple[list[dict[str, Any]], list[str], list[str], list[dict[str, Any]], int]:
     try:
         tree = ast.parse(file_text)
     except SyntaxError:
@@ -227,6 +223,15 @@ def _parse_python(file_text: str) -> tuple[list[dict[str, Any]], list[str], list
 
     line_count = len(file_text.splitlines())
     return functions, imports, calls, function_calls, line_count
+
+
+def _parse_python(file_text: str) -> tuple[list[dict[str, Any]], list[str], list[str], list[dict[str, Any]], int]:
+    if PY_TS_PARSER is not None:
+        try:
+            return _parse_python_with_treesitter(file_text)
+        except Exception:  # noqa: BLE001
+            return _parse_python_with_ast(file_text)
+    return _parse_python_with_ast(file_text)
 
 
 def _parse_js_like(file_text: str) -> tuple[list[dict[str, Any]], list[str], list[str], list[dict[str, Any]], int]:
@@ -411,7 +416,7 @@ def run_parse(settings: RuntimeSettings) -> tuple[Path, int]:
 
 
 def _sha1(text: str) -> str:
-    return hashlib.sha1(text.encode("utf-8")).hexdigest()
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
 def _row_hash(row: dict[str, Any]) -> str:

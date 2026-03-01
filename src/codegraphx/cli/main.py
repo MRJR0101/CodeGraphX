@@ -12,6 +12,7 @@ from codegraphx.cli.commands import (
     compare,
     delta,
     doctor,
+    enrich,
     extract,
     impact,
     load,
@@ -48,6 +49,7 @@ app.command("impact")(impact.command)
 app.command("delta")(delta.command)
 app.add_typer(snapshots.app, name="snapshots")
 app.add_typer(analyze.app, name="analyze")
+app.add_typer(enrich.app, name="enrich")
 
 
 @app.command("completions")

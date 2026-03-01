@@ -1,0 +1,32 @@
+[
+  {
+    "rank": 1,
+    "item": "Complete README TODO placeholders",
+    "impact": "high",
+    "effort": "low"
+  },
+  {
+    "rank": 2,
+    "item": "Increase behavior-oriented tests",
+    "impact": "high",
+    "effort": "medium"
+  },
+  {
+    "rank": 3,
+    "item": "Normalize CLI flags/output contracts",
+    "impact": "medium",
+    "effort": "low"
+  },
+  {
+    "rank": 4,
+    "item": "Adopt per-project VERIFY refresh automation",
+    "impact": "medium",
+    "effort": "low"
+  },
+  {
+    "rank": 5,
+    "item": "Add sqlite-backed run artifacts where useful",
+    "impact": "medium",
+    "effort": "medium"
+  }
+]

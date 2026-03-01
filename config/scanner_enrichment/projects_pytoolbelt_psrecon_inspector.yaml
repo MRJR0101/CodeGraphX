@@ -1,0 +1,17 @@
+projects:
+  - name: pytoolbelt_psrecon_inspector
+    root: C:/Dev/PROJECTS/00_PyToolbelt/04_Inspectors/PSRecon
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - node_modules
+      - __pycache__
+      - dist
+      - build
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - site-packages
+      - .idea
+      - .vscode

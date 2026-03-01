@@ -1,0 +1,1 @@
+{"rule_ids": ["S01_NO_OBVIOUS_SECRETS"], "path_globs": ["cli/main.py", "tests/test_all.py", "platform/policy/gates.py"]}

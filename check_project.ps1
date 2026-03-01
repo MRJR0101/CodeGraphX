@@ -5,13 +5,17 @@ $overallExit = 0
 function Invoke-Check {
     param(
         [string]$Name,
-        [string]$Command
+        [scriptblock]$Action
     )
 
     Write-Host ""
     Write-Host "==> $Name"
-    Invoke-Expression $Command
-    if ($LASTEXITCODE -ne 0) {
+    & $Action
+    $exitCode = $LASTEXITCODE
+    if ($null -eq $exitCode) {
+        $exitCode = 0
+    }
+    if ($exitCode -ne 0) {
         Write-Host "FAILED: $Name"
         $script:overallExit = 1
     } else {
@@ -19,11 +23,11 @@ function Invoke-Check {
     }
 }
 
-Invoke-Check "Sync dependencies" "uv sync --all-extras"
-Invoke-Check "Dependency compatibility" "uv pip check"
-Invoke-Check "Bytecode compile" "uv run python -m compileall -q ."
-Invoke-Check "Ruff lint" "uv run ruff check ."
-Invoke-Check "Mypy type check" "uv run mypy ."
+Invoke-Check "Sync dependencies" { uv sync --all-extras }
+Invoke-Check "Dependency compatibility" { uv pip check }
+Invoke-Check "Bytecode compile" { uv run python -m compileall -q . }
+Invoke-Check "Ruff lint" { uv run ruff check . }
+Invoke-Check "Mypy type check" { uv run mypy . }
 
 Write-Host ""
 Write-Host "==> Pytest"
@@ -37,7 +41,7 @@ if ($LASTEXITCODE -eq 0) {
     $overallExit = 1
 }
 
-Invoke-Check "Package build" "uv run python -m build"
+Invoke-Check "Package build" { uv run python -m build }
 
 Write-Host ""
 if ($overallExit -eq 0) {

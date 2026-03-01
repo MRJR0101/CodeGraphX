@@ -6,7 +6,7 @@ run:
 neo4j:
   uri: ${NEO4J_URI:-bolt://localhost:7687}
   user: ${NEO4J_USER:-neo4j}
-  password: ${NEO4J_PASSWORD:-codegraphx123}
+  password: ${NEO4J_PASSWORD:-}
   database: neo4j
 
 memgraph:

@@ -1,0 +1,51 @@
+{
+  "campaign_id": "campaign_20260301T110557Z",
+  "created_at": "2026-03-01T11:05:57.659915+00:00",
+  "execute": false,
+  "db_path": "C:\\Repository\\ProjectCatalog\\project_catalog.db",
+  "codegraphx_root": "C:\\Repository\\codegraphx",
+  "limit": 1,
+  "min_lines": 2000,
+  "root_prefix": "c:\\Dev\\PROJECTS",
+  "include_enriched": false,
+  "chunk_size": 6,
+  "max_projects": 0,
+  "tag_prefix": "campaign",
+  "resume": false,
+  "runs_total": 1,
+  "runs_planned": 1,
+  "runs_completed": 0,
+  "runs_failed": 0,
+  "runs_skipped_missing_path": 0,
+  "failed": false,
+  "manifest_path": "C:\\Repository\\codegraphx\\data\\enrichment_campaigns\\campaign_smoke.json",
+  "runs": [
+    {
+      "candidate_index": 1,
+      "name": ".gatekeeper-toolchain",
+      "path": "C:\\Dev\\PROJECTS\\.gatekeeper-toolchain",
+      "tag": "campaign_01__gatekeeper-toolchain",
+      "enrich_score": 118.941,
+      "already_enriched": 0,
+      "exists": true,
+      "command": [
+        "uv",
+        "run",
+        "python",
+        "C:\\Repository\\codegraphx\\scripts\\chunked_scan_enrich.py",
+        "--target-root",
+        "C:\\Dev\\PROJECTS\\.gatekeeper-toolchain",
+        "--chunk-size",
+        "6",
+        "--tag",
+        "campaign_01__gatekeeper-toolchain",
+        "--update-db",
+        "C:\\Repository\\ProjectCatalog\\project_catalog.db",
+        "--source-project",
+        ".gatekeeper-toolchain",
+        "--dry-run"
+      ],
+      "status": "planned"
+    }
+  ]
+}

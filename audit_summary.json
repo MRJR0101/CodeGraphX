@@ -1,0 +1,20 @@
+{
+  "project": "codegraphx",
+  "phase1": {
+    "structure_ok": true,
+    "verify_present": false,
+    "readme_present": false,
+    "known_issue_hits": 174
+  },
+  "phase4": {
+    "smoke_test": "skip(no python entrypoint)"
+  },
+  "phase5": {
+    "secret_hits": 4,
+    "injection_hits": 0,
+    "cve_status": "not_applicable"
+  },
+  "priority_score": 7,
+  "generated_at": "2026-02-20 03:52:15",
+  "phase4_tests": "not_applicable"
+}

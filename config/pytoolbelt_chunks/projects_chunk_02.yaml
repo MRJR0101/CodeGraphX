@@ -1,0 +1,139 @@
+projects:
+  - name: 06_Checkers
+    root: c:/Dev/PROJECTS/00_PyToolbelt/06_Checkers
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 07_Fixers
+    root: c:/Dev/PROJECTS/00_PyToolbelt/07_Fixers
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 08_Linters
+    root: c:/Dev/PROJECTS/00_PyToolbelt/08_Linters
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 09_Loggers
+    root: c:/Dev/PROJECTS/00_PyToolbelt/09_Loggers
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 09_SEO
+    root: c:/Dev/PROJECTS/00_PyToolbelt/09_SEO
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 10_Reporters
+    root: c:/Dev/PROJECTS/00_PyToolbelt/10_Reporters
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages

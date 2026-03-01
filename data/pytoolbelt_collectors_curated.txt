@@ -1,0 +1,41 @@
+File Collector Signals
+======================
+source_project: pytoolbelt
+source_path: C:\Dev\PROJECTS\00_PyToolbelt
+scan_artifact: C:\Repository\codegraphx\data\pytoolbelt_scan_complete\scan_merged_pytoolbelt.jsonl
+files_analyzed: 2622
+collector_files: 251
+collector_ratio: 0.095728
+missing_files: 3
+
+Top collectors:
+ 1. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\00_Meta\discover_requirements_v2.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+ 2. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\00_Meta\generate_tools_index.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+ 3. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\02_Scanners\CodeQuality_Scanning\ScriptCat\stream_scanner.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+ 4. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\02_Scanners\CodebaseScanner\codebase_scanner.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+ 5. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\06_Checkers\DoD_Checklist_Kit\dod_checklist_kit\audit.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+ 6. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\06_Checkers\DoD_Checklist_Kit\scripts\discover_requirements.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+ 7. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\09_SEO\90_GRAVEYARD\ResumableCrawler\audit_user_folder.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+ 8. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\17_URLs\URL-Forensics\url_forensics_extract_v2.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+ 9. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\17_URLs\URLextractBuildSqlite\url_extract_build_sqlite.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+10. score=8.0 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\19_SEO\90_GRAVEYARD\ResumableCrawler\audit_user_folder.py | evidence=aggregate,filter,fs_imports,metadata,name_hint,read,walk
+11. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\00_Meta\ToolbeltNameNormalizer\toolbelt_name_normalizer.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+12. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\02_Scanners\CodeQuality_Scanning\AnalyzeScripts\analyze_scripts.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+13. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\03_Analyzers\FileAnalysis\file_correlation_finder.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+14. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\06_Checkers\DoD_Checklist_Kit\scripts\fix_remaining.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+15. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\06_Checkers\DoD_Checklist_Kit\scripts\preflight_check.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+16. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\06_Checkers\find_zero_byte_files\find_zero_byte_files.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+17. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\07_Fixers\CodeQuality_Repair\RestoreVirtualEnvironmentsUVfiles\code_normalize_pro.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+18. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\07_Fixers\CodeQuality_Repair\RestoreVirtualEnvironmentsUVfiles\repair_project.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+19. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\07_Fixers\CodeQuality_Repair\RestoreVirtualEnvironmentsUVfiles\repair_projects.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+20. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\Detection\GoldFinder\gold_finder.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+21. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\Detection\GoldFinder\simple_gold_finder.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+22. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\Linting\CodeNormalizeUTF8\code_normalize_pro.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+23. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\PoSharp\src\posharp\analysis\project.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+24. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\ProjectHealth\ReadmeForge\ReadmeForge.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+25. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\ProjectHealth\ReadmeForge\ReadmeForge_patched.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+26. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\ProjectHealth\ReadmeForge\ReadmeForge_patched_v2.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+27. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\ProjectHealth\ReadmeForge\_archive\ReadmeForge_pre_review.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+28. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\ProjectHealth\ReadmeForge\test_readmeforge_v3_security.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+29. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\ProjectHealth\ReadmeForge\test_readmeforge_v3_security_patched.py | evidence=aggregate,filter,fs_imports,metadata,read,walk
+30. score=7.5 | lang=python | C:\Dev\PROJECTS\00_PyToolbelt\08_Linters\ProjectHealth\ReadmeForge\test_readmeforge_v3_security_patched_v2.py | evidence=aggregate,filter,fs_imports,metadata,read,walk

@@ -90,7 +90,7 @@ def load_settings(settings_path: str | Path) -> RuntimeSettings:
         max_files=int(run.get("max_files", 0) or 0),
         neo4j_uri=str(neo4j.get("uri", "bolt://localhost:7687")),
         neo4j_user=str(neo4j.get("user", "neo4j")),
-        neo4j_password=str(neo4j.get("password", "codegraphx123")),
+        neo4j_password=str(neo4j.get("password", "")),
         neo4j_database=str(neo4j.get("database", "neo4j")),
         meilisearch_enabled=bool(meili.get("enabled", False)),
         meilisearch_host=str(meili.get("host", "localhost")),

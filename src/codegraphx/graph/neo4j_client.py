@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from neo4j import GraphDatabase
+from neo4j import Driver, GraphDatabase
 from neo4j.exceptions import Neo4jError
 
 from codegraphx.core.config import RuntimeSettings
@@ -28,7 +28,11 @@ class LoadResult:
     state_hashes: dict[str, str]
 
 
-def _driver(settings: RuntimeSettings):
+def _driver(settings: RuntimeSettings) -> Driver:
+    if not settings.neo4j_password:
+        raise ValueError(
+            "Neo4j password is required. Set NEO4J_PASSWORD or neo4j.password in settings."
+        )
     return GraphDatabase.driver(
         settings.neo4j_uri,
         auth=(settings.neo4j_user, settings.neo4j_password),
@@ -82,7 +86,7 @@ def _event_hash(row: dict[str, Any]) -> str:
     import json
 
     payload = json.dumps(row, sort_keys=True, ensure_ascii=False)
-    return hashlib.sha1(payload.encode("utf-8")).hexdigest()
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def _prepare_incremental_batch(

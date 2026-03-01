@@ -1,0 +1,10 @@
+{
+  "events_file": "data\\events.jsonl",
+  "force_full": false,
+  "total_input_events": 107,
+  "unique_events": 90,
+  "loaded_events": 0,
+  "skipped_events": 90,
+  "loaded_nodes": 0,
+  "loaded_edges": 0
+}

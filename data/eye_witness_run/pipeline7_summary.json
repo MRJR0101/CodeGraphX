@@ -1,0 +1,250 @@
+{
+  "source_path": "c:\\Dev\\PROJECTS\\Eye-Witness",
+  "phase1": {
+    "ast_files": 78,
+    "functions": 242,
+    "classes": 16
+  },
+  "phase2": {
+    "arch_nodes": 684,
+    "arch_relationships": 2170,
+    "arch_node_labels": {
+      "Repository": 1,
+      "File": 78,
+      "Module": 78,
+      "Package": 57,
+      "Function": 242,
+      "Class": 16,
+      "ExternalSymbol": 212
+    },
+    "arch_relationship_types": {
+      "CONTAINS": 471,
+      "IMPORTS": 296,
+      "CALLS": 1403
+    },
+    "cycles": 0,
+    "dead_modules": 0,
+    "hotspot_top10": [
+      [
+        "main",
+        418
+      ],
+      [
+        "print",
+        175
+      ],
+      [
+        "separator",
+        71
+      ],
+      [
+        "test_eye_witness",
+        64
+      ],
+      [
+        "Eye-Witness",
+        58
+      ],
+      [
+        "demo_production_stdlib",
+        47
+      ],
+      [
+        "shutdown",
+        45
+      ],
+      [
+        "get_logger",
+        43
+      ],
+      [
+        "info",
+        43
+      ],
+      [
+        "init",
+        42
+      ]
+    ]
+  },
+  "phase3": {
+    "cpg_nodes": 13896,
+    "cpg_relationships": 15799,
+    "cpg_node_labels": {
+      "Variable": 6363,
+      "Parameter": 485,
+      "Literal": 1884,
+      "Statement": 1774,
+      "Expression": 3106,
+      "ControlStructure": 284
+    },
+    "cpg_relationship_types": {
+      "AST_PARENT": 13654,
+      "FLOWS_TO": 1864,
+      "BRANCHES_TO": 142,
+      "RETURNS_TO": 139
+    }
+  },
+  "phase4": {
+    "total_nodes_analyzed": 258,
+    "avg_complexity": 1.0,
+    "max_complexity": 1,
+    "risk_flagged_nodes": 22,
+    "risk_details": [
+      {
+        "node_id": "327de4d1-a1ec-462a-911e-82bbc5e25a3c",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "e95df08e-6a22-4eea-b15d-a12fabbe4bba",
+        "flags": [
+          "GOD_CLASS: connections=30"
+        ]
+      },
+      {
+        "node_id": "27c62633-92b2-478d-9206-f93bea08f043",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "9f5dc111-9550-4cbe-b5a5-a5db03a38264",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "60bb8da9-a89a-4c20-81b3-0d4ef3f4e834",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "9868de1d-1370-4c69-8e0d-cf98594a4cf0",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "f69c3d92-29ae-4cbd-b97a-87f99db472a4",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "047c081b-7fb3-4a56-9b9f-d84c1019c93d",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "20f86fa5-3c20-4942-a36a-115629c4eea7",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "f177e9b8-8c5b-44bf-9f0e-0115e6d48983",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "15735532-fe64-4dc3-aebe-b6297b9090c9",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "8ca1c37e-38a8-4cc8-949d-b3c2b5434296",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "29ddde97-bb6c-4163-b75e-437ad765cff8",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "3eb7aae2-253d-46db-a4a8-ea3247367a3f",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "1f91b3f3-e437-4435-956c-e30b131e51b1",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "cdde4479-cddb-46c1-810f-64e112de178a",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "72203a23-e3de-442a-b668-2a33d4c9d1db",
+        "flags": [
+          "CYCLIC_DEPENDENCY"
+        ]
+      },
+      {
+        "node_id": "ecc3ffaf-eebd-48e5-afa6-99fd0ca3d14e",
+        "flags": [
+          "DEEP_CHAIN: depth=6"
+        ]
+      },
+      {
+        "node_id": "5f45d7ac-51e3-4da4-8183-9eb5b7d943c1",
+        "flags": [
+          "DEEP_CHAIN: depth=6"
+        ]
+      },
+      {
+        "node_id": "620872e3-6b94-4668-851b-c90763743f38",
+        "flags": [
+          "DEEP_CHAIN: depth=6"
+        ]
+      },
+      {
+        "node_id": "c6727244-953a-412e-93db-f008307a6a57",
+        "flags": [
+          "DEEP_CHAIN: depth=6"
+        ]
+      },
+      {
+        "node_id": "40b43ad2-d851-4afc-9f09-6dc245c1a836",
+        "flags": [
+          "DEEP_CHAIN: depth=6"
+        ]
+      }
+    ]
+  },
+  "phase5": {
+    "semantic_nodes": 258,
+    "semantic_query_results": 237
+  },
+  "phase6": {
+    "query_validation_valid": true,
+    "query_validation_errors": [],
+    "translator_prompt_chars": 2270,
+    "translator_output_valid": true,
+    "summary_prompt_chars": 432
+  },
+  "phase7": {
+    "repo_fingerprint": "1abce1a7b27ccddb16757088fc5f22f9b01154895c8c80ae292441e9416bddd0",
+    "performance": {
+      "phase1_parsing": "467.5ms",
+      "phase2_architecture": "319.1ms",
+      "phase3_cpg": "251.7ms",
+      "phase4_metrics": "929.9ms",
+      "phase5_semantic": "1m 39.9s",
+      "ingestion": "1m 41.9s"
+    }
+  }
+}

@@ -1,0 +1,4330 @@
+{
+  "files": {
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\celery_worker\\worker.py": {
+      "hash": "ab08123b87578aacc59c8eb81985c4204ee66849304c05113d2925ee5e7fb03c",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\celery_worker\\worker.py",
+        "rel_path": "examples/celery_worker/worker.py",
+        "language": "python",
+        "line_count": 7,
+        "functions": [
+          {
+            "name": "configure_worker",
+            "line": 5
+          }
+        ],
+        "imports": [
+          "eye_witness",
+          "eye_witness.integrations"
+        ],
+        "calls": [
+          "init",
+          "install_celery"
+        ],
+        "function_calls": [
+          {
+            "name": "configure_worker",
+            "line": 5,
+            "calls": [
+              "init",
+              "install_celery"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\cli_demo.py": {
+      "hash": "8f4ed30017168681ccdb048ca3b5187066d01e991cf1753bcfc0e94f7dd3f513",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\cli_demo.py",
+        "rel_path": "examples/cli_demo.py",
+        "language": "python",
+        "line_count": 140,
+        "functions": [
+          {
+            "name": "simulate_database_query",
+            "line": 33
+          },
+          {
+            "name": "process_order",
+            "line": 44
+          },
+          {
+            "name": "simulate_failure",
+            "line": 78
+          },
+          {
+            "name": "should_simulate_failure",
+            "line": 91
+          },
+          {
+            "name": "main",
+            "line": 100
+          }
+        ],
+        "imports": [
+          "eye_witness",
+          "os",
+          "sys",
+          "time"
+        ],
+        "calls": [
+          "insert",
+          "dirname",
+          "add_breadcrumb",
+          "sleep",
+          "get_tracer",
+          "get_logger",
+          "get_logger",
+          "init",
+          "get_logger",
+          "clear_context",
+          "bind_context",
+          "info",
+          "process_order",
+          "info",
+          "should_simulate_failure",
+          "info",
+          "shutdown",
+          "main",
+          "dirname",
+          "start_as_current_span",
+          "set_attribute",
+          "info",
+          "info",
+          "lower",
+          "simulate_failure",
+          "info",
+          "range",
+          "trace_span",
+          "debug",
+          "sleep",
+          "trace_span",
+          "simulate_database_query",
+          "info",
+          "trace_span",
+          "add_breadcrumb",
+          "sleep",
+          "len",
+          "exception",
+          "capture_exception",
+          "warning",
+          "getenv",
+          "len",
+          "strip",
+          "len",
+          "getenv"
+        ],
+        "function_calls": [
+          {
+            "name": "simulate_database_query",
+            "line": 33,
+            "calls": [
+              "add_breadcrumb",
+              "range",
+              "sleep"
+            ]
+          },
+          {
+            "name": "process_order",
+            "line": 44,
+            "calls": [
+              "add_breadcrumb",
+              "debug",
+              "get_logger",
+              "get_tracer",
+              "info",
+              "len",
+              "set_attribute",
+              "simulate_database_query",
+              "sleep",
+              "start_as_current_span",
+              "trace_span"
+            ]
+          },
+          {
+            "name": "simulate_failure",
+            "line": 78,
+            "calls": [
+              "capture_exception",
+              "exception",
+              "get_logger",
+              "warning"
+            ]
+          },
+          {
+            "name": "should_simulate_failure",
+            "line": 91,
+            "calls": [
+              "getenv",
+              "lower",
+              "strip"
+            ]
+          },
+          {
+            "name": "main",
+            "line": 100,
+            "calls": [
+              "bind_context",
+              "clear_context",
+              "get_logger",
+              "getenv",
+              "info",
+              "init",
+              "process_order",
+              "should_simulate_failure",
+              "shutdown",
+              "simulate_failure"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\django_app\\settings_snippet.py": {
+      "hash": "757e298c09bda53a453a016b4f5b081981454f64d7053dfeba6672cb1b286ce1",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\django_app\\settings_snippet.py",
+        "rel_path": "examples/django_app/settings_snippet.py",
+        "language": "python",
+        "line_count": 3,
+        "functions": [],
+        "imports": [],
+        "calls": [],
+        "function_calls": []
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\fastapi_app\\main.py": {
+      "hash": "e43480d88545d1d57fca613a6ffcf6db5f03d9e661f9bff3dac8e1902c080661",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\fastapi_app\\main.py",
+        "rel_path": "examples/fastapi_app/main.py",
+        "language": "python",
+        "line_count": 8,
+        "functions": [
+          {
+            "name": "create_app",
+            "line": 5
+          }
+        ],
+        "imports": [
+          "eye_witness",
+          "eye_witness.integrations"
+        ],
+        "calls": [
+          "init",
+          "install_fastapi"
+        ],
+        "function_calls": [
+          {
+            "name": "create_app",
+            "line": 5,
+            "calls": [
+              "init",
+              "install_fastapi"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\flask_app\\app.py": {
+      "hash": "97741908770430c586f9e46914c06e5d95bb8a5a48d6f5ff4f2cef2559a25b12",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\flask_app\\app.py",
+        "rel_path": "examples/flask_app/app.py",
+        "language": "python",
+        "line_count": 8,
+        "functions": [
+          {
+            "name": "configure_app",
+            "line": 5
+          }
+        ],
+        "imports": [
+          "eye_witness",
+          "eye_witness.integrations"
+        ],
+        "calls": [
+          "init",
+          "install_flask"
+        ],
+        "function_calls": [
+          {
+            "name": "configure_app",
+            "line": 5,
+            "calls": [
+              "init",
+              "install_flask"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\integrations_demo.py": {
+      "hash": "879705a398f9c519f40128186b62176dd61051e837dcdae119ceca1c19940699",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\examples\\integrations_demo.py",
+        "rel_path": "examples/integrations_demo.py",
+        "language": "python",
+        "line_count": 37,
+        "functions": [
+          {
+            "name": "fastapi_example",
+            "line": 15
+          },
+          {
+            "name": "flask_example",
+            "line": 19
+          },
+          {
+            "name": "celery_example",
+            "line": 23
+          },
+          {
+            "name": "django_example",
+            "line": 27
+          }
+        ],
+        "imports": [
+          "eye_witness"
+        ],
+        "calls": [
+          "install_fastapi",
+          "install_flask",
+          "install_celery"
+        ],
+        "function_calls": [
+          {
+            "name": "fastapi_example",
+            "line": 15,
+            "calls": [
+              "install_fastapi"
+            ]
+          },
+          {
+            "name": "flask_example",
+            "line": 19,
+            "calls": [
+              "install_flask"
+            ]
+          },
+          {
+            "name": "celery_example",
+            "line": 23,
+            "calls": [
+              "install_celery"
+            ]
+          },
+          {
+            "name": "django_example",
+            "line": 27,
+            "calls": []
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\functions\\structlog_demo.py": {
+      "hash": "37ff7a923e643fdab35100a12608c1ad38c03217ebf538eccb95ad4e4bd7542e",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\functions\\structlog_demo.py",
+        "rel_path": "functions/structlog_demo.py",
+        "language": "python",
+        "line_count": 324,
+        "functions": [
+          {
+            "name": "separator",
+            "line": 24
+          },
+          {
+            "name": "reset_structlog",
+            "line": 30
+          },
+          {
+            "name": "reset_stdlib_logging",
+            "line": 36
+          },
+          {
+            "name": "demo_production_stdlib",
+            "line": 45
+          },
+          {
+            "name": "demo_high_performance",
+            "line": 95
+          },
+          {
+            "name": "demo_auto_detect",
+            "line": 129
+          },
+          {
+            "name": "demo_contextvars",
+            "line": 168
+          },
+          {
+            "name": "demo_processor_formatter",
+            "line": 200
+          },
+          {
+            "name": "demo_recommended_pipeline",
+            "line": 236
+          },
+          {
+            "name": "print_best_practices",
+            "line": 290
+          },
+          {
+            "name": "main",
+            "line": 308
+          },
+          {
+            "name": "handle_request",
+            "line": 184
+          },
+          {
+            "name": "add_custom_context",
+            "line": 242
+          }
+        ],
+        "imports": [
+          "logging",
+          "orjson",
+          "structlog",
+          "structlog.contextvars",
+          "sys"
+        ],
+        "calls": [
+          "print",
+          "print",
+          "print",
+          "reset_defaults",
+          "clear_contextvars",
+          "getLogger",
+          "separator",
+          "reset_structlog",
+          "reset_stdlib_logging",
+          "configure",
+          "StreamHandler",
+          "setFormatter",
+          "getLogger",
+          "addHandler",
+          "setLevel",
+          "get_logger",
+          "info",
+          "warning",
+          "reset_stdlib_logging",
+          "separator",
+          "reset_structlog",
+          "configure",
+          "get_logger",
+          "debug",
+          "info",
+          "warning",
+          "separator",
+          "reset_structlog",
+          "isatty",
+          "print",
+          "configure",
+          "get_logger",
+          "info",
+          "separator",
+          "reset_structlog",
+          "configure",
+          "get_logger",
+          "handle_request",
+          "handle_request",
+          "separator",
+          "reset_structlog",
+          "reset_stdlib_logging",
+          "ProcessorFormatter",
+          "StreamHandler",
+          "setFormatter",
+          "getLogger",
+          "addHandler",
+          "setLevel",
+          "getLogger",
+          "info",
+          "warning",
+          "reset_stdlib_logging",
+          "separator",
+          "reset_structlog",
+          "reset_stdlib_logging",
+          "configure",
+          "StreamHandler",
+          "setFormatter",
+          "getLogger",
+          "addHandler",
+          "setLevel",
+          "clear_contextvars",
+          "bind_contextvars",
+          "get_logger",
+          "info",
+          "reset_stdlib_logging",
+          "separator",
+          "enumerate",
+          "print",
+          "print",
+          "print",
+          "demo_production_stdlib",
+          "demo_high_performance",
+          "demo_auto_detect",
+          "demo_contextvars",
+          "demo_processor_formatter",
+          "demo_recommended_pipeline",
+          "print_best_practices",
+          "print",
+          "main",
+          "removeHandler",
+          "Formatter",
+          "TimeStamper",
+          "ValueError",
+          "clear_contextvars",
+          "bind_contextvars",
+          "info",
+          "info",
+          "info",
+          "info",
+          "Formatter",
+          "print",
+          "LoggerFactory",
+          "exception",
+          "print",
+          "make_filtering_bound_logger",
+          "BytesLoggerFactory",
+          "exception",
+          "JSONRenderer",
+          "LoggerFactory",
+          "PositionalArgumentsFormatter",
+          "TimeStamper",
+          "StackInfoRenderer",
+          "UnicodeDecoder",
+          "CallsiteParameterAdder",
+          "JSONRenderer",
+          "TimeStamper",
+          "JSONRenderer",
+          "ConsoleRenderer",
+          "JSONRenderer",
+          "TimeStamper",
+          "JSONRenderer",
+          "TimeStamper",
+          "StackInfoRenderer",
+          "TimeStamper",
+          "StackInfoRenderer",
+          "JSONRenderer"
+        ],
+        "function_calls": [
+          {
+            "name": "separator",
+            "line": 24,
+            "calls": [
+              "print"
+            ]
+          },
+          {
+            "name": "reset_structlog",
+            "line": 30,
+            "calls": [
+              "clear_contextvars",
+              "reset_defaults"
+            ]
+          },
+          {
+            "name": "reset_stdlib_logging",
+            "line": 36,
+            "calls": [
+              "getLogger",
+              "removeHandler"
+            ]
+          },
+          {
+            "name": "demo_production_stdlib",
+            "line": 45,
+            "calls": [
+              "CallsiteParameterAdder",
+              "Formatter",
+              "JSONRenderer",
+              "LoggerFactory",
+              "PositionalArgumentsFormatter",
+              "StackInfoRenderer",
+              "StreamHandler",
+              "TimeStamper",
+              "UnicodeDecoder",
+              "addHandler",
+              "configure",
+              "exception",
+              "getLogger",
+              "get_logger",
+              "info",
+              "reset_stdlib_logging",
+              "reset_structlog",
+              "separator",
+              "setFormatter",
+              "setLevel",
+              "warning"
+            ]
+          },
+          {
+            "name": "demo_high_performance",
+            "line": 95,
+            "calls": [
+              "BytesLoggerFactory",
+              "JSONRenderer",
+              "TimeStamper",
+              "configure",
+              "debug",
+              "get_logger",
+              "info",
+              "make_filtering_bound_logger",
+              "print",
+              "reset_structlog",
+              "separator",
+              "warning"
+            ]
+          },
+          {
+            "name": "demo_auto_detect",
+            "line": 129,
+            "calls": [
+              "ConsoleRenderer",
+              "JSONRenderer",
+              "TimeStamper",
+              "ValueError",
+              "configure",
+              "exception",
+              "get_logger",
+              "info",
+              "isatty",
+              "print",
+              "reset_structlog",
+              "separator"
+            ]
+          },
+          {
+            "name": "demo_contextvars",
+            "line": 168,
+            "calls": [
+              "JSONRenderer",
+              "TimeStamper",
+              "bind_contextvars",
+              "clear_contextvars",
+              "configure",
+              "get_logger",
+              "handle_request",
+              "info",
+              "reset_structlog",
+              "separator"
+            ]
+          },
+          {
+            "name": "demo_processor_formatter",
+            "line": 200,
+            "calls": [
+              "JSONRenderer",
+              "ProcessorFormatter",
+              "StackInfoRenderer",
+              "StreamHandler",
+              "TimeStamper",
+              "addHandler",
+              "getLogger",
+              "info",
+              "reset_stdlib_logging",
+              "reset_structlog",
+              "separator",
+              "setFormatter",
+              "setLevel",
+              "warning"
+            ]
+          },
+          {
+            "name": "demo_recommended_pipeline",
+            "line": 236,
+            "calls": [
+              "Formatter",
+              "JSONRenderer",
+              "LoggerFactory",
+              "StackInfoRenderer",
+              "StreamHandler",
+              "TimeStamper",
+              "addHandler",
+              "bind_contextvars",
+              "clear_contextvars",
+              "configure",
+              "getLogger",
+              "get_logger",
+              "info",
+              "reset_stdlib_logging",
+              "reset_structlog",
+              "separator",
+              "setFormatter",
+              "setLevel"
+            ]
+          },
+          {
+            "name": "print_best_practices",
+            "line": 290,
+            "calls": [
+              "enumerate",
+              "print",
+              "separator"
+            ]
+          },
+          {
+            "name": "main",
+            "line": 308,
+            "calls": [
+              "demo_auto_detect",
+              "demo_contextvars",
+              "demo_high_performance",
+              "demo_processor_formatter",
+              "demo_production_stdlib",
+              "demo_recommended_pipeline",
+              "print",
+              "print_best_practices"
+            ]
+          },
+          {
+            "name": "handle_request",
+            "line": 184,
+            "calls": [
+              "bind_contextvars",
+              "clear_contextvars",
+              "info"
+            ]
+          },
+          {
+            "name": "add_custom_context",
+            "line": 242,
+            "calls": []
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\benchmark_logging.py": {
+      "hash": "dedc518f28d5cbf102894140889d31b789342a715edd6333d74f56381bb28042",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\benchmark_logging.py",
+        "rel_path": "scripts/benchmark_logging.py",
+        "language": "python",
+        "line_count": 48,
+        "functions": [
+          {
+            "name": "run_once",
+            "line": 17
+          },
+          {
+            "name": "main",
+            "line": 38
+          }
+        ],
+        "imports": [
+          "__future__",
+          "contextlib",
+          "eye_witness",
+          "os",
+          "time"
+        ],
+        "calls": [
+          "init",
+          "get_logger",
+          "perf_counter",
+          "shutdown",
+          "run_once",
+          "print",
+          "print",
+          "print",
+          "main",
+          "open",
+          "redirect_stdout",
+          "redirect_stderr",
+          "range",
+          "perf_counter",
+          "info"
+        ],
+        "function_calls": [
+          {
+            "name": "run_once",
+            "line": 17,
+            "calls": [
+              "get_logger",
+              "info",
+              "init",
+              "open",
+              "perf_counter",
+              "range",
+              "redirect_stderr",
+              "redirect_stdout",
+              "shutdown"
+            ]
+          },
+          {
+            "name": "main",
+            "line": 38,
+            "calls": [
+              "print",
+              "run_once"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\benchmark_metrics.py": {
+      "hash": "debcc226e3cbbddfacce07e8ee11657ea1026e0b939197f9b4a0f230e6c572f4",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\benchmark_metrics.py",
+        "rel_path": "scripts/benchmark_metrics.py",
+        "language": "python",
+        "line_count": 33,
+        "functions": [
+          {
+            "name": "main",
+            "line": 12
+          }
+        ],
+        "imports": [
+          "__future__",
+          "eye_witness",
+          "time"
+        ],
+        "calls": [
+          "init",
+          "metric_counter",
+          "perf_counter",
+          "range",
+          "shutdown",
+          "print",
+          "print",
+          "print",
+          "main",
+          "add",
+          "perf_counter"
+        ],
+        "function_calls": [
+          {
+            "name": "main",
+            "line": 12,
+            "calls": [
+              "add",
+              "init",
+              "metric_counter",
+              "perf_counter",
+              "print",
+              "range",
+              "shutdown"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\benchmark_tracing.py": {
+      "hash": "7a58c8dca1a9b3ae49b3725ea55088bd27da28a8a79eb16540a562cd082e0aa6",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\benchmark_tracing.py",
+        "rel_path": "scripts/benchmark_tracing.py",
+        "language": "python",
+        "line_count": 27,
+        "functions": [
+          {
+            "name": "main",
+            "line": 12
+          }
+        ],
+        "imports": [
+          "__future__",
+          "eye_witness",
+          "time"
+        ],
+        "calls": [
+          "init",
+          "perf_counter",
+          "range",
+          "shutdown",
+          "print",
+          "print",
+          "print",
+          "main",
+          "perf_counter",
+          "trace_span"
+        ],
+        "function_calls": [
+          {
+            "name": "main",
+            "line": 12,
+            "calls": [
+              "init",
+              "perf_counter",
+              "print",
+              "range",
+              "shutdown",
+              "trace_span"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\check_api_parity.py": {
+      "hash": "7c8258a32ec8a6e7548ebebae556d784eaa14c3df82f67140e546c023c949f5f",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\check_api_parity.py",
+        "rel_path": "scripts/check_api_parity.py",
+        "language": "python",
+        "line_count": 58,
+        "functions": [
+          {
+            "name": "_read_all_symbols",
+            "line": 19
+          },
+          {
+            "name": "main",
+            "line": 36
+          }
+        ],
+        "imports": [
+          "__future__",
+          "ast",
+          "pathlib"
+        ],
+        "calls": [
+          "read_text",
+          "parse",
+          "ValueError",
+          "_read_all_symbols",
+          "sorted",
+          "sorted",
+          "print",
+          "SystemExit",
+          "resolve",
+          "isinstance",
+          "_read_all_symbols",
+          "main",
+          "str",
+          "print",
+          "print",
+          "Path",
+          "join",
+          "join",
+          "isinstance",
+          "isinstance",
+          "set",
+          "isinstance",
+          "isinstance",
+          "append"
+        ],
+        "function_calls": [
+          {
+            "name": "_read_all_symbols",
+            "line": 19,
+            "calls": [
+              "ValueError",
+              "append",
+              "isinstance",
+              "parse",
+              "read_text",
+              "set",
+              "str"
+            ]
+          },
+          {
+            "name": "main",
+            "line": 36,
+            "calls": [
+              "_read_all_symbols",
+              "join",
+              "print",
+              "sorted"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\generate_api_docs.py": {
+      "hash": "55a1a00d911c4e6ba8faae0561bddf358e82a11cac4116944e3403a4aa061916",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\generate_api_docs.py",
+        "rel_path": "scripts/generate_api_docs.py",
+        "language": "python",
+        "line_count": 21,
+        "functions": [
+          {
+            "name": "main",
+            "line": 12
+          }
+        ],
+        "imports": [
+          "__future__",
+          "eye_witness",
+          "pathlib"
+        ],
+        "calls": [
+          "Path",
+          "sorted",
+          "write_text",
+          "print",
+          "main",
+          "getattr",
+          "join"
+        ],
+        "function_calls": [
+          {
+            "name": "main",
+            "line": 12,
+            "calls": [
+              "Path",
+              "getattr",
+              "join",
+              "print",
+              "sorted",
+              "write_text"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\migrate_v1_api.py": {
+      "hash": "cf52316b70ceb98de3f4c80e62c43fc3252f2ba9423e1cd45e8502812c061e39",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\migrate_v1_api.py",
+        "rel_path": "scripts/migrate_v1_api.py",
+        "language": "python",
+        "line_count": 78,
+        "functions": [
+          {
+            "name": "migrate_file",
+            "line": 27
+          },
+          {
+            "name": "main",
+            "line": 55
+          }
+        ],
+        "imports": [
+          "__future__",
+          "argparse",
+          "pathlib"
+        ],
+        "calls": [
+          "read_text",
+          "items",
+          "ArgumentParser",
+          "add_argument",
+          "add_argument",
+          "parse_args",
+          "Path",
+          "rglob",
+          "print",
+          "print",
+          "SystemExit",
+          "replace",
+          "replace",
+          "replace",
+          "migrate_file",
+          "main",
+          "write_text",
+          "print"
+        ],
+        "function_calls": [
+          {
+            "name": "migrate_file",
+            "line": 27,
+            "calls": [
+              "items",
+              "read_text",
+              "replace",
+              "write_text"
+            ]
+          },
+          {
+            "name": "main",
+            "line": 55,
+            "calls": [
+              "ArgumentParser",
+              "Path",
+              "add_argument",
+              "migrate_file",
+              "parse_args",
+              "print",
+              "rglob"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\refresh_lockfile.py": {
+      "hash": "92f1a68dda4b58191616234d8d7e16476ab5fe8051243bde644d52df7d71a241",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\refresh_lockfile.py",
+        "rel_path": "scripts/refresh_lockfile.py",
+        "language": "python",
+        "line_count": 40,
+        "functions": [
+          {
+            "name": "main",
+            "line": 17
+          }
+        ],
+        "imports": [
+          "__future__",
+          "pathlib",
+          "subprocess",
+          "sys"
+        ],
+        "calls": [
+          "Path",
+          "run",
+          "check_returncode",
+          "splitlines",
+          "write_text",
+          "print",
+          "SystemExit",
+          "startswith",
+          "append",
+          "main",
+          "startswith",
+          "join",
+          "sorted"
+        ],
+        "function_calls": [
+          {
+            "name": "main",
+            "line": 17,
+            "calls": [
+              "append",
+              "check_returncode",
+              "join",
+              "print",
+              "run",
+              "sorted",
+              "splitlines",
+              "startswith",
+              "write_text"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\release_check.py": {
+      "hash": "5f1f9c6e28f6d3356c39f9cdaeb28dacea6b9c9d0f2f57b67f5aa2295ea6de30",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\scripts\\release_check.py",
+        "rel_path": "scripts/release_check.py",
+        "language": "python",
+        "line_count": 51,
+        "functions": [
+          {
+            "name": "run",
+            "line": 14
+          },
+          {
+            "name": "main",
+            "line": 20
+          }
+        ],
+        "imports": [
+          "__future__",
+          "subprocess",
+          "sys"
+        ],
+        "calls": [
+          "run",
+          "strip",
+          "print",
+          "SystemExit",
+          "print",
+          "run",
+          "print",
+          "print",
+          "main",
+          "print",
+          "print",
+          "print"
+        ],
+        "function_calls": [
+          {
+            "name": "run",
+            "line": 14,
+            "calls": [
+              "run",
+              "strip"
+            ]
+          },
+          {
+            "name": "main",
+            "line": 20,
+            "calls": [
+              "print",
+              "run"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\__init__.py": {
+      "hash": "5aeddb3d373e44288b6dcb8d39e7404bf169cc6d143b0a27c5899d3810d3a285",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\__init__.py",
+        "rel_path": "src/eye_witness/__init__.py",
+        "language": "python",
+        "line_count": 75,
+        "functions": [],
+        "imports": [
+          "eye_witness._compat",
+          "eye_witness._config",
+          "eye_witness._context",
+          "eye_witness._init",
+          "eye_witness._logging",
+          "eye_witness._metrics",
+          "eye_witness._sentry",
+          "eye_witness._tracing",
+          "eye_witness.integrations"
+        ],
+        "calls": [],
+        "function_calls": []
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_compat.py": {
+      "hash": "43d74d777476aa520a8f1d0571d1e251d5fa9e0c0888e6c81b767ff4084a9596",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_compat.py",
+        "rel_path": "src/eye_witness/_compat.py",
+        "language": "python",
+        "line_count": 29,
+        "functions": [
+          {
+            "name": "init_observability",
+            "line": 14
+          },
+          {
+            "name": "get_structured_logger",
+            "line": 23
+          }
+        ],
+        "imports": [
+          "__future__",
+          "eye_witness._init",
+          "eye_witness._logging",
+          "typing",
+          "warnings"
+        ],
+        "calls": [
+          "warn",
+          "init",
+          "warn",
+          "get_logger"
+        ],
+        "function_calls": [
+          {
+            "name": "init_observability",
+            "line": 14,
+            "calls": [
+              "init",
+              "warn"
+            ]
+          },
+          {
+            "name": "get_structured_logger",
+            "line": 23,
+            "calls": [
+              "get_logger",
+              "warn"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_config.py": {
+      "hash": "8438558a9d84ac0b53a6218de68ee42f42cb4ac895dfa3a35d75f9dd9bcbdb60",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_config.py",
+        "rel_path": "src/eye_witness/_config.py",
+        "language": "python",
+        "line_count": 147,
+        "functions": [
+          {
+            "name": "_coerce",
+            "line": 134
+          },
+          {
+            "name": "__post_init__",
+            "line": 68
+          },
+          {
+            "name": "from_env",
+            "line": 107
+          }
+        ],
+        "imports": [
+          "__future__",
+          "dataclasses",
+          "json",
+          "os",
+          "typing"
+        ],
+        "calls": [
+          "dataclass",
+          "field",
+          "lower",
+          "items",
+          "update",
+          "cls",
+          "int",
+          "float",
+          "tuple",
+          "loads",
+          "sorted",
+          "ValueError",
+          "lower",
+          "sorted",
+          "ValueError",
+          "ValueError",
+          "ValueError",
+          "lower",
+          "ValueError",
+          "ValueError",
+          "get",
+          "str",
+          "lower",
+          "ValueError",
+          "ValueError",
+          "_coerce",
+          "strip",
+          "upper",
+          "strip",
+          "split",
+          "strip"
+        ],
+        "function_calls": [
+          {
+            "name": "_coerce",
+            "line": 134,
+            "calls": [
+              "float",
+              "int",
+              "loads",
+              "lower",
+              "split",
+              "str",
+              "strip",
+              "tuple"
+            ]
+          },
+          {
+            "name": "__post_init__",
+            "line": 68,
+            "calls": [
+              "ValueError",
+              "items",
+              "lower",
+              "sorted"
+            ]
+          },
+          {
+            "name": "from_env",
+            "line": 107,
+            "calls": [
+              "_coerce",
+              "cls",
+              "get",
+              "update",
+              "upper"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_context.py": {
+      "hash": "fdffb5d6f846007f315094116041885502cc4b552dc761045afa7457364e182b",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_context.py",
+        "rel_path": "src/eye_witness/_context.py",
+        "language": "python",
+        "line_count": 56,
+        "functions": [
+          {
+            "name": "bind_context",
+            "line": 19
+          },
+          {
+            "name": "clear_context",
+            "line": 43
+          }
+        ],
+        "imports": [
+          "__future__",
+          "sentry_sdk",
+          "structlog.contextvars",
+          "typing"
+        ],
+        "calls": [
+          "bind_contextvars",
+          "items",
+          "set_context",
+          "clear_contextvars",
+          "str",
+          "clear",
+          "len",
+          "set_tag",
+          "get_current_scope"
+        ],
+        "function_calls": [
+          {
+            "name": "bind_context",
+            "line": 19,
+            "calls": [
+              "bind_contextvars",
+              "items",
+              "len",
+              "set_context",
+              "set_tag",
+              "str"
+            ]
+          },
+          {
+            "name": "clear_context",
+            "line": 43,
+            "calls": [
+              "clear",
+              "clear_contextvars",
+              "get_current_scope"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_init.py": {
+      "hash": "5c32ea7155f8399fadf878faed548e8e527288e172c3318b86994b768b281fe4",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_init.py",
+        "rel_path": "src/eye_witness/_init.py",
+        "language": "python",
+        "line_count": 166,
+        "functions": [
+          {
+            "name": "init",
+            "line": 27
+          },
+          {
+            "name": "shutdown",
+            "line": 128
+          }
+        ],
+        "imports": [
+          "__future__",
+          "atexit",
+          "eye_witness._config",
+          "eye_witness._logging",
+          "eye_witness._metrics",
+          "eye_witness._sentry",
+          "eye_witness._tracing",
+          "opentelemetry",
+          "sentry_sdk",
+          "structlog",
+          "threading",
+          "typing"
+        ],
+        "calls": [
+          "RLock",
+          "configure_logging",
+          "configure_sentry",
+          "configure_tracing",
+          "configure_metrics",
+          "get_logger",
+          "info",
+          "flush",
+          "get_tracer_provider",
+          "hasattr",
+          "get_meter_provider",
+          "hasattr",
+          "get_logger",
+          "info",
+          "shutdown",
+          "from_env",
+          "register",
+          "warning",
+          "bool",
+          "shutdown",
+          "shutdown",
+          "unregister",
+          "RuntimeError"
+        ],
+        "function_calls": [
+          {
+            "name": "init",
+            "line": 27,
+            "calls": [
+              "RuntimeError",
+              "bool",
+              "configure_logging",
+              "configure_metrics",
+              "configure_sentry",
+              "configure_tracing",
+              "from_env",
+              "get_logger",
+              "info",
+              "register",
+              "shutdown",
+              "warning"
+            ]
+          },
+          {
+            "name": "shutdown",
+            "line": 128,
+            "calls": [
+              "flush",
+              "get_meter_provider",
+              "get_tracer_provider",
+              "hasattr",
+              "shutdown",
+              "unregister"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_logging.py": {
+      "hash": "2341daf1e74b56c731fd2b894f6c700f7f0636e9a75a47581301a26393d663af",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_logging.py",
+        "rel_path": "src/eye_witness/_logging.py",
+        "language": "python",
+        "line_count": 221,
+        "functions": [
+          {
+            "name": "_add_otel_trace_context",
+            "line": 24
+          },
+          {
+            "name": "_add_service_info",
+            "line": 49
+          },
+          {
+            "name": "_redact_sensitive_fields",
+            "line": 61
+          },
+          {
+            "name": "configure_logging",
+            "line": 86
+          },
+          {
+            "name": "_should_use_json",
+            "line": 137
+          },
+          {
+            "name": "_build_json_renderer",
+            "line": 147
+          },
+          {
+            "name": "_build_logger_factory",
+            "line": 159
+          },
+          {
+            "name": "_configure_stdlib_bridge",
+            "line": 171
+          },
+          {
+            "name": "get_logger",
+            "line": 210
+          },
+          {
+            "name": "processor",
+            "line": 52
+          },
+          {
+            "name": "_redact",
+            "line": 65
+          },
+          {
+            "name": "processor",
+            "line": 80
+          }
+        ],
+        "imports": [
+          "__future__",
+          "eye_witness._config",
+          "logging",
+          "opentelemetry",
+          "orjson",
+          "structlog",
+          "sys",
+          "typing"
+        ],
+        "calls": [
+          "getattr",
+          "_should_use_json",
+          "configure",
+          "_configure_stdlib_bridge",
+          "JSONRenderer",
+          "WriteLoggerFactory",
+          "ProcessorFormatter",
+          "getLogger",
+          "setLevel",
+          "StreamHandler",
+          "setFormatter",
+          "addHandler",
+          "get_logger",
+          "get_current_span",
+          "get_span_context",
+          "lower",
+          "isinstance",
+          "isinstance",
+          "isinstance",
+          "_redact",
+          "upper",
+          "_add_service_info",
+          "_redact_sensitive_fields",
+          "TimeStamper",
+          "StackInfoRenderer",
+          "UnicodeDecoder",
+          "append",
+          "_build_json_renderer",
+          "append",
+          "append",
+          "append",
+          "isatty",
+          "_add_service_info",
+          "_redact_sensitive_fields",
+          "TimeStamper",
+          "StackInfoRenderer",
+          "_build_json_renderer",
+          "ConsoleRenderer",
+          "clear",
+          "bind",
+          "format",
+          "format",
+          "items",
+          "tuple",
+          "CallsiteParameterAdder",
+          "ConsoleRenderer",
+          "make_filtering_bound_logger",
+          "_build_logger_factory",
+          "JSONRenderer",
+          "BytesLoggerFactory",
+          "_redact",
+          "lower",
+          "_redact",
+          "_redact",
+          "str"
+        ],
+        "function_calls": [
+          {
+            "name": "_add_otel_trace_context",
+            "line": 24,
+            "calls": [
+              "format",
+              "get_current_span",
+              "get_span_context"
+            ]
+          },
+          {
+            "name": "_add_service_info",
+            "line": 49,
+            "calls": []
+          },
+          {
+            "name": "_redact_sensitive_fields",
+            "line": 61,
+            "calls": [
+              "_redact",
+              "isinstance",
+              "items",
+              "lower",
+              "str",
+              "tuple"
+            ]
+          },
+          {
+            "name": "configure_logging",
+            "line": 86,
+            "calls": [
+              "CallsiteParameterAdder",
+              "ConsoleRenderer",
+              "StackInfoRenderer",
+              "TimeStamper",
+              "UnicodeDecoder",
+              "_add_service_info",
+              "_build_json_renderer",
+              "_build_logger_factory",
+              "_configure_stdlib_bridge",
+              "_redact_sensitive_fields",
+              "_should_use_json",
+              "append",
+              "configure",
+              "getattr",
+              "make_filtering_bound_logger",
+              "upper"
+            ]
+          },
+          {
+            "name": "_should_use_json",
+            "line": 137,
+            "calls": [
+              "isatty"
+            ]
+          },
+          {
+            "name": "_build_json_renderer",
+            "line": 147,
+            "calls": [
+              "JSONRenderer"
+            ]
+          },
+          {
+            "name": "_build_logger_factory",
+            "line": 159,
+            "calls": [
+              "BytesLoggerFactory",
+              "WriteLoggerFactory"
+            ]
+          },
+          {
+            "name": "_configure_stdlib_bridge",
+            "line": 171,
+            "calls": [
+              "ConsoleRenderer",
+              "ProcessorFormatter",
+              "StackInfoRenderer",
+              "StreamHandler",
+              "TimeStamper",
+              "_add_service_info",
+              "_build_json_renderer",
+              "_redact_sensitive_fields",
+              "addHandler",
+              "clear",
+              "getLogger",
+              "setFormatter",
+              "setLevel"
+            ]
+          },
+          {
+            "name": "get_logger",
+            "line": 210,
+            "calls": [
+              "bind",
+              "get_logger"
+            ]
+          },
+          {
+            "name": "processor",
+            "line": 52,
+            "calls": []
+          },
+          {
+            "name": "_redact",
+            "line": 65,
+            "calls": [
+              "_redact",
+              "isinstance",
+              "items",
+              "lower",
+              "str",
+              "tuple"
+            ]
+          },
+          {
+            "name": "processor",
+            "line": 80,
+            "calls": [
+              "_redact"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_metrics.py": {
+      "hash": "224dfb52d75fd8819459c71594fe106872f177e2e1cbcb497f5c7b559a8cfc63",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_metrics.py",
+        "rel_path": "src/eye_witness/_metrics.py",
+        "language": "python",
+        "line_count": 85,
+        "functions": [
+          {
+            "name": "configure_metrics",
+            "line": 20
+          },
+          {
+            "name": "_build_metric_readers",
+            "line": 40
+          },
+          {
+            "name": "get_meter",
+            "line": 73
+          },
+          {
+            "name": "metric_counter",
+            "line": 78
+          },
+          {
+            "name": "metric_histogram",
+            "line": 83
+          }
+        ],
+        "imports": [
+          "__future__",
+          "eye_witness._config",
+          "opentelemetry",
+          "opentelemetry.exporter.otlp.proto.http.metric_exporter",
+          "opentelemetry.sdk.metrics",
+          "opentelemetry.sdk.metrics.export",
+          "opentelemetry.sdk.resources",
+          "typing"
+        ],
+        "calls": [
+          "create",
+          "_build_metric_readers",
+          "MeterProvider",
+          "set_meter_provider",
+          "lower",
+          "PeriodicExportingMetricReader",
+          "get_meter",
+          "create_counter",
+          "create_histogram",
+          "ConsoleMetricExporter",
+          "ValueError",
+          "get_meter",
+          "get_meter",
+          "OTLPMetricExporter",
+          "OTLPMetricExporter"
+        ],
+        "function_calls": [
+          {
+            "name": "configure_metrics",
+            "line": 20,
+            "calls": [
+              "MeterProvider",
+              "_build_metric_readers",
+              "create",
+              "set_meter_provider"
+            ]
+          },
+          {
+            "name": "_build_metric_readers",
+            "line": 40,
+            "calls": [
+              "ConsoleMetricExporter",
+              "OTLPMetricExporter",
+              "PeriodicExportingMetricReader",
+              "ValueError",
+              "lower"
+            ]
+          },
+          {
+            "name": "get_meter",
+            "line": 73,
+            "calls": [
+              "get_meter"
+            ]
+          },
+          {
+            "name": "metric_counter",
+            "line": 78,
+            "calls": [
+              "create_counter",
+              "get_meter"
+            ]
+          },
+          {
+            "name": "metric_histogram",
+            "line": 83,
+            "calls": [
+              "create_histogram",
+              "get_meter"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_sentry.py": {
+      "hash": "7ec1ff48c3affe36ec71025a7f6d7ebaf906c1c2c317236ea39c3b5309d30823",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_sentry.py",
+        "rel_path": "src/eye_witness/_sentry.py",
+        "language": "python",
+        "line_count": 129,
+        "functions": [
+          {
+            "name": "configure_sentry",
+            "line": 23
+          },
+          {
+            "name": "capture_exception",
+            "line": 53
+          },
+          {
+            "name": "capture_message",
+            "line": 69
+          },
+          {
+            "name": "add_breadcrumb",
+            "line": 81
+          },
+          {
+            "name": "set_tag",
+            "line": 108
+          },
+          {
+            "name": "set_context",
+            "line": 113
+          },
+          {
+            "name": "set_user",
+            "line": 118
+          }
+        ],
+        "imports": [
+          "__future__",
+          "eye_witness._config",
+          "sentry_sdk",
+          "sentry_sdk.integrations.logging",
+          "typing"
+        ],
+        "calls": [
+          "LoggingIntegration",
+          "init",
+          "capture_exception",
+          "capture_message",
+          "add_breadcrumb",
+          "set_tag",
+          "set_context",
+          "set_user"
+        ],
+        "function_calls": [
+          {
+            "name": "configure_sentry",
+            "line": 23,
+            "calls": [
+              "LoggingIntegration",
+              "init"
+            ]
+          },
+          {
+            "name": "capture_exception",
+            "line": 53,
+            "calls": [
+              "capture_exception"
+            ]
+          },
+          {
+            "name": "capture_message",
+            "line": 69,
+            "calls": [
+              "capture_message"
+            ]
+          },
+          {
+            "name": "add_breadcrumb",
+            "line": 81,
+            "calls": [
+              "add_breadcrumb"
+            ]
+          },
+          {
+            "name": "set_tag",
+            "line": 108,
+            "calls": [
+              "set_tag"
+            ]
+          },
+          {
+            "name": "set_context",
+            "line": 113,
+            "calls": [
+              "set_context"
+            ]
+          },
+          {
+            "name": "set_user",
+            "line": 118,
+            "calls": [
+              "set_user"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_tracing.py": {
+      "hash": "694e23f3ab1a5d692784dfb59cde6b0fd5648ce69d91ca0464c2140008a11370",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\_tracing.py",
+        "rel_path": "src/eye_witness/_tracing.py",
+        "language": "python",
+        "line_count": 233,
+        "functions": [
+          {
+            "name": "configure_tracing",
+            "line": 35
+          },
+          {
+            "name": "_build_sampler",
+            "line": 72
+          },
+          {
+            "name": "_build_exporter",
+            "line": 132
+          },
+          {
+            "name": "_build_processor",
+            "line": 168
+          },
+          {
+            "name": "get_tracer",
+            "line": 187
+          },
+          {
+            "name": "trace_span",
+            "line": 200
+          },
+          {
+            "name": "__init__",
+            "line": 86
+          },
+          {
+            "name": "should_sample",
+            "line": 94
+          },
+          {
+            "name": "get_description",
+            "line": 125
+          }
+        ],
+        "imports": [
+          "__future__",
+          "collections.abc",
+          "contextlib",
+          "eye_witness._config",
+          "opentelemetry",
+          "opentelemetry.exporter.otlp.proto.grpc.trace_exporter",
+          "opentelemetry.exporter.otlp.proto.http.trace_exporter",
+          "opentelemetry.sdk.resources",
+          "opentelemetry.sdk.trace",
+          "opentelemetry.sdk.trace.export",
+          "opentelemetry.sdk.trace.sampling",
+          "opentelemetry.trace",
+          "typing"
+        ],
+        "calls": [
+          "create",
+          "_build_sampler",
+          "TracerProvider",
+          "set_tracer_provider",
+          "_build_exporter",
+          "_build_processor",
+          "TraceIdRatioBased",
+          "lower",
+          "ValueError",
+          "BatchSpanProcessor",
+          "get_tracer",
+          "get_tracer",
+          "add_span_processor",
+          "SpanNameRateSampler",
+          "_build_sampler",
+          "sorted",
+          "should_sample",
+          "ConsoleSpanExporter",
+          "OTLPSpanExporter",
+          "GrpcExporter",
+          "lower",
+          "SimpleSpanProcessor",
+          "start_as_current_span",
+          "startswith",
+          "items",
+          "should_sample",
+          "get_description",
+          "len",
+          "set_attribute",
+          "_build_sampler",
+          "items",
+          "len",
+          "record_exception",
+          "set_status",
+          "Status",
+          "str"
+        ],
+        "function_calls": [
+          {
+            "name": "configure_tracing",
+            "line": 35,
+            "calls": [
+              "TracerProvider",
+              "_build_exporter",
+              "_build_processor",
+              "_build_sampler",
+              "add_span_processor",
+              "create",
+              "set_tracer_provider"
+            ]
+          },
+          {
+            "name": "_build_sampler",
+            "line": 72,
+            "calls": [
+              "SpanNameRateSampler",
+              "TraceIdRatioBased"
+            ]
+          },
+          {
+            "name": "_build_exporter",
+            "line": 132,
+            "calls": [
+              "ConsoleSpanExporter",
+              "GrpcExporter",
+              "OTLPSpanExporter",
+              "ValueError",
+              "lower"
+            ]
+          },
+          {
+            "name": "_build_processor",
+            "line": 168,
+            "calls": [
+              "BatchSpanProcessor",
+              "SimpleSpanProcessor",
+              "lower"
+            ]
+          },
+          {
+            "name": "get_tracer",
+            "line": 187,
+            "calls": [
+              "get_tracer"
+            ]
+          },
+          {
+            "name": "trace_span",
+            "line": 200,
+            "calls": [
+              "Status",
+              "get_tracer",
+              "items",
+              "record_exception",
+              "set_attribute",
+              "set_status",
+              "start_as_current_span",
+              "str"
+            ]
+          },
+          {
+            "name": "__init__",
+            "line": 86,
+            "calls": [
+              "_build_sampler",
+              "items",
+              "len",
+              "sorted"
+            ]
+          },
+          {
+            "name": "should_sample",
+            "line": 94,
+            "calls": [
+              "should_sample",
+              "startswith"
+            ]
+          },
+          {
+            "name": "get_description",
+            "line": 125,
+            "calls": [
+              "get_description",
+              "len"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\__init__.py": {
+      "hash": "e7f98afbb1f8c2bac616d002ca17bdf1581a22cf33428fce46ed8ee2e53e9a34",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\__init__.py",
+        "rel_path": "src/eye_witness/integrations/__init__.py",
+        "language": "python",
+        "line_count": 13,
+        "functions": [],
+        "imports": [
+          "eye_witness.integrations.celery",
+          "eye_witness.integrations.django",
+          "eye_witness.integrations.fastapi",
+          "eye_witness.integrations.flask"
+        ],
+        "calls": [],
+        "function_calls": []
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\celery.py": {
+      "hash": "a64509e0c70386229ca78b158dfbbef0415565d22db0fb834c857c4250c8f9c0",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\celery.py",
+        "rel_path": "src/eye_witness/integrations/celery.py",
+        "language": "python",
+        "line_count": 31,
+        "functions": [
+          {
+            "name": "install_celery",
+            "line": 8
+          },
+          {
+            "name": "eye_witness_task_prerun",
+            "line": 22
+          },
+          {
+            "name": "eye_witness_task_postrun",
+            "line": 30
+          }
+        ],
+        "imports": [
+          "__future__",
+          "celery",
+          "eye_witness._context"
+        ],
+        "calls": [
+          "clear_context",
+          "bind_context",
+          "clear_context",
+          "str",
+          "getattr"
+        ],
+        "function_calls": [
+          {
+            "name": "install_celery",
+            "line": 8,
+            "calls": [
+              "bind_context",
+              "clear_context",
+              "getattr",
+              "str"
+            ]
+          },
+          {
+            "name": "eye_witness_task_prerun",
+            "line": 22,
+            "calls": [
+              "bind_context",
+              "clear_context",
+              "getattr",
+              "str"
+            ]
+          },
+          {
+            "name": "eye_witness_task_postrun",
+            "line": 30,
+            "calls": [
+              "clear_context"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\django.py": {
+      "hash": "88544328ca00403479844b50bbe7bf410c34c20234ab57cea5a47ed4ef096e6a",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\django.py",
+        "rel_path": "src/eye_witness/integrations/django.py",
+        "language": "python",
+        "line_count": 32,
+        "functions": [
+          {
+            "name": "__init__",
+            "line": 21
+          },
+          {
+            "name": "__call__",
+            "line": 24
+          }
+        ],
+        "imports": [
+          "__future__",
+          "eye_witness._context",
+          "uuid"
+        ],
+        "calls": [
+          "clear_context",
+          "bind_context",
+          "hasattr",
+          "get",
+          "get_response",
+          "clear_context",
+          "str",
+          "uuid4"
+        ],
+        "function_calls": [
+          {
+            "name": "__init__",
+            "line": 21,
+            "calls": []
+          },
+          {
+            "name": "__call__",
+            "line": 24,
+            "calls": [
+              "bind_context",
+              "clear_context",
+              "get",
+              "get_response",
+              "hasattr",
+              "str",
+              "uuid4"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\fastapi.py": {
+      "hash": "a5fcca5f8f421e33cf7b19003e251d5a27c703dcc6f7740b2143cefb947e3fda",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\fastapi.py",
+        "rel_path": "src/eye_witness/integrations/fastapi.py",
+        "language": "python",
+        "line_count": 38,
+        "functions": [
+          {
+            "name": "install_fastapi",
+            "line": 11
+          },
+          {
+            "name": "eye_witness_middleware",
+            "line": 26
+          }
+        ],
+        "imports": [
+          "__future__",
+          "collections.abc",
+          "eye_witness._context",
+          "uuid"
+        ],
+        "calls": [
+          "middleware",
+          "clear_context",
+          "bind_context",
+          "get",
+          "str",
+          "user_id_getter",
+          "clear_context",
+          "uuid4",
+          "str",
+          "call_next"
+        ],
+        "function_calls": [
+          {
+            "name": "install_fastapi",
+            "line": 11,
+            "calls": [
+              "bind_context",
+              "call_next",
+              "clear_context",
+              "get",
+              "middleware",
+              "str",
+              "user_id_getter",
+              "uuid4"
+            ]
+          },
+          {
+            "name": "eye_witness_middleware",
+            "line": 26,
+            "calls": [
+              "bind_context",
+              "call_next",
+              "clear_context",
+              "get",
+              "middleware",
+              "str",
+              "user_id_getter",
+              "uuid4"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\flask.py": {
+      "hash": "8b9387b4eb1ccbd6b6779a5f99b97b96af2813869e03b9cf0b7eaa88a43e8ad6",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\integrations\\flask.py",
+        "rel_path": "src/eye_witness/integrations/flask.py",
+        "language": "python",
+        "line_count": 40,
+        "functions": [
+          {
+            "name": "install_flask",
+            "line": 11
+          },
+          {
+            "name": "eye_witness_before_request",
+            "line": 26
+          },
+          {
+            "name": "eye_witness_teardown_request",
+            "line": 39
+          }
+        ],
+        "imports": [
+          "__future__",
+          "collections.abc",
+          "eye_witness._context",
+          "flask",
+          "uuid"
+        ],
+        "calls": [
+          "clear_context",
+          "bind_context",
+          "clear_context",
+          "get",
+          "str",
+          "user_id_getter",
+          "uuid4",
+          "str"
+        ],
+        "function_calls": [
+          {
+            "name": "install_flask",
+            "line": 11,
+            "calls": [
+              "bind_context",
+              "clear_context",
+              "get",
+              "str",
+              "user_id_getter",
+              "uuid4"
+            ]
+          },
+          {
+            "name": "eye_witness_before_request",
+            "line": 26,
+            "calls": [
+              "bind_context",
+              "clear_context",
+              "get",
+              "str",
+              "user_id_getter",
+              "uuid4"
+            ]
+          },
+          {
+            "name": "eye_witness_teardown_request",
+            "line": 39,
+            "calls": [
+              "clear_context"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\__init__.py": {
+      "hash": "8eef0f44bdda68a1160dafd6ecaf68f433d5a8e6dc82dbc94148ef8b69fb435b",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\__init__.py",
+        "rel_path": "src/eye_witness/internal/__init__.py",
+        "language": "python",
+        "line_count": 8,
+        "functions": [],
+        "imports": [
+          "eye_witness.internal.lifecycle",
+          "eye_witness.internal.schema",
+          "eye_witness.internal.serializers",
+          "eye_witness.internal.util"
+        ],
+        "calls": [],
+        "function_calls": []
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\lifecycle.py": {
+      "hash": "0c8301ddd1cc72d84162db91bc6ebe8e3f4b012e402be8ea91409a2b9846a4e8",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\lifecycle.py",
+        "rel_path": "src/eye_witness/internal/lifecycle.py",
+        "language": "python",
+        "line_count": 10,
+        "functions": [
+          {
+            "name": "state_snapshot",
+            "line": 6
+          }
+        ],
+        "imports": [
+          "eye_witness"
+        ],
+        "calls": [
+          "bool",
+          "bool"
+        ],
+        "function_calls": [
+          {
+            "name": "state_snapshot",
+            "line": 6,
+            "calls": [
+              "bool"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\schema.py": {
+      "hash": "30b9359c9710161e8cf5b2633479d829907f77882f5b65665ad0bdb24df4977a",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\schema.py",
+        "rel_path": "src/eye_witness/internal/schema.py",
+        "language": "python",
+        "line_count": 9,
+        "functions": [
+          {
+            "name": "stable_keys",
+            "line": 8
+          }
+        ],
+        "imports": [
+          "__future__",
+          "typing"
+        ],
+        "calls": [
+          "sorted",
+          "keys"
+        ],
+        "function_calls": [
+          {
+            "name": "stable_keys",
+            "line": 8,
+            "calls": [
+              "keys",
+              "sorted"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\serializers.py": {
+      "hash": "f43479d78579b805f036eba5da61af92d67a52733f77f4000d8afbfff715fa75",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\serializers.py",
+        "rel_path": "src/eye_witness/internal/serializers.py",
+        "language": "python",
+        "line_count": 10,
+        "functions": [
+          {
+            "name": "safe_json_dumps",
+            "line": 9
+          }
+        ],
+        "imports": [
+          "__future__",
+          "json",
+          "typing"
+        ],
+        "calls": [
+          "dumps"
+        ],
+        "function_calls": [
+          {
+            "name": "safe_json_dumps",
+            "line": 9,
+            "calls": [
+              "dumps"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\util.py": {
+      "hash": "95ca29e84c3291d56c1ef769b775f5b1a2a74dbd215a22b94ef3fd0122789537",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\internal\\util.py",
+        "rel_path": "src/eye_witness/internal/util.py",
+        "language": "python",
+        "line_count": 9,
+        "functions": [
+          {
+            "name": "clamp_rate",
+            "line": 4
+          }
+        ],
+        "imports": [],
+        "calls": [],
+        "function_calls": [
+          {
+            "name": "clamp_rate",
+            "line": 4,
+            "calls": []
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\v1\\__init__.py": {
+      "hash": "325272c3b3a0919523bef31eafc2dce4fb875bb7b236bd3487bf60c669ae6204",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\src\\eye_witness\\v1\\__init__.py",
+        "rel_path": "src/eye_witness/v1/__init__.py",
+        "language": "python",
+        "line_count": 54,
+        "functions": [],
+        "imports": [
+          "eye_witness"
+        ],
+        "calls": [],
+        "function_calls": []
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\structlog_config.py": {
+      "hash": "3e5621dcebd0e1c06852e25c1eba149d0371f930f46581f04fa46fef34ed3786",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\structlog_config.py",
+        "rel_path": "structlog_config.py",
+        "language": "python",
+        "line_count": 285,
+        "functions": [
+          {
+            "name": "configure_production_stdlib",
+            "line": 24
+          },
+          {
+            "name": "configure_high_performance",
+            "line": 79
+          },
+          {
+            "name": "configure_auto_detect",
+            "line": 104
+          },
+          {
+            "name": "handle_request",
+            "line": 149
+          },
+          {
+            "name": "create_processor_formatter",
+            "line": 171
+          },
+          {
+            "name": "setup_stdlib_handler_with_formatter",
+            "line": 184
+          },
+          {
+            "name": "configure_recommended_pipeline",
+            "line": 210
+          }
+        ],
+        "imports": [
+          "logging",
+          "orjson",
+          "structlog",
+          "structlog.contextvars",
+          "sys",
+          "typing"
+        ],
+        "calls": [
+          "get_logger",
+          "configure",
+          "configure",
+          "isatty",
+          "configure",
+          "clear_contextvars",
+          "bind_contextvars",
+          "info",
+          "info",
+          "ProcessorFormatter",
+          "create_processor_formatter",
+          "StreamHandler",
+          "setFormatter",
+          "getLogger",
+          "addHandler",
+          "setLevel",
+          "extend",
+          "configure",
+          "configure_auto_detect",
+          "get_logger",
+          "info",
+          "warning",
+          "TimeStamper",
+          "extend",
+          "append",
+          "append",
+          "LoggerFactory",
+          "make_filtering_bound_logger",
+          "BytesLoggerFactory",
+          "JSONRenderer",
+          "TimeStamper",
+          "StackInfoRenderer",
+          "JSONRenderer",
+          "LoggerFactory",
+          "exception",
+          "PositionalArgumentsFormatter",
+          "TimeStamper",
+          "StackInfoRenderer",
+          "UnicodeDecoder",
+          "CallsiteParameterAdder",
+          "JSONRenderer",
+          "TimeStamper",
+          "JSONRenderer",
+          "ConsoleRenderer",
+          "JSONRenderer",
+          "TimeStamper",
+          "StackInfoRenderer"
+        ],
+        "function_calls": [
+          {
+            "name": "configure_production_stdlib",
+            "line": 24,
+            "calls": [
+              "CallsiteParameterAdder",
+              "JSONRenderer",
+              "LoggerFactory",
+              "PositionalArgumentsFormatter",
+              "StackInfoRenderer",
+              "TimeStamper",
+              "UnicodeDecoder",
+              "configure"
+            ]
+          },
+          {
+            "name": "configure_high_performance",
+            "line": 79,
+            "calls": [
+              "BytesLoggerFactory",
+              "JSONRenderer",
+              "TimeStamper",
+              "configure",
+              "make_filtering_bound_logger"
+            ]
+          },
+          {
+            "name": "configure_auto_detect",
+            "line": 104,
+            "calls": [
+              "ConsoleRenderer",
+              "JSONRenderer",
+              "TimeStamper",
+              "configure",
+              "isatty"
+            ]
+          },
+          {
+            "name": "handle_request",
+            "line": 149,
+            "calls": [
+              "bind_contextvars",
+              "clear_contextvars",
+              "info"
+            ]
+          },
+          {
+            "name": "create_processor_formatter",
+            "line": 171,
+            "calls": [
+              "JSONRenderer",
+              "ProcessorFormatter",
+              "StackInfoRenderer",
+              "TimeStamper"
+            ]
+          },
+          {
+            "name": "setup_stdlib_handler_with_formatter",
+            "line": 184,
+            "calls": [
+              "StreamHandler",
+              "addHandler",
+              "create_processor_formatter",
+              "getLogger",
+              "setFormatter",
+              "setLevel"
+            ]
+          },
+          {
+            "name": "configure_recommended_pipeline",
+            "line": 210,
+            "calls": [
+              "JSONRenderer",
+              "LoggerFactory",
+              "StackInfoRenderer",
+              "TimeStamper",
+              "append",
+              "configure",
+              "extend"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\contract\\test_api_contract.py": {
+      "hash": "bcb5edfc107dc775d81d998f36aab8a1ae60ab785a7c461e7ddbd435a9751236",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\contract\\test_api_contract.py",
+        "rel_path": "tests/contract/test_api_contract.py",
+        "language": "python",
+        "line_count": 7,
+        "functions": [
+          {
+            "name": "test_v1_import_contract_smoke",
+            "line": 4
+          }
+        ],
+        "imports": [
+          "eye_witness.v1"
+        ],
+        "calls": [
+          "init",
+          "info",
+          "shutdown",
+          "get_logger"
+        ],
+        "function_calls": [
+          {
+            "name": "test_v1_import_contract_smoke",
+            "line": 4,
+            "calls": [
+              "get_logger",
+              "info",
+              "init",
+              "shutdown"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\integration\\test_framework_examples.py": {
+      "hash": "068b5c3ceeae1fcd33292da7946d9e33e9d693052b3e15251c4597d75359d470",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\integration\\test_framework_examples.py",
+        "rel_path": "tests/integration/test_framework_examples.py",
+        "language": "python",
+        "line_count": 8,
+        "functions": [
+          {
+            "name": "test_framework_example_files_exist",
+            "line": 4
+          }
+        ],
+        "imports": [
+          "pathlib"
+        ],
+        "calls": [
+          "exists",
+          "exists",
+          "exists",
+          "exists",
+          "Path",
+          "Path",
+          "Path",
+          "Path"
+        ],
+        "function_calls": [
+          {
+            "name": "test_framework_example_files_exist",
+            "line": 4,
+            "calls": [
+              "Path",
+              "exists"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\perf\\test_logging_perf.py": {
+      "hash": "3eb9a5cdb0984063c9508c6bb84d0016fa094e022affb14889bd7c3dfc9e655a",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\perf\\test_logging_perf.py",
+        "rel_path": "tests/perf/test_logging_perf.py",
+        "language": "python",
+        "line_count": 9,
+        "functions": [
+          {
+            "name": "test_logging_perf_smoke",
+            "line": 4
+          }
+        ],
+        "imports": [
+          "eye_witness"
+        ],
+        "calls": [
+          "init",
+          "get_logger",
+          "range",
+          "shutdown",
+          "info"
+        ],
+        "function_calls": [
+          {
+            "name": "test_logging_perf_smoke",
+            "line": 4,
+            "calls": [
+              "get_logger",
+              "info",
+              "init",
+              "range",
+              "shutdown"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\perf\\test_metrics_perf.py": {
+      "hash": "62b40fc81dff9b3de220b373b8402755b9c7ca8285b5e272d7992cab2e33c4fb",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\perf\\test_metrics_perf.py",
+        "rel_path": "tests/perf/test_metrics_perf.py",
+        "language": "python",
+        "line_count": 15,
+        "functions": [
+          {
+            "name": "test_metrics_perf_smoke",
+            "line": 4
+          }
+        ],
+        "imports": [
+          "eye_witness"
+        ],
+        "calls": [
+          "init",
+          "metric_counter",
+          "range",
+          "shutdown",
+          "add"
+        ],
+        "function_calls": [
+          {
+            "name": "test_metrics_perf_smoke",
+            "line": 4,
+            "calls": [
+              "add",
+              "init",
+              "metric_counter",
+              "range",
+              "shutdown"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\perf\\test_tracing_perf.py": {
+      "hash": "a8d86e7c0198e73f1bc787ce0e6eea6fa06108c4de5e90341ce1fcf2c0c58722",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\perf\\test_tracing_perf.py",
+        "rel_path": "tests/perf/test_tracing_perf.py",
+        "language": "python",
+        "line_count": 9,
+        "functions": [
+          {
+            "name": "test_tracing_perf_smoke",
+            "line": 4
+          }
+        ],
+        "imports": [
+          "eye_witness"
+        ],
+        "calls": [
+          "init",
+          "range",
+          "shutdown",
+          "trace_span"
+        ],
+        "function_calls": [
+          {
+            "name": "test_tracing_perf_smoke",
+            "line": 4,
+            "calls": [
+              "init",
+              "range",
+              "shutdown",
+              "trace_span"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\stress\\test_concurrency.py": {
+      "hash": "0ab22a79e47829438daec0c995f3dd05c1230762197cd883f956348e9409aba6",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\stress\\test_concurrency.py",
+        "rel_path": "tests/stress/test_concurrency.py",
+        "language": "python",
+        "line_count": 18,
+        "functions": [
+          {
+            "name": "test_concurrent_force_reinit_smoke",
+            "line": 6
+          },
+          {
+            "name": "work",
+            "line": 7
+          }
+        ],
+        "imports": [
+          "concurrent.futures",
+          "eye_witness"
+        ],
+        "calls": [
+          "init",
+          "shutdown",
+          "ThreadPoolExecutor",
+          "list",
+          "map",
+          "range"
+        ],
+        "function_calls": [
+          {
+            "name": "test_concurrent_force_reinit_smoke",
+            "line": 6,
+            "calls": [
+              "ThreadPoolExecutor",
+              "init",
+              "list",
+              "map",
+              "range",
+              "shutdown"
+            ]
+          },
+          {
+            "name": "work",
+            "line": 7,
+            "calls": [
+              "init",
+              "shutdown"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\stress\\test_volume.py": {
+      "hash": "d3f5bd2a902a2d20de0b4ca13a61df7a5355f2680b30e431cc6ab22a4983b560",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\stress\\test_volume.py",
+        "rel_path": "tests/stress/test_volume.py",
+        "language": "python",
+        "line_count": 9,
+        "functions": [
+          {
+            "name": "test_log_volume_smoke",
+            "line": 4
+          }
+        ],
+        "imports": [
+          "eye_witness"
+        ],
+        "calls": [
+          "init",
+          "get_logger",
+          "range",
+          "shutdown",
+          "info"
+        ],
+        "function_calls": [
+          {
+            "name": "test_log_volume_smoke",
+            "line": 4,
+            "calls": [
+              "get_logger",
+              "info",
+              "init",
+              "range",
+              "shutdown"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_api_versioning.py": {
+      "hash": "fa8f2b6bee39bb0ade138dd6a86e75943f045ba110d868e81dc60e057430d421",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_api_versioning.py",
+        "rel_path": "tests/test_api_versioning.py",
+        "language": "python",
+        "line_count": 29,
+        "functions": [
+          {
+            "name": "test_v1_namespace_parity",
+            "line": 14
+          },
+          {
+            "name": "test_compat_init_emits_deprecation_warning",
+            "line": 19
+          }
+        ],
+        "imports": [
+          "__future__",
+          "eye_witness",
+          "eye_witness.v1",
+          "warnings"
+        ],
+        "calls": [
+          "shutdown",
+          "catch_warnings",
+          "simplefilter",
+          "init_observability",
+          "any",
+          "lower",
+          "str"
+        ],
+        "function_calls": [
+          {
+            "name": "test_v1_namespace_parity",
+            "line": 14,
+            "calls": []
+          },
+          {
+            "name": "test_compat_init_emits_deprecation_warning",
+            "line": 19,
+            "calls": [
+              "any",
+              "catch_warnings",
+              "init_observability",
+              "lower",
+              "shutdown",
+              "simplefilter",
+              "str"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_contract_wheel.py": {
+      "hash": "53301b31d949696cd6f8e59414876a47db76dcbbd18f38b7d261965bcbdab365",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_contract_wheel.py",
+        "rel_path": "tests/test_contract_wheel.py",
+        "language": "python",
+        "line_count": 54,
+        "functions": [
+          {
+            "name": "test_wheel_contract_smoke",
+            "line": 15
+          }
+        ],
+        "imports": [
+          "__future__",
+          "os",
+          "pathlib",
+          "pytest",
+          "subprocess",
+          "sys",
+          "tempfile"
+        ],
+        "calls": [
+          "getenv",
+          "skip",
+          "TemporaryDirectory",
+          "mkdir",
+          "run",
+          "run",
+          "run",
+          "run",
+          "run",
+          "Path",
+          "sorted",
+          "Path",
+          "resolve",
+          "str",
+          "glob",
+          "str",
+          "str",
+          "str",
+          "str",
+          "str",
+          "Path"
+        ],
+        "function_calls": [
+          {
+            "name": "test_wheel_contract_smoke",
+            "line": 15,
+            "calls": [
+              "Path",
+              "TemporaryDirectory",
+              "getenv",
+              "glob",
+              "mkdir",
+              "resolve",
+              "run",
+              "skip",
+              "sorted",
+              "str"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_eye_witness.py": {
+      "hash": "1176b895992b378f2f0b014f4aa76b131f32951fc42b2a7555d4cb94fe3caecb",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_eye_witness.py",
+        "rel_path": "tests/test_eye_witness.py",
+        "language": "python",
+        "line_count": 426,
+        "functions": [
+          {
+            "name": "reset_init_state",
+            "line": 28
+          },
+          {
+            "name": "test_defaults",
+            "line": 39
+          },
+          {
+            "name": "test_custom_values",
+            "line": 47
+          },
+          {
+            "name": "test_frozen",
+            "line": 58
+          },
+          {
+            "name": "test_from_env",
+            "line": 63
+          },
+          {
+            "name": "test_from_env_overrides",
+            "line": 69
+          },
+          {
+            "name": "test_invalid_otel_sample_rate_raises",
+            "line": 74
+          },
+          {
+            "name": "test_invalid_sentry_traces_sample_rate_raises",
+            "line": 78
+          },
+          {
+            "name": "test_otel_exporter_accepts_case_insensitive_value",
+            "line": 82
+          },
+          {
+            "name": "test_metrics_exporter_validation",
+            "line": 86
+          },
+          {
+            "name": "test_metrics_export_interval_validation",
+            "line": 90
+          },
+          {
+            "name": "test_span_name_sample_rates_validation",
+            "line": 94
+          },
+          {
+            "name": "test_from_env_coerces_tuple_and_dict",
+            "line": 98
+          },
+          {
+            "name": "test_configure_logging_runs",
+            "line": 118
+          },
+          {
+            "name": "test_get_logger_with_context",
+            "line": 125
+          },
+          {
+            "name": "test_otel_trace_context_processor_no_span",
+            "line": 131
+          },
+          {
+            "name": "test_stdlib_bridge_adds_service_metadata",
+            "line": 138
+          },
+          {
+            "name": "test_stdlib_bridge_keeps_existing_handlers_when_disabled",
+            "line": 158
+          },
+          {
+            "name": "test_redacts_sensitive_fields",
+            "line": 171
+          },
+          {
+            "name": "test_configure_sentry_no_dsn",
+            "line": 197
+          },
+          {
+            "name": "test_configure_sentry_with_dsn",
+            "line": 202
+          },
+          {
+            "name": "test_configure_tracing_console",
+            "line": 215
+          },
+          {
+            "name": "test_configure_tracing_disabled",
+            "line": 220
+          },
+          {
+            "name": "test_configure_tracing_sample_rate_zero",
+            "line": 225
+          },
+          {
+            "name": "test_configure_tracing_none_adds_no_processors",
+            "line": 230
+          },
+          {
+            "name": "test_configure_tracing_console_is_case_insensitive",
+            "line": 237
+          },
+          {
+            "name": "test_configure_tracing_uses_span_name_sampler_when_rules_present",
+            "line": 245
+          },
+          {
+            "name": "test_configure_metrics_disabled",
+            "line": 258
+          },
+          {
+            "name": "test_configure_metrics_none_exporter",
+            "line": 263
+          },
+          {
+            "name": "test_second_init_is_ignored_without_force",
+            "line": 270
+          },
+          {
+            "name": "test_second_init_reconfigures_with_force",
+            "line": 286
+          },
+          {
+            "name": "test_init_registers_single_atexit_hook",
+            "line": 302
+          },
+          {
+            "name": "test_shutdown_is_idempotent",
+            "line": 310
+          },
+          {
+            "name": "test_bind_and_clear_context",
+            "line": 326
+          },
+          {
+            "name": "test_bind_context_sentry_tag",
+            "line": 331
+          },
+          {
+            "name": "test_clear_context_clears_sentry_scope",
+            "line": 343
+          },
+          {
+            "name": "test_sentry_helpers_are_exported",
+            "line": 351
+          },
+          {
+            "name": "test_metrics_helpers_are_exported",
+            "line": 356
+          },
+          {
+            "name": "test_integrations_are_exported",
+            "line": 361
+          },
+          {
+            "name": "test_fastapi_install_registers_http_middleware",
+            "line": 369
+          },
+          {
+            "name": "test_flask_install_registers_hooks",
+            "line": 384
+          },
+          {
+            "name": "test_celery_install_registers_signal_handlers",
+            "line": 399
+          },
+          {
+            "name": "test_django_middleware_calls_next",
+            "line": 416
+          },
+          {
+            "name": "get_response",
+            "line": 419
+          },
+          {
+            "name": "middleware",
+            "line": 371
+          },
+          {
+            "name": "before_request",
+            "line": 386
+          },
+          {
+            "name": "teardown_request",
+            "line": 390
+          },
+          {
+            "name": "__init__",
+            "line": 401
+          },
+          {
+            "name": "connect",
+            "line": 404
+          },
+          {
+            "name": "decorator",
+            "line": 374
+          }
+        ],
+        "imports": [
+          "eye_witness",
+          "eye_witness._config",
+          "eye_witness._context",
+          "eye_witness._init",
+          "eye_witness._logging",
+          "eye_witness._metrics",
+          "eye_witness._sentry",
+          "eye_witness._tracing",
+          "eye_witness.integrations",
+          "logging",
+          "os",
+          "pytest",
+          "unittest.mock"
+        ],
+        "calls": [
+          "fixture",
+          "EyeWitnessConfig",
+          "EyeWitnessConfig",
+          "EyeWitnessConfig",
+          "EyeWitnessConfig",
+          "EyeWitnessConfig",
+          "configure_logging",
+          "get_logger",
+          "EyeWitnessConfig",
+          "configure_logging",
+          "get_logger",
+          "_add_otel_trace_context",
+          "EyeWitnessConfig",
+          "getLogger",
+          "list",
+          "NullHandler",
+          "EyeWitnessConfig",
+          "EyeWitnessConfig",
+          "configure_sentry",
+          "EyeWitnessConfig",
+          "configure_sentry",
+          "EyeWitnessConfig",
+          "configure_tracing",
+          "EyeWitnessConfig",
+          "configure_tracing",
+          "EyeWitnessConfig",
+          "configure_tracing",
+          "EyeWitnessConfig",
+          "configure_tracing",
+          "EyeWitnessConfig",
+          "configure_tracing",
+          "EyeWitnessConfig",
+          "configure_tracing",
+          "EyeWitnessConfig",
+          "configure_metrics",
+          "EyeWitnessConfig",
+          "configure_metrics",
+          "shutdown",
+          "shutdown",
+          "bind_context",
+          "clear_context",
+          "clear_context",
+          "MagicMock",
+          "callable",
+          "callable",
+          "callable",
+          "callable",
+          "callable",
+          "callable",
+          "callable",
+          "callable",
+          "callable",
+          "callable",
+          "FakeApp",
+          "install_fastapi",
+          "callable",
+          "FakeFlask",
+          "install_flask",
+          "callable",
+          "callable",
+          "install_celery",
+          "EyeWitnessDjangoMiddleware",
+          "middleware",
+          "raises",
+          "dict",
+          "from_env",
+          "dict",
+          "from_env",
+          "raises",
+          "EyeWitnessConfig",
+          "raises",
+          "EyeWitnessConfig",
+          "raises",
+          "EyeWitnessConfig",
+          "raises",
+          "EyeWitnessConfig",
+          "raises",
+          "EyeWitnessConfig",
+          "dict",
+          "from_env",
+          "patch",
+          "MagicMock",
+          "configure_logging",
+          "EyeWitnessConfig",
+          "configure_logging",
+          "patch",
+          "MagicMock",
+          "configure_logging",
+          "len",
+          "get_description",
+          "patch",
+          "patch",
+          "patch",
+          "patch",
+          "init",
+          "init",
+          "patch",
+          "patch",
+          "patch",
+          "patch",
+          "init",
+          "init",
+          "patch",
+          "init",
+          "init",
+          "assert_any_call",
+          "patch",
+          "patch",
+          "patch",
+          "patch",
+          "init",
+          "patch",
+          "patch",
+          "bind_context",
+          "assert_any_call",
+          "assert_any_call",
+          "assert_called_once_with",
+          "patch",
+          "clear_context",
+          "assert_called_once_with",
+          "Signal",
+          "Signal",
+          "len",
+          "len",
+          "object",
+          "proc",
+          "proc",
+          "type",
+          "type",
+          "append"
+        ],
+        "function_calls": [
+          {
+            "name": "reset_init_state",
+            "line": 28,
+            "calls": [
+              "fixture"
+            ]
+          },
+          {
+            "name": "test_defaults",
+            "line": 39,
+            "calls": [
+              "EyeWitnessConfig"
+            ]
+          },
+          {
+            "name": "test_custom_values",
+            "line": 47,
+            "calls": [
+              "EyeWitnessConfig"
+            ]
+          },
+          {
+            "name": "test_frozen",
+            "line": 58,
+            "calls": [
+              "EyeWitnessConfig",
+              "raises"
+            ]
+          },
+          {
+            "name": "test_from_env",
+            "line": 63,
+            "calls": [
+              "dict",
+              "from_env"
+            ]
+          },
+          {
+            "name": "test_from_env_overrides",
+            "line": 69,
+            "calls": [
+              "dict",
+              "from_env"
+            ]
+          },
+          {
+            "name": "test_invalid_otel_sample_rate_raises",
+            "line": 74,
+            "calls": [
+              "EyeWitnessConfig",
+              "raises"
+            ]
+          },
+          {
+            "name": "test_invalid_sentry_traces_sample_rate_raises",
+            "line": 78,
+            "calls": [
+              "EyeWitnessConfig",
+              "raises"
+            ]
+          },
+          {
+            "name": "test_otel_exporter_accepts_case_insensitive_value",
+            "line": 82,
+            "calls": [
+              "EyeWitnessConfig"
+            ]
+          },
+          {
+            "name": "test_metrics_exporter_validation",
+            "line": 86,
+            "calls": [
+              "EyeWitnessConfig",
+              "raises"
+            ]
+          },
+          {
+            "name": "test_metrics_export_interval_validation",
+            "line": 90,
+            "calls": [
+              "EyeWitnessConfig",
+              "raises"
+            ]
+          },
+          {
+            "name": "test_span_name_sample_rates_validation",
+            "line": 94,
+            "calls": [
+              "EyeWitnessConfig",
+              "raises"
+            ]
+          },
+          {
+            "name": "test_from_env_coerces_tuple_and_dict",
+            "line": 98,
+            "calls": [
+              "dict",
+              "from_env"
+            ]
+          },
+          {
+            "name": "test_configure_logging_runs",
+            "line": 118,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_logging",
+              "get_logger"
+            ]
+          },
+          {
+            "name": "test_get_logger_with_context",
+            "line": 125,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_logging",
+              "get_logger"
+            ]
+          },
+          {
+            "name": "test_otel_trace_context_processor_no_span",
+            "line": 131,
+            "calls": [
+              "_add_otel_trace_context"
+            ]
+          },
+          {
+            "name": "test_stdlib_bridge_adds_service_metadata",
+            "line": 138,
+            "calls": [
+              "EyeWitnessConfig",
+              "MagicMock",
+              "configure_logging",
+              "patch",
+              "proc"
+            ]
+          },
+          {
+            "name": "test_stdlib_bridge_keeps_existing_handlers_when_disabled",
+            "line": 158,
+            "calls": [
+              "EyeWitnessConfig",
+              "NullHandler",
+              "configure_logging",
+              "getLogger",
+              "list"
+            ]
+          },
+          {
+            "name": "test_redacts_sensitive_fields",
+            "line": 171,
+            "calls": [
+              "EyeWitnessConfig",
+              "MagicMock",
+              "configure_logging",
+              "patch",
+              "proc"
+            ]
+          },
+          {
+            "name": "test_configure_sentry_no_dsn",
+            "line": 197,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_sentry"
+            ]
+          },
+          {
+            "name": "test_configure_sentry_with_dsn",
+            "line": 202,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_sentry"
+            ]
+          },
+          {
+            "name": "test_configure_tracing_console",
+            "line": 215,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_tracing"
+            ]
+          },
+          {
+            "name": "test_configure_tracing_disabled",
+            "line": 220,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_tracing"
+            ]
+          },
+          {
+            "name": "test_configure_tracing_sample_rate_zero",
+            "line": 225,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_tracing"
+            ]
+          },
+          {
+            "name": "test_configure_tracing_none_adds_no_processors",
+            "line": 230,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_tracing"
+            ]
+          },
+          {
+            "name": "test_configure_tracing_console_is_case_insensitive",
+            "line": 237,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_tracing",
+              "len",
+              "type"
+            ]
+          },
+          {
+            "name": "test_configure_tracing_uses_span_name_sampler_when_rules_present",
+            "line": 245,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_tracing",
+              "get_description",
+              "type"
+            ]
+          },
+          {
+            "name": "test_configure_metrics_disabled",
+            "line": 258,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_metrics"
+            ]
+          },
+          {
+            "name": "test_configure_metrics_none_exporter",
+            "line": 263,
+            "calls": [
+              "EyeWitnessConfig",
+              "configure_metrics"
+            ]
+          },
+          {
+            "name": "test_second_init_is_ignored_without_force",
+            "line": 270,
+            "calls": [
+              "init",
+              "patch"
+            ]
+          },
+          {
+            "name": "test_second_init_reconfigures_with_force",
+            "line": 286,
+            "calls": [
+              "init",
+              "patch"
+            ]
+          },
+          {
+            "name": "test_init_registers_single_atexit_hook",
+            "line": 302,
+            "calls": [
+              "assert_any_call",
+              "init",
+              "patch"
+            ]
+          },
+          {
+            "name": "test_shutdown_is_idempotent",
+            "line": 310,
+            "calls": [
+              "init",
+              "patch",
+              "shutdown"
+            ]
+          },
+          {
+            "name": "test_bind_and_clear_context",
+            "line": 326,
+            "calls": [
+              "bind_context",
+              "clear_context"
+            ]
+          },
+          {
+            "name": "test_bind_context_sentry_tag",
+            "line": 331,
+            "calls": [
+              "assert_any_call",
+              "assert_called_once_with",
+              "bind_context",
+              "clear_context",
+              "patch"
+            ]
+          },
+          {
+            "name": "test_clear_context_clears_sentry_scope",
+            "line": 343,
+            "calls": [
+              "MagicMock",
+              "assert_called_once_with",
+              "clear_context",
+              "patch"
+            ]
+          },
+          {
+            "name": "test_sentry_helpers_are_exported",
+            "line": 351,
+            "calls": [
+              "callable"
+            ]
+          },
+          {
+            "name": "test_metrics_helpers_are_exported",
+            "line": 356,
+            "calls": [
+              "callable"
+            ]
+          },
+          {
+            "name": "test_integrations_are_exported",
+            "line": 361,
+            "calls": [
+              "callable"
+            ]
+          },
+          {
+            "name": "test_fastapi_install_registers_http_middleware",
+            "line": 369,
+            "calls": [
+              "FakeApp",
+              "callable",
+              "install_fastapi"
+            ]
+          },
+          {
+            "name": "test_flask_install_registers_hooks",
+            "line": 384,
+            "calls": [
+              "FakeFlask",
+              "callable",
+              "install_flask"
+            ]
+          },
+          {
+            "name": "test_celery_install_registers_signal_handlers",
+            "line": 399,
+            "calls": [
+              "Signal",
+              "append",
+              "install_celery",
+              "len"
+            ]
+          },
+          {
+            "name": "test_django_middleware_calls_next",
+            "line": 416,
+            "calls": [
+              "EyeWitnessDjangoMiddleware",
+              "middleware",
+              "object"
+            ]
+          },
+          {
+            "name": "get_response",
+            "line": 419,
+            "calls": []
+          },
+          {
+            "name": "middleware",
+            "line": 371,
+            "calls": []
+          },
+          {
+            "name": "before_request",
+            "line": 386,
+            "calls": []
+          },
+          {
+            "name": "teardown_request",
+            "line": 390,
+            "calls": []
+          },
+          {
+            "name": "__init__",
+            "line": 401,
+            "calls": []
+          },
+          {
+            "name": "connect",
+            "line": 404,
+            "calls": [
+              "append"
+            ]
+          },
+          {
+            "name": "decorator",
+            "line": 374,
+            "calls": []
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_migration_tool.py": {
+      "hash": "656f7a09fbecdf5419ecb1af60e70094bcb59593b0da3568d6e6f989f6a6fc3f",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_migration_tool.py",
+        "rel_path": "tests/test_migration_tool.py",
+        "language": "python",
+        "line_count": 34,
+        "functions": [
+          {
+            "name": "test_migration_tool_rewrites_deprecated_symbols",
+            "line": 11
+          }
+        ],
+        "imports": [
+          "__future__",
+          "pathlib",
+          "subprocess",
+          "sys",
+          "tempfile"
+        ],
+        "calls": [
+          "TemporaryDirectory",
+          "write_text",
+          "run",
+          "read_text",
+          "Path",
+          "str",
+          "Path"
+        ],
+        "function_calls": [
+          {
+            "name": "test_migration_tool_rewrites_deprecated_symbols",
+            "line": 11,
+            "calls": [
+              "Path",
+              "TemporaryDirectory",
+              "read_text",
+              "run",
+              "str",
+              "write_text"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_snapshots.py": {
+      "hash": "1bc36ea5a61305d5f670dd59622cf4bfaff62401a6a3893aaa517c650b595f43",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_snapshots.py",
+        "rel_path": "tests/test_snapshots.py",
+        "language": "python",
+        "line_count": 85,
+        "functions": [
+          {
+            "name": "_snapshot_required_keys",
+            "line": 18
+          },
+          {
+            "name": "_run_python",
+            "line": 23
+          },
+          {
+            "name": "test_log_schema_snapshot",
+            "line": 28
+          },
+          {
+            "name": "test_trace_schema_snapshot",
+            "line": 42
+          },
+          {
+            "name": "test_metrics_schema_snapshot",
+            "line": 69
+          }
+        ],
+        "imports": [
+          "__future__",
+          "contextlib",
+          "eye_witness._config",
+          "eye_witness._logging",
+          "io",
+          "json",
+          "pathlib",
+          "structlog",
+          "subprocess",
+          "sys"
+        ],
+        "calls": [
+          "loads",
+          "set",
+          "run",
+          "EyeWitnessConfig",
+          "loads",
+          "issubset",
+          "loads",
+          "issubset",
+          "loads",
+          "issubset",
+          "Path",
+          "read_text",
+          "splitlines",
+          "StringIO",
+          "redirect_stdout",
+          "configure_logging",
+          "info",
+          "getvalue",
+          "splitlines",
+          "keys",
+          "_run_python",
+          "_run_python",
+          "_snapshot_required_keys",
+          "_snapshot_required_keys",
+          "_snapshot_required_keys",
+          "strip",
+          "get_logger",
+          "strip"
+        ],
+        "function_calls": [
+          {
+            "name": "_snapshot_required_keys",
+            "line": 18,
+            "calls": [
+              "loads",
+              "read_text",
+              "set"
+            ]
+          },
+          {
+            "name": "_run_python",
+            "line": 23,
+            "calls": [
+              "run",
+              "splitlines",
+              "strip"
+            ]
+          },
+          {
+            "name": "test_log_schema_snapshot",
+            "line": 28,
+            "calls": [
+              "EyeWitnessConfig",
+              "StringIO",
+              "_snapshot_required_keys",
+              "configure_logging",
+              "get_logger",
+              "getvalue",
+              "info",
+              "issubset",
+              "keys",
+              "loads",
+              "redirect_stdout",
+              "splitlines",
+              "strip"
+            ]
+          },
+          {
+            "name": "test_trace_schema_snapshot",
+            "line": 42,
+            "calls": [
+              "_run_python",
+              "_snapshot_required_keys",
+              "issubset",
+              "loads"
+            ]
+          },
+          {
+            "name": "test_metrics_schema_snapshot",
+            "line": 69,
+            "calls": [
+              "_run_python",
+              "_snapshot_required_keys",
+              "issubset",
+              "loads"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_stress.py": {
+      "hash": "7fd8e61482adad673b485b900ff308d82dd22c819f8ba4afa3d5c5862eb124c7",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\test_stress.py",
+        "rel_path": "tests/test_stress.py",
+        "language": "python",
+        "line_count": 70,
+        "functions": [
+          {
+            "name": "_reset_state",
+            "line": 12
+          },
+          {
+            "name": "test_concurrent_init_shutdown_no_exceptions",
+            "line": 18
+          },
+          {
+            "name": "test_high_volume_threaded_logging_no_exceptions",
+            "line": 44
+          },
+          {
+            "name": "worker",
+            "line": 23
+          },
+          {
+            "name": "worker",
+            "line": 58
+          }
+        ],
+        "imports": [
+          "__future__",
+          "concurrent.futures",
+          "eye_witness",
+          "eye_witness._init",
+          "threading"
+        ],
+        "calls": [
+          "_reset_state",
+          "Lock",
+          "_reset_state",
+          "init",
+          "get_logger",
+          "Lock",
+          "shutdown",
+          "ThreadPoolExecutor",
+          "list",
+          "ThreadPoolExecutor",
+          "list",
+          "init",
+          "shutdown",
+          "map",
+          "range",
+          "map",
+          "range",
+          "info",
+          "range",
+          "append",
+          "append"
+        ],
+        "function_calls": [
+          {
+            "name": "_reset_state",
+            "line": 12,
+            "calls": []
+          },
+          {
+            "name": "test_concurrent_init_shutdown_no_exceptions",
+            "line": 18,
+            "calls": [
+              "Lock",
+              "ThreadPoolExecutor",
+              "_reset_state",
+              "append",
+              "init",
+              "list",
+              "map",
+              "range",
+              "shutdown"
+            ]
+          },
+          {
+            "name": "test_high_volume_threaded_logging_no_exceptions",
+            "line": 44,
+            "calls": [
+              "Lock",
+              "ThreadPoolExecutor",
+              "_reset_state",
+              "append",
+              "get_logger",
+              "info",
+              "init",
+              "list",
+              "map",
+              "range",
+              "shutdown"
+            ]
+          },
+          {
+            "name": "worker",
+            "line": 23,
+            "calls": [
+              "append",
+              "init",
+              "shutdown"
+            ]
+          },
+          {
+            "name": "worker",
+            "line": 58,
+            "calls": [
+              "append",
+              "info",
+              "range"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\unit\\test_api_parity.py": {
+      "hash": "50571f2d476a59d258fb0025ef128a307d53048f1c30b3fec8601674f6057536",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\unit\\test_api_parity.py",
+        "rel_path": "tests/unit/test_api_parity.py",
+        "language": "python",
+        "line_count": 8,
+        "functions": [
+          {
+            "name": "test_top_level_and_v1_api_parity",
+            "line": 5
+          }
+        ],
+        "imports": [
+          "eye_witness",
+          "eye_witness.v1"
+        ],
+        "calls": [
+          "set",
+          "set"
+        ],
+        "function_calls": [
+          {
+            "name": "test_top_level_and_v1_api_parity",
+            "line": 5,
+            "calls": [
+              "set"
+            ]
+          }
+        ]
+      }
+    },
+    "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\unit\\test_internal.py": {
+      "hash": "51b86a81f4fe7970170dad9146a2e35e3ee9d8e678b47ace8e389ccfd96a4fbf",
+      "row": {
+        "project": "eye_witness",
+        "path": "C:\\Dev\\PROJECTS\\Eye-Witness\\tests\\unit\\test_internal.py",
+        "rel_path": "tests/unit/test_internal.py",
+        "language": "python",
+        "line_count": 17,
+        "functions": [
+          {
+            "name": "test_clamp_rate_bounds",
+            "line": 4
+          },
+          {
+            "name": "test_safe_json_dumps",
+            "line": 10
+          },
+          {
+            "name": "test_stable_keys",
+            "line": 16
+          }
+        ],
+        "imports": [
+          "eye_witness.internal"
+        ],
+        "calls": [
+          "safe_json_dumps",
+          "startswith",
+          "clamp_rate",
+          "clamp_rate",
+          "clamp_rate",
+          "stable_keys"
+        ],
+        "function_calls": [
+          {
+            "name": "test_clamp_rate_bounds",
+            "line": 4,
+            "calls": [
+              "clamp_rate"
+            ]
+          },
+          {
+            "name": "test_safe_json_dumps",
+            "line": 10,
+            "calls": [
+              "safe_json_dumps",
+              "startswith"
+            ]
+          },
+          {
+            "name": "test_stable_keys",
+            "line": 16,
+            "calls": [
+              "stable_keys"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

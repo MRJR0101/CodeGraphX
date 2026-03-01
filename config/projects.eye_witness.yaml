@@ -1,0 +1,20 @@
+projects:
+  - name: eye_witness
+    root: C:/Dev/PROJECTS/Eye-Witness
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - outputs
+      - .cache
+      - .benchmarks
+      - _archive
+      - mnt
+      - observability

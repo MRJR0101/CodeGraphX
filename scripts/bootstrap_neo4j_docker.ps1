@@ -2,12 +2,16 @@ param(
     [string]$ContainerName = "codegraphx-neo4j",
     [string]$Image = "neo4j:5.26-community",
     [string]$Username = "neo4j",
-    [string]$Password = "codegraphx123",
+    [string]$Password = $env:NEO4J_PASSWORD,
     [string]$CypherFile = "scripts/bootstrap_neo4j.cypher"
 )
 
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $false
+
+if ([string]::IsNullOrWhiteSpace($Password)) {
+    throw "Neo4j password is required. Pass -Password or set NEO4J_PASSWORD."
+}
 
 if (-not (Get-Command docker -ErrorAction SilentlyContinue)) {
     throw "Docker is required but was not found in PATH."

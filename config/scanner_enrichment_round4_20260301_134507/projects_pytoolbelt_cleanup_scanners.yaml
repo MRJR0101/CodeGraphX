@@ -1,0 +1,24 @@
+projects:
+  - name: pytoolbelt_cleanup_scanners
+    root: C:/Dev/PROJECTS/00_PyToolbelt/07_Fixers/CodeQuality_Repair/RestoreVirtualEnvironmentsUVfiles/cleanup_all_projects/scanners
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - node_modules
+      - __pycache__
+      - dist
+      - build
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - site-packages
+      - .idea
+      - .vscode
+      - 99_Archive
+      - 90_GRAVEYARD
+      - AssessmentInbox
+      - incoming
+      - ms-playwright
+      - .gomodcache
+      - archive

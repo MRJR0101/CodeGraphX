@@ -8,7 +8,7 @@ from typer.testing import CliRunner
 from codegraphx.cli.main import app
 
 
-def _write_yaml(path: Path, payload: dict) -> None:
+def _write_yaml(path: Path, payload: dict[str, object]) -> None:
     path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
 
 
@@ -17,6 +17,7 @@ def test_cli_help_and_version() -> None:
     help_result = runner.invoke(app, ["--help"])
     assert help_result.exit_code == 0
     assert "CodeGraphX CLI" in help_result.stdout
+    assert "enrich" in help_result.stdout
     assert "impact" in help_result.stdout
     assert "snapshots" in help_result.stdout
     assert "doctor" in help_result.stdout
@@ -24,6 +25,14 @@ def test_cli_help_and_version() -> None:
     version_result = runner.invoke(app, ["--version"])
     assert version_result.exit_code == 0
     assert "0.2.0" in version_result.stdout
+
+    enrich_help = runner.invoke(app, ["enrich", "--help"])
+    assert enrich_help.exit_code == 0
+    assert "Enrichment automation commands" in enrich_help.stdout
+    assert "campaign" in enrich_help.stdout
+    assert "collectors" in enrich_help.stdout
+    assert "intelligence" in enrich_help.stdout
+    assert "index-audit" in enrich_help.stdout
 
 
 def test_doctor_skip_neo4j(tmp_path: Path) -> None:
@@ -38,7 +47,7 @@ def test_doctor_skip_neo4j(tmp_path: Path) -> None:
             "neo4j": {
                 "uri": "bolt://localhost:7687",
                 "user": "neo4j",
-                "password": "codegraphx123",
+                "password": "test-password",
                 "database": "neo4j",
             },
             "meilisearch": {"enabled": False, "host": "localhost", "port": 7700, "index": "codegraphx"},
@@ -61,3 +70,4 @@ def test_doctor_skip_neo4j(tmp_path: Path) -> None:
     assert "doctor checks" in result.stdout
     assert "neo4j_connection" in result.stdout
     assert "skip" in result.stdout.lower()
+

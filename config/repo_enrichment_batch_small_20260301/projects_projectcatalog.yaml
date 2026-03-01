@@ -1,0 +1,27 @@
+projects:
+  - name: repo_projectcatalog
+    root: C:/Dev/PROJECTS/ProjectCatalog
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - node_modules
+      - __pycache__
+      - dist
+      - build
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - site-packages
+      - .idea
+      - .vscode
+      - 99_Archive
+      - 90_GRAVEYARD
+      - AssessmentInbox
+      - incoming
+      - ms-playwright
+      - .gomodcache
+      - _analysis_reports
+      - _logs
+      - _planning
+      - archive

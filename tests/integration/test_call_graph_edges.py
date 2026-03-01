@@ -9,7 +9,7 @@ from codegraphx.core.io import read_jsonl
 from codegraphx.core.stages import run_extract, run_parse, run_scan
 
 
-def _write_yaml(path: Path, payload: dict) -> None:
+def _write_yaml(path: Path, payload: dict[str, object]) -> None:
     path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
 
 
@@ -36,7 +36,7 @@ def test_extract_emits_calls_function_edges(tmp_path: Path) -> None:
             "neo4j": {
                 "uri": "bolt://localhost:7687",
                 "user": "neo4j",
-                "password": "codegraphx123",
+                "password": "test-password",
                 "database": "neo4j",
             },
             "meilisearch": {"enabled": False, "host": "localhost", "port": 7700, "index": "codegraphx"},

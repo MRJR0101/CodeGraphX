@@ -1,0 +1,139 @@
+projects:
+  - name: 17_URLs
+    root: c:/Dev/PROJECTS/00_PyToolbelt/17_URLs
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 18_Databases
+    root: c:/Dev/PROJECTS/00_PyToolbelt/18_Databases
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 19_SEO
+    root: c:/Dev/PROJECTS/00_PyToolbelt/19_SEO
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 20_DevTools
+    root: c:/Dev/PROJECTS/00_PyToolbelt/20_DevTools
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 20_WindowsSystem
+    root: c:/Dev/PROJECTS/00_PyToolbelt/20_WindowsSystem
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 21_Network
+    root: c:/Dev/PROJECTS/00_PyToolbelt/21_Network
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages

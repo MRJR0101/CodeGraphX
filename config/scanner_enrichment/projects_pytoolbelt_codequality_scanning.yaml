@@ -1,0 +1,17 @@
+projects:
+  - name: pytoolbelt_codequality_scanning
+    root: C:/Dev/PROJECTS/00_PyToolbelt/02_Scanners/CodeQuality_Scanning
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - node_modules
+      - __pycache__
+      - dist
+      - build
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - site-packages
+      - .idea
+      - .vscode

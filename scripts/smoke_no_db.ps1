@@ -74,7 +74,7 @@ run:
 neo4j:
   uri: bolt://localhost:7687
   user: neo4j
-  password: codegraphx123
+  password: not-used-in-smoke
   database: neo4j
 meilisearch:
   enabled: false

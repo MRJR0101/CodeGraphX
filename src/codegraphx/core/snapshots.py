@@ -77,7 +77,7 @@ def event_hashes(events_path: Path) -> dict[str, str]:
             continue
         seen_keys.add(key)
         payload = json.dumps(row, sort_keys=True, ensure_ascii=False)
-        hashes[key] = hashlib.sha1(payload.encode("utf-8")).hexdigest()
+        hashes[key] = hashlib.sha256(payload.encode("utf-8")).hexdigest()
     return hashes
 
 

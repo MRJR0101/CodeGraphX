@@ -1,0 +1,192 @@
+{
+  "files": {
+    "tests\\fixtures\\mini_repos\\python_pkg_a\\.venv\\Lib\\site-packages\\_virtualenv.py": {
+      "hash": "6cf30c56faf2a55228914dbbd17f8088ed371ebb08f5e7fa6fd931f913fcaf1d",
+      "row": {
+        "project": "DemoA",
+        "path": "tests\\fixtures\\mini_repos\\python_pkg_a\\.venv\\Lib\\site-packages\\_virtualenv.py",
+        "rel_path": ".venv/Lib/site-packages/_virtualenv.py",
+        "language": "python",
+        "line_count": 101,
+        "functions": [
+          {
+            "name": "patch_dist",
+            "line": 9
+          },
+          {
+            "name": "parse_config_files",
+            "line": 19
+          },
+          {
+            "name": "find_spec",
+            "line": 50
+          },
+          {
+            "name": "exec_module",
+            "line": 88
+          },
+          {
+            "name": "load_module",
+            "line": 94
+          }
+        ],
+        "imports": [
+          "functools",
+          "importlib.util",
+          "os",
+          "sys",
+          "threading"
+        ],
+        "calls": [
+          "join",
+          "insert",
+          "_Finder",
+          "old_parse_config_files",
+          "get_option_dict",
+          "old",
+          "old",
+          "patch_dist",
+          "patch_dist",
+          "abspath",
+          "pop",
+          "len",
+          "Lock",
+          "append",
+          "find_spec",
+          "hasattr",
+          "getattr",
+          "setattr",
+          "partial"
+        ],
+        "function_calls": [
+          {
+            "name": "patch_dist",
+            "line": 9,
+            "calls": [
+              "abspath",
+              "get_option_dict",
+              "old_parse_config_files",
+              "pop"
+            ]
+          },
+          {
+            "name": "parse_config_files",
+            "line": 19,
+            "calls": [
+              "abspath",
+              "get_option_dict",
+              "old_parse_config_files",
+              "pop"
+            ]
+          },
+          {
+            "name": "find_spec",
+            "line": 50,
+            "calls": [
+              "Lock",
+              "append",
+              "find_spec",
+              "getattr",
+              "hasattr",
+              "len",
+              "partial",
+              "setattr"
+            ]
+          },
+          {
+            "name": "exec_module",
+            "line": 88,
+            "calls": [
+              "old",
+              "patch_dist"
+            ]
+          },
+          {
+            "name": "load_module",
+            "line": 94,
+            "calls": [
+              "old",
+              "patch_dist"
+            ]
+          }
+        ]
+      }
+    },
+    "tests\\fixtures\\mini_repos\\python_pkg_a\\.venv\\Scripts\\activate_this.py": {
+      "hash": "b9baecdc96531b3dd63e8b24b986427141dc907e18baeaebf157b6216c87224f",
+      "row": {
+        "project": "DemoA",
+        "path": "tests\\fixtures\\mini_repos\\python_pkg_a\\.venv\\Scripts\\activate_this.py",
+        "rel_path": ".venv/Scripts/activate_this.py",
+        "language": "python",
+        "line_count": 59,
+        "functions": [],
+        "imports": [
+          "__future__",
+          "os",
+          "site",
+          "sys"
+        ],
+        "calls": [
+          "dirname",
+          "join",
+          "len",
+          "split",
+          "abspath",
+          "basename",
+          "realpath",
+          "addsitedir",
+          "AssertionError",
+          "join",
+          "split",
+          "len",
+          "get"
+        ],
+        "function_calls": []
+      }
+    },
+    "tests\\fixtures\\mini_repos\\python_pkg_a\\a.py": {
+      "hash": "c27dcf55992803d587b5ef07954306f481e370426958b7f4aae8abeb783e49a9",
+      "row": {
+        "project": "DemoA",
+        "path": "tests\\fixtures\\mini_repos\\python_pkg_a\\a.py",
+        "rel_path": "a.py",
+        "language": "python",
+        "line_count": 11,
+        "functions": [
+          {
+            "name": "add",
+            "line": 1
+          },
+          {
+            "name": "add2",
+            "line": 5
+          },
+          {
+            "name": "run",
+            "line": 10
+          }
+        ],
+        "imports": [],
+        "calls": [],
+        "function_calls": [
+          {
+            "name": "add",
+            "line": 1,
+            "calls": []
+          },
+          {
+            "name": "add2",
+            "line": 5,
+            "calls": []
+          },
+          {
+            "name": "run",
+            "line": 10,
+            "calls": []
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+projects:
+  - name: codebase_x
+    root: C:/Repository/codegraphx
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - data

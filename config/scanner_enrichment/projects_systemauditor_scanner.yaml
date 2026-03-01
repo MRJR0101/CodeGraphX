@@ -1,0 +1,17 @@
+projects:
+  - name: systemauditor_scanner
+    root: C:/Dev/PROJECTS/SystemAuditor
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - node_modules
+      - __pycache__
+      - dist
+      - build
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - site-packages
+      - .idea
+      - .vscode

@@ -13,7 +13,7 @@ from codegraphx.core.snapshots import list_snapshots
 from codegraphx.core.stages import run_extract, run_parse, run_scan
 
 
-def _write_yaml(path: Path, payload: dict) -> None:
+def _write_yaml(path: Path, payload: dict[str, object]) -> None:
     path.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
 
 
@@ -51,7 +51,7 @@ def test_non_db_snapshot_delta_pipeline(tmp_path: Path) -> None:
             "neo4j": {
                 "uri": "bolt://localhost:7687",
                 "user": "neo4j",
-                "password": "codegraphx123",
+                "password": "test-password",
                 "database": "neo4j",
             },
             "meilisearch": {"enabled": False, "host": "localhost", "port": 7700, "index": "codegraphx"},
@@ -122,3 +122,4 @@ def test_non_db_snapshot_delta_pipeline(tmp_path: Path) -> None:
     changed_functions = report.get("changed_functions", [])
     assert isinstance(changed_functions, list)
     assert any(row.get("function") == "subtract" for row in changed_functions if isinstance(row, dict))
+

@@ -1,0 +1,47 @@
+projects:
+  - name: 08_Linters
+    root: C:/Dev/PROJECTS/00_PyToolbelt/08_Linters
+    exclude:
+      - .eggs
+      - .git
+      - .idea
+      - .mypy_cache
+      - .pytest_cache
+      - .ruff_cache
+      - .tox
+      - .venv
+      - .vscode
+      - 99_Archive
+      - __pycache__
+      - _analysis_reports
+      - _logs
+      - _planning
+      - build
+      - dist
+      - eggs
+      - node_modules
+      - site-packages
+      - venv
+  - name: 09_Loggers
+    root: C:/Dev/PROJECTS/00_PyToolbelt/09_Loggers
+    exclude:
+      - .eggs
+      - .git
+      - .idea
+      - .mypy_cache
+      - .pytest_cache
+      - .ruff_cache
+      - .tox
+      - .venv
+      - .vscode
+      - 99_Archive
+      - __pycache__
+      - _analysis_reports
+      - _logs
+      - _planning
+      - build
+      - dist
+      - eggs
+      - node_modules
+      - site-packages
+      - venv

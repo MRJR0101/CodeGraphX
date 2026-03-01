@@ -1,0 +1,139 @@
+projects:
+  - name: 00_Meta
+    root: c:/Dev/PROJECTS/00_PyToolbelt/00_Meta
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 01_Auditors
+    root: c:/Dev/PROJECTS/00_PyToolbelt/01_Auditors
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 02_Scanners
+    root: c:/Dev/PROJECTS/00_PyToolbelt/02_Scanners
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 03_Analyzers
+    root: c:/Dev/PROJECTS/00_PyToolbelt/03_Analyzers
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 04_Inspectors
+    root: c:/Dev/PROJECTS/00_PyToolbelt/04_Inspectors
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages
+  - name: 05_Validators
+    root: c:/Dev/PROJECTS/00_PyToolbelt/05_Validators
+    exclude:
+      - .git
+      - .venv
+      - venv
+      - __pycache__
+      - .pytest_cache
+      - .mypy_cache
+      - .ruff_cache
+      - node_modules
+      - dist
+      - build
+      - 99_Archive
+      - _analysis_reports
+      - _logs
+      - _planning
+      - .idea
+      - .vscode
+      - .tox
+      - .eggs
+      - eggs
+      - site-packages

@@ -1,0 +1,17 @@
+{
+  "metrics": [
+    {
+      "functions": 17
+    }
+  ],
+  "duplicates": [
+    {
+      "duplicate_groups": 1
+    }
+  ],
+  "patterns": [
+    {
+      "pattern_hits": 0
+    }
+  ]
+}

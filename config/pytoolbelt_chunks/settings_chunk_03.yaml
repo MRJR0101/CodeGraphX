@@ -1,0 +1,19 @@
+run:
+  out_dir: c:/Repository/codegraphx/data/pytoolbelt_chunks/chunk_03
+  max_files: 0
+  include_ext: [".py", ".js", ".ts"]
+
+neo4j:
+  uri: ${NEO4J_URI:-bolt://localhost:7687}
+  user: ${NEO4J_USER:-neo4j}
+  password: ${NEO4J_PASSWORD:-}
+  database: neo4j
+
+memgraph:
+  uri: ${MEMGRAPH_URI:-bolt://localhost:7687}
+
+meilisearch:
+  host: ${MEILISEARCH_HOST:-localhost}
+  port: ${MEILISEARCH_PORT:-7700}
+  index: codegraphx
+  enabled: false
