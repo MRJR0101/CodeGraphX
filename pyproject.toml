@@ -93,7 +93,7 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests/unit", "tests/integration"]
-addopts = "--cov=. --cov-report=term-missing --basetemp=.pytest_tmp"
+addopts = "--basetemp=.pytest_tmp"
 
 [tool.coverage.run]
 source = ["."]
