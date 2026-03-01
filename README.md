@@ -43,6 +43,22 @@ pip install -e ".[dev]"
 uv sync --all-extras
 ```
 
+### Verify Installation
+
+```bash
+codegraphx --version
+codegraphx --help
+```
+
+If you cloned the repo and directly run `python cli/main.py`, the legacy shim now
+points to the canonical CLI but still requires dependencies to be installed first.
+Use:
+
+```bash
+pip install -e .
+python -m codegraphx --help
+```
+
 ### Run the Pipeline (No Database Required)
 
 ```bash
