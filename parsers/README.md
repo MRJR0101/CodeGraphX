@@ -32,7 +32,7 @@
 ## Quick Start
 
 ```powershell
-cd C:\Dev\PROJECTS\00_PyToolbelt\05_CodeAnalysis\codegraphx\codegraphx\parsers
+cd <project-root>\parsers
 python __init__.py --help
 ```
 

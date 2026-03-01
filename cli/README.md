@@ -38,7 +38,7 @@ Commands:
 ## Quick Start
 
 ```powershell
-cd C:\Dev\PROJECTS\00_PyToolbelt\05_CodeAnalysis\codegraphx\codegraphx\cli
+cd <project-root>\cli
 python main.py --help
 ```
 

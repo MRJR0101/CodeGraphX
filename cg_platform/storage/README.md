@@ -32,7 +32,7 @@
 ## Quick Start
 
 ```powershell
-cd C:\Dev\PROJECTS\00_PyToolbelt\05_CodeAnalysis\codegraphx\codegraphx\platform\storage
+cd <project-root>\platform\storage
 python __init__.py --help
 ```
 

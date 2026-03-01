@@ -32,7 +32,7 @@ codegraphx project
 ## Quick Start
 
 ```powershell
-cd C:\Dev\PROJECTS\00_PyToolbelt\05_CodeAnalysis\codegraphx\codegraphx\src\codegraphx
+cd <project-root>\src\codegraphx
 python __init__.py --help
 ```
 

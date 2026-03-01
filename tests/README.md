@@ -32,7 +32,7 @@
 ## Quick Start
 
 ```powershell
-cd C:\Dev\PROJECTS\00_PyToolbelt\05_CodeAnalysis\codegraphx\codegraphx\tests
+cd <project-root>\tests
 python __init__.py --help
 ```
 

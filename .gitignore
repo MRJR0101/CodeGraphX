@@ -30,3 +30,12 @@ Thumbs.db
 # Environment
 .env
 .env.*
+
+# Local enrichment outputs and private scan artifacts
+data/
+config/pytoolbelt_chunks/
+config/pytoolbelt_preview_chunks/
+config/repo_enrichment_batch_*/
+config/repo_enrichment_refresh_*/
+config/scanner_enrichment*/
+tests/fixtures/mini_repos/**/uv_*.log

@@ -58,7 +58,7 @@ Use this when a single scan is too large/noisy (for example, `00_PyToolbelt`).
 ```powershell
 cd C:\Repository\codegraphx
 uv run python .\scripts\chunked_scan_enrich.py `
-  --target-root "C:\Dev\PROJECTS\00_PyToolbelt" `
+  --target-root "<source-root>" `
   --chunk-size 6 `
   --tag pytoolbelt `
   --update-db "C:\Repository\ProjectCatalog\project_catalog.db" `
@@ -66,7 +66,7 @@ uv run python .\scripts\chunked_scan_enrich.py `
 
 # Resume an interrupted run
 uv run python .\scripts\chunked_scan_enrich.py `
-  --target-root "C:\Dev\PROJECTS\00_PyToolbelt" `
+  --target-root "<source-root>" `
   --chunk-size 6 `
   --tag pytoolbelt `
   --resume `
@@ -75,7 +75,7 @@ uv run python .\scripts\chunked_scan_enrich.py `
 
 # Planning mode (generate chunk configs only)
 uv run python .\scripts\chunked_scan_enrich.py `
-  --target-root "C:\Dev\PROJECTS\00_PyToolbelt" `
+  --target-root "<source-root>" `
   --chunk-size 6 `
   --tag pytoolbelt `
   --dry-run
@@ -148,8 +148,8 @@ CLI wrappers are also available:
 uv run codegraphx enrich backlog --db "C:\Repository\ProjectCatalog\project_catalog.db" --limit 20
 uv run codegraphx enrich campaign --db "C:\Repository\ProjectCatalog\project_catalog.db" --limit 3 --execute --resume
 uv run codegraphx enrich index-audit --db "C:\Repository\ProjectCatalog\project_catalog.db"
-uv run codegraphx enrich collectors --db "C:\Repository\ProjectCatalog\project_catalog.db" --source-path "C:\Dev\PROJECTS\00_PyToolbelt"
-uv run codegraphx enrich intelligence --db "C:\Repository\ProjectCatalog\project_catalog.db" --source-path "C:\Dev\PROJECTS\00_PyToolbelt"
+uv run codegraphx enrich collectors --db "C:\Repository\ProjectCatalog\project_catalog.db" --source-path "<source-root>"
+uv run codegraphx enrich intelligence --db "C:\Repository\ProjectCatalog\project_catalog.db" --source-path "<source-root>"
 ```
 
 ## File Collector Signals
@@ -162,7 +162,7 @@ cd C:\Repository\codegraphx
 # Use latest enrichment scan artifact for project root
 uv run python .\scripts\file_collector_signals.py `
   --db "C:\Repository\ProjectCatalog\project_catalog.db" `
-  --source-path "C:\Dev\PROJECTS\00_PyToolbelt" `
+  --source-path "<source-root>" `
   --exclude-subpath "AssessmentInbox\\devwide\\incoming,AssessmentInbox\\devwide_rescan" `
   --min-score 4.0 `
   --top 100 `
@@ -172,7 +172,7 @@ uv run python .\scripts\file_collector_signals.py `
 # Analyze only (no DB write)
 uv run python .\scripts\file_collector_signals.py `
   --db "C:\Repository\ProjectCatalog\project_catalog.db" `
-  --source-path "C:\Dev\PROJECTS\00_PyToolbelt" `
+  --source-path "<source-root>" `
   --dry-run
 ```
 
@@ -193,7 +193,7 @@ cd C:\Repository\codegraphx
 
 uv run python .\scripts\code_intelligence_signals.py `
   --db "C:\Repository\ProjectCatalog\project_catalog.db" `
-  --source-path "C:\Dev\PROJECTS\00_PyToolbelt" `
+  --source-path "<source-root>" `
   --exclude-subpath "assessmentinbox" `
   --min-file-sim 0.65 `
   --min-func-sim 0.8 `

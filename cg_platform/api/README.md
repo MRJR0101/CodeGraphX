@@ -32,7 +32,7 @@ FastAPI app factory.
 ## Quick Start
 
 ```powershell
-cd C:\Dev\PROJECTS\00_PyToolbelt\05_CodeAnalysis\codegraphx\codegraphx\platform\api
+cd <project-root>\platform\api
 python app.py --help
 ```
 

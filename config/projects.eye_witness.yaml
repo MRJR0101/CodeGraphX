@@ -1,6 +1,6 @@
 projects:
   - name: eye_witness
-    root: C:/Dev/PROJECTS/Eye-Witness
+    root: C:/path/to/Eye-Witness
     exclude:
       - .git
       - .venv
