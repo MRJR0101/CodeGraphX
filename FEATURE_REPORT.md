@@ -2,7 +2,7 @@
 
 **Generated:** 2026-02-07  
 **Project:** CodeGraphX - Tree-sitter to Code Knowledge Graph Pipeline  
-**Version:** 0.1.0
+**Version:** 0.2.0
 
 ---
 
