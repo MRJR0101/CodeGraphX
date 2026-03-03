@@ -18,7 +18,6 @@ import subprocess
 from datetime import UTC, datetime
 from pathlib import Path
 
-
 DEFAULT_EXCLUDE_NAMES = [
     ".git",
     ".venv",
@@ -94,7 +93,14 @@ def _sanitize(value: str) -> str:
 
 
 def _run(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, cwd=str(cwd), capture_output=True, text=True, encoding="utf-8", errors="replace")
+    return subprocess.run(  # noqa: S603 - command is constructed from controlled internal inputs
+        cmd,
+        cwd=str(cwd),
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+    )
 
 
 def _line_count(path: Path) -> int:
@@ -183,7 +189,9 @@ def main() -> None:
     args = _parse_args()
     root = Path(args.root).resolve()
     db_path = Path(args.db).resolve()
-    codegraphx_root = Path(args.codegraphx_root).resolve() if args.codegraphx_root else Path(__file__).resolve().parents[1]
+    codegraphx_root = (
+        Path(args.codegraphx_root).resolve() if args.codegraphx_root else Path(__file__).resolve().parents[1]
+    )
 
     if not root.is_dir():
         raise SystemExit(f"root not found: {root}")

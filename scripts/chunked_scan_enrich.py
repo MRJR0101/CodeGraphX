@@ -11,9 +11,8 @@ import argparse
 import json
 import sqlite3
 import subprocess
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Iterable
-
 
 DEFAULT_EXCLUDES = {
     ".git",
@@ -113,7 +112,7 @@ def _run_scan(
         "--settings",
         str(settings_yaml),
     ]
-    proc = subprocess.run(
+    proc = subprocess.run(  # noqa: S603 - internal command assembled from trusted workflow args
         cmd,
         cwd=str(codegraphx_root),
         capture_output=True,
@@ -231,7 +230,9 @@ def main() -> None:
     if not target_root.is_dir():
         raise SystemExit(f"Target root not found: {target_root}")
 
-    codegraphx_root = Path(args.codegraphx_root).resolve() if args.codegraphx_root else Path(__file__).resolve().parents[1]
+    codegraphx_root = (
+        Path(args.codegraphx_root).resolve() if args.codegraphx_root else Path(__file__).resolve().parents[1]
+    )
     if not (codegraphx_root / "config").is_dir():
         raise SystemExit(f"CodeGraphX root invalid (missing config directory): {codegraphx_root}")
 

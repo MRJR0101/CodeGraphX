@@ -23,7 +23,6 @@ from pathlib import Path
 from statistics import mean
 from typing import Any, NamedTuple
 
-
 SEEDS: tuple[int, ...] = (
     0x9E3779B1,
     0x85EBCA77,
@@ -42,9 +41,7 @@ SEEDS: tuple[int, ...] = (
 JS_IMPORT_RE = re.compile(r"\bimport\s+.*?\bfrom\s+['\"]([^'\"]+)['\"]")
 JS_REQUIRE_RE = re.compile(r"\brequire\(\s*['\"]([^'\"]+)['\"]\s*\)")
 JS_FUNC_BLOCK_RE = re.compile(r"\bfunction\s+([A-Za-z_][A-Za-z0-9_]*)\s*\([^)]*\)\s*\{")
-JS_ARROW_BLOCK_RE = re.compile(
-    r"\b(?:const|let|var)\s+([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?:async\s*)?\([^)]*\)\s*=>\s*\{"
-)
+JS_ARROW_BLOCK_RE = re.compile(r"\b(?:const|let|var)\s+([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(?:async\s*)?\([^)]*\)\s*=>\s*\{")
 JS_CALL_RE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*)\s*\(")
 
 TOKEN_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
@@ -81,6 +78,7 @@ DEFAULT_EXCLUDE_SUBPATHS: tuple[str, ...] = (
     "/ms-playwright/",
     "/webkit.resources/",
 )
+
 
 class FunctionInfo(NamedTuple):
     uid: str
@@ -124,7 +122,9 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("--json", action="store_true", help="Print JSON output.")
     parser.add_argument("--output", default="", help="Optional output path.")
     parser.add_argument("--dry-run", action="store_true", help="Analyze without writing DB.")
-    parser.add_argument("--append", action="store_true", help="Append/update rows without replacing existing source rows.")
+    parser.add_argument(
+        "--append", action="store_true", help="Append/update rows without replacing existing source rows."
+    )
     return parser.parse_args()
 
 
@@ -195,11 +195,11 @@ def _normalize_js_body(text: str) -> str:
 
 
 def _sha1(value: str) -> str:
-    return hashlib.sha1(value.encode("utf-8", errors="ignore")).hexdigest()
+    return hashlib.sha1(value.encode("utf-8", errors="ignore")).hexdigest()  # noqa: S324
 
 
 def _hash_token(token: str, seed: int) -> int:
-    digest = hashlib.sha1(f"{seed}:{token}".encode("utf-8")).digest()
+    digest = hashlib.sha1(f"{seed}:{token}".encode()).digest()  # noqa: S324
     return int.from_bytes(digest[:8], byteorder="big", signed=False)
 
 
@@ -907,12 +907,23 @@ def _ensure_tables(cur: sqlite3.Cursor) -> None:
         )
         """
     )
-    cur.execute("CREATE INDEX IF NOT EXISTS idx_intel_source_project ON codegraphx_project_intelligence (source_project)")
-    cur.execute("CREATE INDEX IF NOT EXISTS idx_dep_source_internal ON codegraphx_dependency_edges (source_path, is_internal)")
-    cur.execute("CREATE INDEX IF NOT EXISTS idx_call_source_internal ON codegraphx_call_edges (source_path, is_internal)")
+    cur.execute(
+        "CREATE INDEX IF NOT EXISTS idx_intel_source_project ON codegraphx_project_intelligence (source_project)"
+    )
+    cur.execute(
+        "CREATE INDEX IF NOT EXISTS idx_dep_source_internal ON codegraphx_dependency_edges (source_path, is_internal)"
+    )
+    cur.execute(
+        "CREATE INDEX IF NOT EXISTS idx_call_source_internal ON codegraphx_call_edges (source_path, is_internal)"
+    )
     cur.execute("CREATE INDEX IF NOT EXISTS idx_call_caller ON codegraphx_call_edges (caller_uid)")
-    cur.execute("CREATE INDEX IF NOT EXISTS idx_complexity_source_score ON codegraphx_complexity_nodes (source_path, cyclomatic)")
-    cur.execute("CREATE INDEX IF NOT EXISTS idx_similarity_source_type ON codegraphx_similarity_pairs (source_path, pair_type)")
+    cur.execute(
+        "CREATE INDEX IF NOT EXISTS idx_complexity_source_score "
+        "ON codegraphx_complexity_nodes (source_path, cyclomatic)"
+    )
+    cur.execute(
+        "CREATE INDEX IF NOT EXISTS idx_similarity_source_type ON codegraphx_similarity_pairs (source_path, pair_type)"
+    )
     cur.execute("CREATE INDEX IF NOT EXISTS idx_similarity_score ON codegraphx_similarity_pairs (similarity)")
 
 
@@ -1016,9 +1027,9 @@ def persist_results(
             for row in results["complexity"]
         ],
     )
-    similarity_rows = (
-        [("file", row) for row in results["file_pairs"]] + [("function", row) for row in results["function_pairs"]]
-    )
+    similarity_rows = [("file", row) for row in results["file_pairs"]] + [
+        ("function", row) for row in results["function_pairs"]
+    ]
     cur.executemany(
         """
         INSERT INTO codegraphx_similarity_pairs (

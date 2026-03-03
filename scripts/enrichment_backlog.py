@@ -129,10 +129,7 @@ def main() -> None:
     finally:
         conn.close()
 
-    if args.json:
-        output = json.dumps(rows, indent=2)
-    else:
-        output = _render_text(rows)
+    output = json.dumps(rows, indent=2) if args.json else _render_text(rows)
 
     if args.output:
         Path(args.output).write_text(output + "\n", encoding="utf-8")

@@ -30,7 +30,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-
 # Configuration
 CONFIG_FILE = "config/default.yaml"
 PROJECTS_FILE = "config/projects.yaml"
@@ -49,7 +48,7 @@ def run_command(
 ) -> tuple[int, str, str]:
     """Run a command and return exit code, stdout, stderr."""
     try:
-        result = subprocess.run(
+        result = subprocess.run(  # noqa: S603 - internal helper executes fixed local tooling commands
             cmd,
             cwd=cwd,
             capture_output=True,
@@ -71,9 +70,7 @@ def check_codegraphx_installed() -> bool:
 
 def get_staged_files() -> list[str]:
     """Get list of staged Python files."""
-    code, stdout, _ = run_command(
-        ["git", "diff", "--cached", "--name-only", "--", ".py"]
-    )
+    code, stdout, _ = run_command(["git", "diff", "--cached", "--name-only", "--", ".py"])
     if code != 0:
         return []
     return [f for f in stdout.strip().split("\n") if f]
@@ -96,43 +93,51 @@ def run_quick_scan(files: list[str]) -> dict[str, Any]:
             for i, line in enumerate(lines, 1):
                 # Check for potential issues
                 if "eval(" in line and "user" in line.lower():
-                    issues.append({
-                        "file": file_path,
-                        "line": i,
-                        "severity": SEVERITY_HIGH,
-                        "message": "Potential user input in eval()",
-                        "code": line.strip()[:50],
-                    })
+                    issues.append(
+                        {
+                            "file": file_path,
+                            "line": i,
+                            "severity": SEVERITY_HIGH,
+                            "message": "Potential user input in eval()",
+                            "code": line.strip()[:50],
+                        }
+                    )
 
                 if "exec(" in line and "user" in line.lower():
-                    issues.append({
-                        "file": file_path,
-                        "line": i,
-                        "severity": SEVERITY_HIGH,
-                        "message": "Potential user input in exec()",
-                        "code": line.strip()[:50],
-                    })
+                    issues.append(
+                        {
+                            "file": file_path,
+                            "line": i,
+                            "severity": SEVERITY_HIGH,
+                            "message": "Potential user input in exec()",
+                            "code": line.strip()[:50],
+                        }
+                    )
 
                 if "SELECT" in line and "{" in line:
-                    issues.append({
-                        "file": file_path,
-                        "line": i,
-                        "severity": SEVERITY_MEDIUM,
-                        "message": "Possible SQL injection risk",
-                        "code": line.strip()[:50],
-                    })
+                    issues.append(
+                        {
+                            "file": file_path,
+                            "line": i,
+                            "severity": SEVERITY_MEDIUM,
+                            "message": "Possible SQL injection risk",
+                            "code": line.strip()[:50],
+                        }
+                    )
 
                 if "password" in line.lower() and "=" in line:
-                    issues.append({
-                        "file": file_path,
-                        "line": i,
-                        "severity": SEVERITY_LOW,
-                        "message": "Possible hardcoded password",
-                        "code": line.strip()[:50],
-                    })
+                    issues.append(
+                        {
+                            "file": file_path,
+                            "line": i,
+                            "severity": SEVERITY_LOW,
+                            "message": "Possible hardcoded password",
+                            "code": line.strip()[:50],
+                        }
+                    )
 
-        except Exception:
-            pass  # Skip files we can't read
+        except OSError:
+            continue  # Skip files we can't read
 
     # Get metrics
     metrics = {
@@ -142,9 +147,7 @@ def run_quick_scan(files: list[str]) -> dict[str, Any]:
     }
 
     # Get diff stats
-    code, stdout, _ = run_command(
-        ["git", "diff", "--numstat", "--", "*.py"]
-    )
+    code, stdout, _ = run_command(["git", "diff", "--numstat", "--", "*.py"])
     if code == 0:
         for line in stdout.strip().split("\n"):
             if line:
@@ -212,11 +215,14 @@ def main():
     metrics = results.get("metrics", {})
 
     # Log the analysis
-    log_audit("pre_commit_scan", {
-        "files": staged_files,
-        "issues_found": len(issues),
-        "metrics": metrics,
-    })
+    log_audit(
+        "pre_commit_scan",
+        {
+            "files": staged_files,
+            "issues_found": len(issues),
+            "metrics": metrics,
+        },
+    )
 
     # Print metrics
     print("\nChange Summary:")

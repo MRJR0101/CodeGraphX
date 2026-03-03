@@ -5,7 +5,6 @@ import json
 import sqlite3
 from pathlib import Path
 
-
 SCRIPT_PATH = Path(__file__).resolve().parents[2] / "scripts" / "code_intelligence_signals.py"
 
 
@@ -205,7 +204,12 @@ def test_persist_results_writes_tables(tmp_path: Path) -> None:
             }
         ],
         "file_pairs": [
-            {"left_id": r"c:\x\a.py", "right_id": r"c:\x\b.py", "similarity": 0.9, "evidence": {"mode": "token_jaccard"}},
+            {
+                "left_id": r"c:\x\a.py",
+                "right_id": r"c:\x\b.py",
+                "similarity": 0.9,
+                "evidence": {"mode": "token_jaccard"},
+            },
         ],
         "function_pairs": [
             {

@@ -9,7 +9,6 @@ import json
 import sqlite3
 from pathlib import Path
 
-
 RECOMMENDED_INDEXES: list[dict[str, object]] = [
     {"table": "projects", "name": "idx_projects_path", "columns": ("path",)},
     {"table": "projects", "name": "idx_projects_line_count", "columns": ("line_count",)},
@@ -27,11 +26,23 @@ RECOMMENDED_INDEXES: list[dict[str, object]] = [
     {"table": "codegraphx_file_signals", "name": "idx_file_signals_score", "columns": ("collector_score",)},
     {"table": "codegraphx_project_signals", "name": "idx_project_signals_ratio", "columns": ("collector_ratio",)},
     {"table": "codegraphx_project_intelligence", "name": "idx_intel_source_project", "columns": ("source_project",)},
-    {"table": "codegraphx_dependency_edges", "name": "idx_dep_source_internal", "columns": ("source_path", "is_internal")},
+    {
+        "table": "codegraphx_dependency_edges",
+        "name": "idx_dep_source_internal",
+        "columns": ("source_path", "is_internal"),
+    },
     {"table": "codegraphx_call_edges", "name": "idx_call_source_internal", "columns": ("source_path", "is_internal")},
     {"table": "codegraphx_call_edges", "name": "idx_call_caller", "columns": ("caller_uid",)},
-    {"table": "codegraphx_complexity_nodes", "name": "idx_complexity_source_score", "columns": ("source_path", "cyclomatic")},
-    {"table": "codegraphx_similarity_pairs", "name": "idx_similarity_source_type", "columns": ("source_path", "pair_type")},
+    {
+        "table": "codegraphx_complexity_nodes",
+        "name": "idx_complexity_source_score",
+        "columns": ("source_path", "cyclomatic"),
+    },
+    {
+        "table": "codegraphx_similarity_pairs",
+        "name": "idx_similarity_source_type",
+        "columns": ("source_path", "pair_type"),
+    },
     {"table": "codegraphx_similarity_pairs", "name": "idx_similarity_score", "columns": ("similarity",)},
 ]
 
@@ -188,10 +199,7 @@ def main() -> None:
     finally:
         conn.close()
 
-    if args.json:
-        output = json.dumps(report, indent=2)
-    else:
-        output = _render_text(report)
+    output = json.dumps(report, indent=2) if args.json else _render_text(report)
 
     if args.output:
         Path(args.output).write_text(output + "\n", encoding="utf-8")

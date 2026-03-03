@@ -11,7 +11,6 @@ import sqlite3
 from pathlib import Path
 from typing import Any
 
-
 SIGNAL_PATTERNS: dict[str, list[re.Pattern[str]]] = {
     "walk": [
         re.compile(r"\bos\.walk\("),
@@ -96,7 +95,9 @@ def _parse_args() -> argparse.Namespace:
         default="",
         help="Optional source_project label. Default: name from enrichment row or source-path directory name.",
     )
-    parser.add_argument("--min-score", type=float, default=4.0, help="Minimum score threshold for collector classification.")
+    parser.add_argument(
+        "--min-score", type=float, default=4.0, help="Minimum score threshold for collector classification."
+    )
     parser.add_argument("--top", type=int, default=50, help="Top collector files to include in summary output.")
     parser.add_argument(
         "--exclude-subpath",
@@ -300,7 +301,8 @@ def _ensure_signal_tables(cur: sqlite3.Cursor) -> None:
     cur.execute("CREATE INDEX IF NOT EXISTS idx_file_signals_source_path ON codegraphx_file_signals (source_path)")
     cur.execute("CREATE INDEX IF NOT EXISTS idx_file_signals_collector ON codegraphx_file_signals (is_file_collector)")
     cur.execute(
-        "CREATE INDEX IF NOT EXISTS idx_file_signals_source_collector ON codegraphx_file_signals (source_path, is_file_collector)"
+        "CREATE INDEX IF NOT EXISTS idx_file_signals_source_collector "
+        "ON codegraphx_file_signals (source_path, is_file_collector)"
     )
 
 
@@ -332,7 +334,8 @@ def persist_rows(
             INSERT INTO codegraphx_file_signals (
               source_path, source_project, file_path, language,
               collector_score, is_file_collector,
-              signal_walk, signal_read, signal_filter, signal_metadata, signal_aggregate, signal_fs_imports, signal_name_hint,
+              signal_walk, signal_read, signal_filter, signal_metadata,
+              signal_aggregate, signal_fs_imports, signal_name_hint,
               evidence_json
             ) VALUES (
               ?, ?, ?, ?,
