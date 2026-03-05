@@ -1,0 +1,52 @@
+name: Quality Center Gate
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+
+jobs:
+  quality-center-gate:
+    name: quality-center-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install baseline tooling
+        run: python -m pip install --upgrade pip setuptools wheel pytest
+
+      - name: Install project (if applicable)
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f pyproject.toml || -f setup.py || -f setup.cfg ]]; then
+            python -m pip install -e '.[dev]' || python -m pip install -e .
+          elif [[ -f requirements.txt ]]; then
+            python -m pip install -r requirements.txt
+          fi
+
+      - name: Run quality-center smoke gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f tests/test_smoke.py ]]; then
+            python -m pytest -q --basetemp .pytest_tmp_ci tests/test_smoke.py
+          elif [[ -f tests/test_cli_smoke.py ]]; then
+            python -m pytest -q --basetemp .pytest_tmp_ci tests/test_cli_smoke.py
+          elif [[ -d tests ]]; then
+            python -m pytest -q --basetemp .pytest_tmp_ci tests
+          elif [[ -f scripts/smoke_no_db.ps1 ]]; then
+            pwsh -NoProfile -ExecutionPolicy Bypass -File ./scripts/smoke_no_db.ps1
+          else
+            echo "No smoke entrypoint discovered."
+            exit 1
+          fi
