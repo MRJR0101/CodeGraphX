@@ -43,3 +43,6 @@ tests/fixtures/mini_repos/**/uv_*.log
 
 # Local QA/build artifacts (managed)
 .pytest_tmp_qwf/
+
+# Internal ops/quality workflow files
+MISSINGMORE
