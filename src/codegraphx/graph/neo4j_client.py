@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from neo4j import Driver, GraphDatabase
-from neo4j.exceptions import Neo4jError
+if TYPE_CHECKING:
+    from neo4j import Driver
 
 from codegraphx.core.config import RuntimeSettings
 from codegraphx.core.io import read_json, read_jsonl, write_json
@@ -29,6 +29,8 @@ class LoadResult:
 
 
 def _driver(settings: RuntimeSettings) -> Driver:
+    from neo4j import GraphDatabase
+
     if not settings.neo4j_password:
         raise ValueError(
             "Neo4j password is required. Set NEO4J_PASSWORD or neo4j.password in settings."
@@ -112,6 +114,77 @@ def _prepare_incremental_batch(
     return unique_rows, new_hashes, skipped
 
 
+def _event_record(row: dict[str, Any]) -> dict[str, str] | None:
+    kind = str(row.get("kind", ""))
+    if kind == "node":
+        return {
+            "kind": "node",
+            "label": str(row.get("label", "")),
+            "uid": str(row.get("uid", "")),
+        }
+    if kind == "edge":
+        return {
+            "kind": "edge",
+            "type": str(row.get("type", "")),
+            "src_label": str(row.get("src_label", "")),
+            "src_uid": str(row.get("src_uid", "")),
+            "dst_label": str(row.get("dst_label", "")),
+            "dst_uid": str(row.get("dst_uid", "")),
+        }
+    return None
+
+
+def _state_records(rows: list[dict[str, Any]]) -> dict[str, dict[str, str]]:
+    records: dict[str, dict[str, str]] = {}
+    seen_keys: set[str] = set()
+    for idx, row in enumerate(rows):
+        key = _event_identity(row, idx)
+        if key in seen_keys:
+            continue
+        seen_keys.add(key)
+        record = _event_record(row)
+        if record is not None:
+            records[key] = record
+    return records
+
+
+def _stale_state_records(
+    previous_hashes: dict[str, str],
+    previous_records: dict[str, Any],
+    new_hashes: dict[str, str],
+) -> list[dict[str, str]]:
+    stale: list[dict[str, str]] = []
+    for key in sorted(set(previous_hashes) - set(new_hashes)):
+        record = previous_records.get(key)
+        if isinstance(record, dict):
+            stale.append({str(k): str(v) for k, v in record.items()})
+    return stale
+
+
+def _delete_stale_record(session: Any, record: dict[str, str]) -> None:
+    kind = record.get("kind", "")
+    if kind == "node":
+        label = _safe_label(record.get("label", "Entity"))
+        session.run(
+            f"MATCH (n:{label} {{uid:$uid}}) DETACH DELETE n",
+            uid=record.get("uid", ""),
+        ).consume()
+        return
+
+    if kind == "edge":
+        rel_type = _safe_label(record.get("type", "RELATED_TO"))
+        src_label = _safe_label(record.get("src_label", "Entity"))
+        dst_label = _safe_label(record.get("dst_label", "Entity"))
+        session.run(
+            (
+                f"MATCH (a:{src_label} {{uid:$src_uid}})-[r:{rel_type}]->"
+                f"(b:{dst_label} {{uid:$dst_uid}}) DELETE r"
+            ),
+            src_uid=record.get("src_uid", ""),
+            dst_uid=record.get("dst_uid", ""),
+        ).consume()
+
+
 def load_events_incremental(
     settings: RuntimeSettings,
     events_path: str,
@@ -123,6 +196,9 @@ def load_events_incremental(
     prev_hashes = state.get("hashes", {})
     if not isinstance(prev_hashes, dict):
         prev_hashes = {}
+    prev_records = state.get("records", {})
+    if not isinstance(prev_records, dict):
+        prev_records = {}
 
     if force_full:
         unique_rows, new_hashes, _ = _prepare_incremental_batch(rows, {})
@@ -130,10 +206,15 @@ def load_events_incremental(
     else:
         unique_rows, new_hashes, skipped = _prepare_incremental_batch(rows, prev_hashes)
 
+    new_records = _state_records(rows)
+    stale_records = _stale_state_records(prev_hashes, prev_records, new_hashes)
+
     node_count = 0
     edge_count = 0
     with _driver(settings) as driver:
         with driver.session(database=settings.neo4j_database) as session:
+            for record in stale_records:
+                _delete_stale_record(session, record)
             for row in unique_rows:
                 kind = str(row.get("kind", ""))
                 if kind == "node":
@@ -147,6 +228,7 @@ def load_events_incremental(
         Path(state_path),
         {
             "hashes": new_hashes,
+            "records": new_records,
             "total_input_events": len(rows),
             "unique_events": len(new_hashes),
             "loaded_events": len(unique_rows),
@@ -212,6 +294,11 @@ def run_query(
 
 
 def check_connection(settings: RuntimeSettings) -> tuple[bool, str]:
+    try:
+        from neo4j.exceptions import Neo4jError
+    except Exception as exc:  # noqa: BLE001
+        return False, str(exc)
+
     try:
         with _driver(settings) as driver:
             with driver.session(database=settings.neo4j_database) as session:

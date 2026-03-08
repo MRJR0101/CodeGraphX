@@ -1,321 +1,254 @@
 # CodeGraphX
 
 [![CI](https://github.com/MRJR0101/CodeGraphX/actions/workflows/ci.yml/badge.svg)](https://github.com/MRJR0101/CodeGraphX/actions/workflows/ci.yml)
-[![Python 3.10-3.13](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://www.python.org/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.2.0-orange)](CHANGELOG.md)
 
-A deterministic code intelligence pipeline that scans source repositories, parses
-code into structured facts using tree-sitter, builds a knowledge graph of
-projects/files/functions/calls, and enables fast impact analysis, snapshot diffs,
-and trend reporting.
-
----
+CodeGraphX is a local-first code intelligence CLI that scans repositories, parses
+source files into structured facts, emits deterministic graph events, and
+supports impact analysis, snapshots, diffs, and optional Neo4j loading.
 
 ## Why CodeGraphX
 
-Most code analysis tools either require a running IDE or depend on cloud services.
-CodeGraphX is different:
+- Deterministic output: unchanged inputs produce stable JSONL artifacts and hashes.
+- Incremental execution: parsing, extraction, and graph loading reuse cached state.
+- Database optional: `scan`, `parse`, `extract`, `snapshots`, and `delta` work without Neo4j.
+- Inspectable pipeline: every stage writes artifacts you can diff, audit, and replay.
+- CI covered: the repo is tested on Ubuntu and Windows across Python 3.11 to 3.13.
 
-- **Local-first** -- runs entirely on your machine, no network required
-- **Deterministic** -- same input always produces same output via content hashing
-- **Incremental** -- only re-processes files that changed
-- **DB-optional** -- the full pipeline works without Neo4j using JSONL artifacts
-- **CI-ready** -- tested on Ubuntu + Windows across Python 3.10-3.13
-
-The pipeline produces stable JSONL artifacts at every stage, so you can inspect,
-replay, and audit every step before touching a database.
-
----
-
-## Quick Start
+## Installation
 
 ```bash
-# Clone and install
 git clone https://github.com/MRJR0101/CodeGraphX.git
 cd CodeGraphX
+
+# pip
 python -m venv .venv
-.venv\Scripts\activate        # Windows
+.venv\Scripts\activate        # Windows PowerShell
 # source .venv/bin/activate   # Linux/macOS
 pip install -e ".[dev]"
 
-# Or with uv (recommended)
-uv sync --all-extras
+# or uv
+uv sync --all-groups
 ```
 
-### Verify Installation
+Verify the CLI:
 
 ```bash
-codegraphx --version
-codegraphx --help
-```
-
-If you cloned the repo and directly run `python cli/main.py`, the legacy shim now
-points to the canonical CLI but still requires dependencies to be installed first.
-Use:
-
-```bash
-pip install -e .
+python -m codegraphx --version
 python -m codegraphx --help
 ```
 
-### Run the Pipeline (No Database Required)
+`python cli/main.py` is still supported as a legacy compatibility shim, but the
+canonical entrypoints are `python -m codegraphx` and `codegraphx`.
+
+## Quick Start
+
+1. Create a local projects file from the example:
 
 ```bash
-# 1. Configure your project roots
 cp config/projects.example.yaml config/projects.yaml
-# Edit config/projects.yaml to point at your code
-
-# 2. Run the pipeline
-codegraphx scan                # Discover files -> data/scan.jsonl
-codegraphx parse               # Parse with tree-sitter -> data/ast.jsonl
-codegraphx extract             # Extract facts -> data/events.jsonl
-
-# 3. Inspect results
-cat data/events.jsonl | python -m json.tool | head -50
 ```
 
-### Run with Neo4j (Optional)
+2. Edit `config/projects.yaml` to point at one or more repositories.
+
+3. Run the pipeline:
 
 ```bash
-# Set up Neo4j credentials
+codegraphx scan
+codegraphx parse
+codegraphx extract
+```
+
+4. Inspect the first few emitted events:
+
+```bash
+Get-Content data/events.jsonl -TotalCount 5   # Windows PowerShell
+# head -n 5 data/events.jsonl                 # POSIX shells
+```
+
+### Optional Neo4j Setup
+
+```bash
 cp .env.example .env
-# Edit .env with your Neo4j connection details
-
-# Load the graph
+codegraphx doctor
 codegraphx load
-
-# Query it
 codegraphx query "MATCH (f:Function) RETURN f.name LIMIT 10"
 ```
 
----
+CodeGraphX loads `.env` automatically when referenced by `config/default.yaml`.
 
-## Architecture
+## Pipeline
 
-```
-Source Code
+```text
+Source repo(s)
     |
     v
-[scan] --> scan.jsonl           Enumerate files by extension + exclude rules
+[scan]    -> scan.jsonl            File inventory by project/root/path
     |
     v
-[parse] --> ast.jsonl           Tree-sitter parsing with fallback strategies
-    |                           Cached: parse.cache.json, parse.meta.json
+[parse]   -> ast.jsonl             Parsed functions/imports/calls
+             parse.cache.json
+             parse.meta.json
+    |
     v
-[extract] --> events.jsonl      Semantic facts: Functions, Classes, CALLS, IMPORTS
-    |                           Cached: extract.cache.json, extract.meta.json
+[extract] -> events.jsonl          Project/File/Function/Symbol/Module events
+             extract.cache.json
+             extract.meta.json
+    |
     v
-[load] --> Neo4j graph          Incremental apply with state tracking
-    |                           State: load.state.json, load.meta.json
+[load]    -> Neo4j                 Incremental merge and stale-record cleanup
+             load.state.json
+             load.meta.json
+    |
     v
-[analyze/query/impact/delta]    Analysis, querying, impact tracing, diffs
+[search/query/impact/analyze/delta/snapshots]
 ```
 
-Every stage writes deterministic JSONL so you can replay or inspect without
-re-running earlier stages.
+## Graph Model
 
-### Graph Schema
-
-| Node | Properties |
-|------|-----------|
-| Project | name |
-| File | path, project |
-| Function | name, path, start_line, end_line, params, project |
-| Symbol | name, path, project |
+| Node | Key Properties |
+|------|----------------|
+| `Project` | `name` |
+| `File` | `uid`, `project`, `path`, `rel_path`, `language`, `line_count` |
+| `Function` | `uid`, `name`, `line`, `project`, `file_uid`, `signature_hash` |
+| `Symbol` | `uid`, `name` |
+| `Module` | `uid`, `name` |
 
 | Edge | Meaning |
 |------|---------|
-| CONTAINS | Project -> File |
-| DEFINES | File -> Function |
-| CALLS | Function/File -> Symbol |
-| CALLS_FUNCTION | Function -> Function |
-
----
+| `CONTAINS` | `Project -> File` |
+| `DEFINES` | `File -> Function` |
+| `CALLS` | `Function -> Symbol` or `File -> Symbol` |
+| `IMPORTS` | `File -> Module` |
+| `CALLS_FUNCTION` | `Function -> Function` |
 
 ## Commands
 
 ### Core Pipeline
 
-| Command | What It Does |
-|---------|-------------|
-| `scan` | Discover files from configured project roots |
-| `parse` | Parse files into AST summaries with tree-sitter |
-| `extract` | Extract semantic graph events (nodes + edges) |
-| `load` | Incrementally load events into Neo4j |
+| Command | Purpose |
+|---------|---------|
+| `scan` | Discover project files from `config/projects.yaml` |
+| `parse` | Parse supported files into AST-like records |
+| `extract` | Convert parsed records into graph events |
+| `load` | Incrementally apply events to Neo4j |
 
-### Analysis
+### Analysis and Diffs
 
-| Command | What It Does |
-|---------|-------------|
-| `analyze metrics` | Code metrics per project |
-| `analyze hotspots` | High-complexity / high-change areas |
-| `analyze security` | Security-relevant patterns |
-| `analyze debt` | Technical debt indicators |
-| `analyze duplicates` | Duplicate function detection |
-| `analyze patterns` | Code pattern recognition |
-| `analyze full` | Run all analysis modules |
+| Command | Purpose |
+|---------|---------|
+| `analyze metrics` | Function fan-in/fan-out style metrics |
+| `analyze hotspots` | High-line hotspots from loaded graph data |
+| `analyze security` | Name-based security pattern queries |
+| `analyze debt` | Aggregate debt-style summaries |
+| `analyze refactor` | Name-filtered refactor candidates |
+| `analyze duplicates` | Signature-hash duplicate detection |
+| `analyze patterns` | Pattern-oriented function search |
+| `analyze full` | Multi-section summary report |
+| `snapshots create/list/diff/report` | Snapshot lifecycle commands |
+| `delta` | Detailed snapshot delta reporting |
 
-### Snapshot and Change Tracking
+### Search and Query
 
-| Command | What It Does |
-|---------|-------------|
-| `snapshots create` | Create a named snapshot from current state |
-| `snapshots list` | List all snapshots |
-| `snapshots diff` | Compare two snapshots |
-| `snapshots report` | Generate a change report between snapshots |
-| `delta` | Detailed change summary between snapshots |
+| Command | Purpose |
+|---------|---------|
+| `query` | Run Cypher against Neo4j |
+| `search` | Search extracted events by name/path |
+| `ask` | Run template-based NL-style queries |
+| `compare` | Compare two projects |
+| `impact` | Trace direct and transitive callers |
 
-### Querying and Search
+### Diagnostics and Automation
 
-| Command | What It Does |
-|---------|-------------|
-| `query` | Execute Cypher queries against the graph |
-| `search` | Search functions/symbols |
-| `ask` | Template-based natural language queries |
-| `compare` | Compare two projects (shared functions, call trees) |
-| `impact` | Find direct and transitive callers of a symbol |
-
-### Utilities
-
-| Command | What It Does |
-|---------|-------------|
-| `doctor` | Environment and service health checks |
-| `completions` | Shell completion hints |
-
----
-
-## Example: Impact Analysis
-
-Find every function that directly or transitively calls `authenticate_user`:
-
-```bash
-codegraphx impact authenticate_user --project my_project --depth 4 --limit 100
-```
-
-This traverses the call graph up to 4 levels deep and reports every caller,
-showing you exactly what breaks if you change that function.
-
----
-
-## Example: Snapshot Diffs
-
-Track how your codebase changes over time:
-
-```bash
-# Create a baseline snapshot
-codegraphx snapshots create --label before-refactor
-
-# ... make changes to your code ...
-
-# Re-run the pipeline
-codegraphx scan && codegraphx parse && codegraphx extract
-
-# Create a new snapshot and diff
-codegraphx snapshots create --label after-refactor
-codegraphx delta before-refactor after-refactor --show-lists
-```
-
----
+| Command | Purpose |
+|---------|---------|
+| `doctor` | Validate config, imports, and optional Neo4j connectivity |
+| `completions` | Print shell-completion guidance |
+| `enrich backlog` | Rank candidate repos from a SQLite catalog |
+| `enrich chunk-scan` | Run chunked scans against a target root |
+| `enrich campaign` | Plan or execute ranked enrichment campaigns |
+| `enrich index-audit` | Audit recommended SQLite indexes |
+| `enrich collectors` | Compute collector-style project signals |
+| `enrich intelligence` | Compute similarity and intelligence signals |
 
 ## Configuration
 
-### Project Configuration (config/projects.yaml)
+Project roots are configured in a local `config/projects.yaml` file:
 
 ```yaml
 projects:
-  - name: MyApp
-    root: C:/Dev/MyApp
+  - name: DemoPython
+    root: C:/path/to/python_project
     exclude:
       - .venv
       - __pycache__
-      - node_modules
+      - dist
+      - build
 ```
 
-### Runtime Settings (config/default.yaml)
+Runtime behavior comes from `config/default.yaml`:
 
 ```yaml
 run:
   out_dir: data
-  max_files: 0              # 0 = no limit
+  max_files: 0
   include_ext: [".py", ".js", ".ts"]
 
 neo4j:
   uri: ${NEO4J_URI:-bolt://localhost:7687}
   user: ${NEO4J_USER:-neo4j}
-  password: ${NEO4J_PASSWORD:-codegraphx123}
-  database: neo4j
+  password: ${NEO4J_PASSWORD:-}
+  database: ${NEO4J_DATABASE:-neo4j}
 ```
 
-Environment variables are supported with `${VAR:-default}` syntax.
+Environment variable expansion uses `${VAR:-default}` syntax.
 
-### Supported Languages
-
-- Python (.py)
-- JavaScript (.js)
-- TypeScript (.ts)
-
-Parsing uses tree-sitter with automatic fallback strategies.
-
----
-
-## Testing
+## Validation
 
 ```bash
-# Run all tests
-pytest -q
+python -m pytest -q
+python -m codegraphx --help
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke_no_db.ps1 -ReportPath smoke_no_db_report.json
+```
 
-# Run with uv
-uv run pytest -q
+For the full local gate, install `uv` and run:
 
-# Run the no-DB smoke test (Windows)
-powershell -ExecutionPolicy Bypass -File .\scripts\smoke_no_db.ps1 -ReportPath smoke_report.json
-
-# Full release check
+```bash
 powershell -ExecutionPolicy Bypass -File .\scripts\release_check.ps1
 ```
 
-CI runs on every push: lint (ruff), type check (mypy), tests (pytest), and
-package build across Ubuntu + Windows on Python 3.10-3.13.
+## Security Notes
 
----
-
-## Security
-
-- Cypher queries are parameterized in all command paths that accept user input
-- `query --safe` provides a lexical guard for ad-hoc query execution
-- Path validation prevents directory traversal in parse/extract stages
-- Credentials belong in environment variables, not config files
-
-See [docs/security-architecture.md](docs/security-architecture.md) for the full
-threat model and operational guidance.
-
----
+- User-supplied Cypher parameters are passed separately from query text.
+- `query --safe` adds a lexical guard for ad hoc query execution.
+- Path handling in the pipeline avoids traversing outside configured roots.
+- Credentials should live in `.env` or environment variables, not committed YAML.
 
 ## Documentation
 
-| Document | What It Covers |
-|----------|---------------|
-| [docs/design.md](docs/design.md) | Architecture and execution model |
-| [docs/commands.md](docs/commands.md) | Full command reference |
-| [docs/schema.md](docs/schema.md) | Graph schema and identity model |
-| [docs/queries.md](docs/queries.md) | Common Cypher query patterns |
-| [docs/roadmap.md](docs/roadmap.md) | Planned features and milestones |
-| [docs/security-architecture.md](docs/security-architecture.md) | Security controls and guidance |
-| [CHANGELOG.md](CHANGELOG.md) | Version history |
-| [FEATURE_REPORT.md](FEATURE_REPORT.md) | Comprehensive feature documentation |
-
----
+| Document | Purpose |
+|----------|---------|
+| [docs/README.md](docs/README.md) | Docs entrypoint and navigation |
+| [docs/commands.md](docs/commands.md) | Command examples and reference |
+| [docs/design.md](docs/design.md) | Architecture and stage behavior |
+| [docs/schema.md](docs/schema.md) | Graph entities and identities |
+| [docs/queries.md](docs/queries.md) | Query examples and patterns |
+| [docs/security-architecture.md](docs/security-architecture.md) | Threat model and safeguards |
+| [docs/roadmap.md](docs/roadmap.md) | Planned work |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contributor workflow |
+| [VERIFY.md](VERIFY.md) | Current validation checklist |
+| [CHANGELOG.md](CHANGELOG.md) | Release history |
 
 ## Compatibility
 
 | Component | Supported |
 |-----------|-----------|
-| Python | 3.10, 3.11, 3.12, 3.13 |
-| OS | Windows, Linux (CI-tested) |
-| Neo4j | 5.x (optional) |
-
----
+| Python | 3.10+ |
+| CI matrix | 3.11, 3.12, 3.13 |
+| OS | Windows and Linux |
+| Neo4j | 5.x |
 
 ## License
 

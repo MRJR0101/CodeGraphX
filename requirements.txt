@@ -1,30 +1,15 @@
-# CodeGraphX 2.0 - Dependencies
-# Phase 0: Infrastructure
-
-# AST Parsing
-tree-sitter>=0.21.0
-tree-sitter-python>=0.21.0
-tree-sitter-javascript>=0.21.0
-
-# Graph Database
+# CodeGraphX runtime dependencies
 neo4j>=5.0.0
-
-# Numerical
-numpy>=1.24.0
-
-# Embeddings (Phase 5)
-sentence-transformers>=2.2.0
-
-# API Layer (Future)
-fastapi>=0.100.0
-uvicorn>=0.23.0
-
-# Data Validation
-pydantic>=2.0.0
-
-# CLI
-click>=8.1.0
-
-# Utilities
-uuid6>=2024.1.12
+python-dotenv>=1.0.0
+PyYAML>=6.0.0
 rich>=13.0.0
+typer>=0.12,<1.0
+
+# Contributor tooling
+build>=1.2
+pytest>=8.0
+pytest-cov>=6.0
+ruff>=0.8
+mypy>=1.13
+pip-audit>=2.7
+pre-commit>=4.0

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from codegraphx.graph.neo4j_client import _prepare_incremental_batch
+from codegraphx.graph.neo4j_client import _prepare_incremental_batch, _stale_state_records
 
 
 def test_prepare_incremental_batch_first_load_all_unique() -> None:
@@ -50,3 +50,20 @@ def test_prepare_incremental_batch_detects_changed_props() -> None:
     assert len(second_hashes) == 1
     assert skipped == 0
 
+
+def test_stale_state_records_returns_removed_records() -> None:
+    previous_hashes = {
+        "node:Project:A": "h1",
+        "node:File:A:f.py": "h2",
+    }
+    previous_records = {
+        "node:Project:A": {"kind": "node", "label": "Project", "uid": "A"},
+        "node:File:A:f.py": {"kind": "node", "label": "File", "uid": "A:f.py"},
+    }
+    new_hashes = {
+        "node:Project:A": "h1",
+    }
+
+    stale = _stale_state_records(previous_hashes, previous_records, new_hashes)
+
+    assert stale == [{"kind": "node", "label": "File", "uid": "A:f.py"}]

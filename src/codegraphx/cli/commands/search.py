@@ -8,6 +8,21 @@ from codegraphx.core.io import read_jsonl
 from codegraphx.core.stages import data_paths
 
 
+def _node_project(label: str, props: dict[str, object]) -> str:
+    project = str(props.get("project", "")).strip()
+    if project:
+        return project
+
+    if label == "Project":
+        return str(props.get("name", "")).strip()
+
+    uid = str(props.get("uid", "")).strip()
+    if label in {"File", "Function"} and ":" in uid:
+        return uid.split(":", 1)[0]
+
+    return ""
+
+
 def command(
     query: str = typer.Argument(..., help="Search query"),
     project: str = typer.Option("", "--project", "-p", help="Project filter"),
@@ -34,10 +49,9 @@ def command(
         if index == "symbols" and label not in {"Symbol", "Module"}:
             continue
         if project:
-            if str(props.get("project", "")) != project:
+            if _node_project(label, props) != project:
                 continue
         rows.append({"label": label, **props})
         if len(rows) >= limit:
             break
     print_rows("search result", rows, limit=limit)
-

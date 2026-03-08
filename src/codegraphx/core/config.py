@@ -6,10 +6,13 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from dotenv import dotenv_values
 import yaml  # type: ignore[import-untyped]
 
 
 ENV_PATTERN = re.compile(r"\$\{([A-Z0-9_]+):-([^}]*)\}")
+_LOADED_DOTENV_PATHS: set[Path] = set()
+_DOTENV_MANAGED_KEYS: dict[str, Path] = {}
 
 
 @dataclass(frozen=True)
@@ -43,8 +46,33 @@ def _expand_env_tokens(text: str) -> str:
     return ENV_PATTERN.sub(repl, text)
 
 
+def _load_env_files(anchor_path: Path) -> None:
+    candidates: list[Path] = [Path.cwd() / ".env"]
+    resolved = anchor_path.resolve()
+    candidates.extend(parent / ".env" for parent in (resolved.parent, *resolved.parents))
+
+    seen: set[Path] = set()
+    for candidate in candidates:
+        if candidate in seen:
+            continue
+        seen.add(candidate)
+        if not candidate.exists() or candidate in _LOADED_DOTENV_PATHS:
+            continue
+        values = dotenv_values(candidate)
+        for key, value in values.items():
+            if value is None:
+                continue
+            current_source = _DOTENV_MANAGED_KEYS.get(key)
+            if key not in os.environ or current_source is not None:
+                os.environ[key] = value
+                _DOTENV_MANAGED_KEYS[key] = candidate
+        _LOADED_DOTENV_PATHS.add(candidate)
+
+
 def load_yaml(path: str | Path) -> dict[str, Any]:
-    raw = Path(path).read_text(encoding="utf-8")
+    config_path = Path(path)
+    _load_env_files(config_path)
+    raw = config_path.read_text(encoding="utf-8")
     expanded = _expand_env_tokens(raw)
     loaded = yaml.safe_load(expanded) or {}
     if not isinstance(loaded, dict):

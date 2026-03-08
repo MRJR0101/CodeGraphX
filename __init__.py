@@ -1,25 +1,18 @@
-"""
-CodeGraphX 2.0 - Unified Code Intelligence Platform
+"""Repository-root compatibility module.
 
-Layers:
-  1. Code Property Graph (deep semantic structure)
-  2. Architectural Knowledge Graph (module + dependency clarity)
-  3. LLM Query & Semantic Retrieval Interface
-
-Usage:
-    from codegraphx import IngestionPipeline
-    pipeline = IngestionPipeline()
-    ctx = pipeline.ingest("/path/to/repo")
+The installable package lives under ``src/codegraphx``. This file is kept
+import-safe so pytest collection and repository tooling do not accidentally
+execute legacy package wiring from the repository root.
 """
+from __future__ import annotations
+
 __version__ = "0.2.0"
 
-from codegraphx.core.config import CodeGraphXConfig, config
-from codegraphx.core.models import IngestionContext
-from codegraphx.core.pipeline import IngestionPipeline
+__all__ = ["__version__"]
 
-__all__ = [
-    "IngestionPipeline",
-    "IngestionContext",
-    "CodeGraphXConfig",
-    "config",
-]
+
+def __getattr__(name: str) -> object:
+    raise AttributeError(
+        f"{name!r} is not exported from the repository root. "
+        "Import from the installed `codegraphx` package under `src/codegraphx` instead."
+    )

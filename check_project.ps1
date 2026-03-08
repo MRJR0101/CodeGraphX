@@ -23,15 +23,15 @@ function Invoke-Check {
     }
 }
 
-Invoke-Check "Sync dependencies" { uv sync --all-extras }
+Invoke-Check "Sync dependencies" { uv sync --all-groups }
 Invoke-Check "Dependency compatibility" { uv pip check }
-Invoke-Check "Bytecode compile" { uv run python -m compileall -q . }
+Invoke-Check "Bytecode compile" { uv run python -m compileall -q src tests scripts cli cg_platform core extractors graph llm metrics parsers schema semantic }
 Invoke-Check "Ruff lint" { uv run ruff check . }
-Invoke-Check "Mypy type check" { uv run mypy . }
+Invoke-Check "Mypy type check" { uv run python -m mypy src }
 
 Write-Host ""
 Write-Host "==> Pytest"
-uv run pytest -q
+uv run python -m pytest -q
 if ($LASTEXITCODE -eq 0) {
     Write-Host "OK: Pytest"
 } elseif ($LASTEXITCODE -eq 5) {

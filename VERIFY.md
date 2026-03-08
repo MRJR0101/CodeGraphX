@@ -1,2 +1,66 @@
-# VERIFY - codegraphx  ## Snapshot - Updated: 2026-02-20 03:44:57 - File count: 3021 - Total lines: 868203 - Last modified: 2026-02-18T23:46:47  ## Checklist Status - PRE: complete - Phase 1: complete - Phase 2: complete - Phase 3: complete - Phase 4: complete - Phase 5: complete - Phase 6: complete - Phase 7: complete - POST: complete  ## Current Findings - Open issue markers: 174 - Smoke test: skip(no python entrypoint) - Secret pattern hits: 4 - Injection pattern hits: 0 - CVE status: not_applicable
-- Test suite: not_applicable
+# Verification Guide
+
+This file documents the current validation path for the repository. It is a
+guide for contributors, not a frozen snapshot of one machine's file counts or
+internal report output.
+
+## Last Local Verification
+
+Validated on 2026-03-08 with the canonical package under `src/codegraphx`.
+
+Current expected quick-check results:
+
+- `python -m pytest -q` passes
+- `python -m codegraphx --help` exits successfully
+- `python cli/main.py --version` prints the packaged version when dependencies are installed
+
+## Fast Validation
+
+Run these for most changes:
+
+```bash
+python -m pytest -q
+python -m codegraphx --help
+```
+
+## Windows No-DB Smoke
+
+This exercises the JSONL-first pipeline without requiring Neo4j:
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke_no_db.ps1 -ReportPath smoke_no_db_report.json
+```
+
+The report file is local output and should not be committed.
+
+## Full Release Gate
+
+The full scripted gate requires `uv`:
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\scripts\release_check.ps1
+```
+
+That gate runs project checks, linting, typing, tests, package build, and the
+no-database smoke test.
+
+## Optional Neo4j Validation
+
+For changes that affect graph loading, Cypher, or `doctor` behavior:
+
+1. Copy `.env.example` to `.env`.
+2. Point the Neo4j variables at a reachable instance.
+3. Run `python -m codegraphx doctor`.
+4. Run `python -m codegraphx load` against a generated `events.jsonl`.
+
+## Artifact Expectations
+
+Expected local artifacts during validation include:
+
+- `data/*.jsonl`
+- `data/*.json`
+- `smoke_no_db_report.json`
+- `.pytest_tmp/`
+
+These are local outputs and should stay ignored unless a fixture explicitly
+needs them.

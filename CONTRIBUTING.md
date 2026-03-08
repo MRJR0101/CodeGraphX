@@ -1,46 +1,84 @@
-# Contributing to codegraphx
+# Contributing to CodeGraphX
 
-Thank you for contributing to CodeGraphX. Keep changes reproducible, configuration-driven, and easy to validate in CI.
+Keep changes deterministic, config-driven, and easy to validate from a clean clone.
 
-## Development Setup
+## Setup
+
+Choose one workflow:
 
 ```bash
+# pip
 python -m venv .venv
-.venv\Scripts\activate
+.venv\Scripts\activate        # Windows PowerShell
+# source .venv/bin/activate   # Linux/macOS
 pip install -e ".[dev]"
+
+# or uv
+uv sync --all-groups
 ```
 
-## Coding Standards
+Sanity-check the install before editing:
 
-- Prefer typed functions and explicit return types for public APIs.
-- Keep CLI behavior backward-compatible unless a documented breaking change is required.
-- Route new runtime toggles through YAML/config or explicit CLI options.
-- Avoid hidden side effects in pipeline stages; deterministic outputs are required.
-- Update docs when commands, flags, or output artifacts change.
+```bash
+python -m codegraphx --help
+python -m pytest -q
+```
 
-## Testing
+## Working Rules
 
-Run before opening a PR:
+- Make changes in the canonical package under `src/codegraphx`.
+- Preserve deterministic pipeline behavior and stable artifact naming.
+- Route new runtime toggles through config files or explicit CLI options.
+- Keep user-facing CLI behavior backward-compatible unless a breaking change is deliberate and documented.
+- Update docs when commands, flags, config defaults, or emitted artifacts change.
+
+## Generated Files
+
+Do not commit local-only artifacts such as:
+
+- `config/projects.yaml`
+- `config/projects.local.yaml`
+- `data/`
+- smoke reports, audit summaries, or temporary ledgers
+- virtual environments, caches, and build output
+
+If you add a new generated artifact, either document why it belongs in the repo or add it to `.gitignore`.
+
+## Validation
+
+Run the fast path for most changes:
 
 ```bash
 python -m pytest -q
-powershell -ExecutionPolicy RemoteSigned -File .\scripts\smoke_no_db.ps1 -ReportPath smoke_no_db_report.json
+python -m codegraphx --help
 ```
 
-If your change affects graph loading, also validate Neo4j-backed flows in your environment.
+For Windows no-DB validation:
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\scripts\smoke_no_db.ps1 -ReportPath smoke_no_db_report.json
+```
+
+For the full gate, install `uv` and run:
+
+```bash
+powershell -ExecutionPolicy Bypass -File .\scripts\release_check.ps1
+```
+
+If your change affects Neo4j loading or Cypher behavior, also validate against a real Neo4j instance.
 
 ## Pull Request Checklist
 
 - [ ] Tests pass locally.
-- [ ] CLI help and README examples are updated for command/flag changes.
-- [ ] Config defaults and migration implications are documented.
+- [ ] CLI help, README examples, and docs match the implemented behavior.
+- [ ] Dependency changes are reflected in `pyproject.toml`, `setup.py`, and `requirements.txt`.
+- [ ] Config changes are reflected in `.env.example` or example YAML files where relevant.
 - [ ] New artifacts are deterministic and safe to diff.
 
-## Documentation Requirements
+## Files To Update When Behavior Changes
 
-For user-visible behavior changes, update:
-
-- `README.md`
-- `VERIFY.md`
-- `CHANGELOG.md`
+- `README.md` for user-facing usage changes
+- `docs/` for deeper command or architecture changes
+- `CHANGELOG.md` for releasable changes
+- `VERIFY.md` when the recommended validation flow changes
 

@@ -38,7 +38,8 @@ def command(
     )
     file_callers_query = (
         "MATCH (caller:File)-[:CALLS]->(s:Symbol) "
-        "WHERE s.name = $symbol AND ($project = '' OR caller.project = $project) "
+        "WHERE s.name = $symbol "
+        "AND ($project = '' OR coalesce(caller.project, split(caller.uid, ':')[0]) = $project) "
         f"RETURN caller.rel_path AS file, caller.uid AS file_uid LIMIT {limit}"
     )
 

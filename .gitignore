@@ -31,6 +31,8 @@ Thumbs.db
 # Environment
 .env
 .env.*
+config/projects.yaml
+config/projects.local.yaml
 
 # Local enrichment outputs and private scan artifacts
 data/
@@ -46,3 +48,14 @@ tests/fixtures/mini_repos/**/uv_*.log
 
 # Internal ops/quality workflow files
 MISSINGMORE
+MISSINGMORE.txt
+MISSINGMORE_FILE_LEDGER.tsv
+HANDOFF.md
+
+# Local analysis and publishing artifacts
+audit_summary.json
+baseline_post.json
+recommendations.json
+FEATURE_REPORT.md
+LOOP_REPORT.md
+docs/_incoming_root/

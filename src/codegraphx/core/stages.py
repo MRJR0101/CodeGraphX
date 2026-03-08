@@ -7,7 +7,6 @@ import re
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable
-from tree_sitter import Node
 
 from codegraphx.core.config import Project, RuntimeSettings
 from codegraphx.core.io import read_json, read_jsonl, write_json, write_jsonl
@@ -113,10 +112,10 @@ def _parse_python_with_treesitter(
     calls: list[str] = []
     function_calls: list[dict[str, Any]] = []
 
-    def node_text(node: Node) -> str:
+    def node_text(node: Any) -> str:
         return src[node.start_byte : node.end_byte].decode("utf-8", errors="ignore")
 
-    def call_name_from_function_node(node: Node) -> str:
+    def call_name_from_function_node(node: Any) -> str:
         text = node_text(node).strip()
         if "." in text:
             text = text.split(".")[-1]
@@ -263,10 +262,10 @@ def _parse_js_ts_with_treesitter(
     tree = parser.parse(src)
     root = tree.root_node
 
-    def node_text(node: Node) -> str:
+    def node_text(node: Any) -> str:
         return src[node.start_byte : node.end_byte].decode("utf-8", errors="ignore")
 
-    def call_name_from_node(node: Node) -> str:
+    def call_name_from_node(node: Any) -> str:
         text = node_text(node).strip()
         if "." in text:
             text = text.split(".")[-1]
@@ -500,6 +499,7 @@ def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path
                 "uid": file_uid,
                 "props": {
                     "uid": file_uid,
+                    "project": project,
                     "path": row.get("path"),
                     "rel_path": rel_path,
                     "language": row.get("language"),
