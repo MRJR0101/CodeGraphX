@@ -176,6 +176,19 @@ def _parse_python_with_treesitter(
     )
 
 
+def _walk_no_nested_fns(node: ast.AST) -> Iterable[ast.AST]:
+    """Yield AST nodes under *node* without descending into nested function definitions.
+
+    This mirrors the tree-sitter parser behaviour: calls inside an inner function
+    are attributed to that inner function, not to the enclosing one.
+    """
+    yield node
+    for child in ast.iter_child_nodes(node):
+        if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        yield from _walk_no_nested_fns(child)
+
+
 def _parse_python_with_ast(
     file_text: str,
 ) -> tuple[list[dict[str, Any]], list[str], list[str], list[dict[str, Any]], int]:
@@ -193,7 +206,7 @@ def _parse_python_with_ast(
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             functions.append({"name": node.name, "line": node.lineno})
             fn_calls: list[str] = []
-            for child in ast.walk(node):
+            for child in _walk_no_nested_fns(node):
                 if isinstance(child, ast.Call):
                     fn = child.func
                     if isinstance(fn, ast.Name):
@@ -358,7 +371,7 @@ def run_parse(settings: RuntimeSettings) -> tuple[Path, int]:
         if not path.exists():
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
-        file_hash = _sha1(text)
+        file_hash = _content_hash(text)
         cached = cached_files.get(str(path), {})
         if isinstance(cached, dict) and cached.get("hash") == file_hash and isinstance(cached.get("row"), dict):
             parsed_row = cached["row"]
@@ -414,7 +427,7 @@ def run_parse(settings: RuntimeSettings) -> tuple[Path, int]:
     return paths.ast, len(rows)
 
 
-def _sha1(text: str) -> str:
+def _content_hash(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
@@ -430,7 +443,7 @@ def _row_hash(row: dict[str, Any]) -> str:
         "calls": row.get("calls"),
         "function_calls": row.get("function_calls"),
     }
-    return _sha1(json.dumps(stable, sort_keys=True, ensure_ascii=False))
+    return _content_hash(json.dumps(stable, sort_keys=True, ensure_ascii=False))
 
 
 def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path, int]:
@@ -443,15 +456,22 @@ def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path
 
     updated_cache: dict[str, Any] = {}
     events: list[dict[str, Any]] = []
+    # project_functions and pending_fn_calls are built during the main loop below.
+    # CALLS_FUNCTION edges are resolved after all rows are processed, so collecting
+    # these in the same pass is safe -- no second iteration of ast_rows needed.
     project_functions: dict[str, dict[str, list[str]]] = {}
     pending_fn_calls: list[tuple[str, str, list[str]]] = []
+    cache_hits = 0
+    cache_misses = 0
     for row in ast_rows:
         project = str(row.get("project", "unknown"))
         rel_path = str(row.get("rel_path", ""))
         file_uid = f"{project}:{rel_path}"
-        funcs = row.get("functions", [])
-        if isinstance(funcs, list):
-            for fn in funcs:
+
+        # Collect function definitions and pending call edges for CALLS_FUNCTION resolution.
+        funcs_raw = row.get("functions", [])
+        if isinstance(funcs_raw, list):
+            for fn in funcs_raw:
                 if not isinstance(fn, dict):
                     continue
                 fn_name = str(fn.get("name", "unknown"))
@@ -460,9 +480,9 @@ def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path
                 project_map = project_functions.setdefault(project, {})
                 project_map.setdefault(fn_name, []).append(fn_uid)
 
-        function_calls = row.get("function_calls", [])
-        if isinstance(function_calls, list):
-            for fn_call in function_calls:
+        function_calls_raw = row.get("function_calls", [])
+        if isinstance(function_calls_raw, list):
+            for fn_call in function_calls_raw:
                 if not isinstance(fn_call, dict):
                     continue
                 fn_name = str(fn_call.get("name", ""))
@@ -472,9 +492,8 @@ def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path
                 if not isinstance(called_names, list):
                     continue
                 pending_fn_calls.append((project, src_uid, [str(c) for c in called_names]))
-    cache_hits = 0
-    cache_misses = 0
-    for row in ast_rows:
+
+        # Cache check and event generation.
         path_key = str(row.get("path", ""))
         row_hash = _row_hash(row)
         relation_mode = "relations-on" if relations else "relations-off"
@@ -488,9 +507,6 @@ def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path
             continue
 
         chunk: list[dict[str, Any]] = []
-        project = str(row.get("project", "unknown"))
-        rel_path = str(row.get("rel_path", ""))
-        file_uid = f"{project}:{rel_path}"
         chunk.append({"kind": "node", "label": "Project", "uid": project, "props": {"name": project}})
         chunk.append(
             {
@@ -539,7 +555,7 @@ def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path
                             "line": fn_line,
                             "project": project,
                             "file_uid": file_uid,
-                            "signature_hash": _sha1(signature),
+                            "signature_hash": _content_hash(signature),
                         },
                     }
                 )

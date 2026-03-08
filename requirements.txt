@@ -1,11 +1,12 @@
-# CodeGraphX runtime dependencies
+# CodeGraphX runtime dependencies (matches pyproject.toml [project.dependencies])
 neo4j>=5.0.0
 python-dotenv>=1.0.0
 PyYAML>=6.0.0
 rich>=13.0.0
 typer>=0.12,<1.0
 
-# Contributor tooling
+# Development / contributor tooling (matches pyproject.toml [dependency-groups] dev)
+# Install with: uv sync --dev  OR  pip install -e ".[dev]"
 build>=1.2
 pytest>=8.0
 pytest-cov>=6.0

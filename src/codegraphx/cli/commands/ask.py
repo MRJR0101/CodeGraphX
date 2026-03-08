@@ -37,12 +37,18 @@ def _question_to_cypher(question: str, project: str) -> tuple[str, dict[str, str
 def command(
     question: str = typer.Argument(..., help="Natural language question"),
     project: str = typer.Option("", "--project", "-p", help="Project filter"),
-    model: str = typer.Option("openai", "--model", "-m", help="Model provider label"),
-    model_name: str = typer.Option("gpt-4o", "--model-name", "-M", help="Model name label"),
+    model: str = typer.Option("openai", "--model", "-m", help="Model provider label (not yet wired)"),
+    model_name: str = typer.Option("gpt-4o", "--model-name", "-M", help="Model name label (not yet wired)"),
     settings: str = typer.Option("config/default.yaml", help="Runtime settings YAML"),
 ) -> None:
+    """Translate a natural language question into a Cypher query and run it.
+
+    NOTE: This command is a stub. The --model and --model-name flags are accepted
+    but no LLM is called. Questions are routed to a small set of hardcoded Cypher
+    templates via keyword matching. Full LLM integration is planned.
+    """
     cfg = load_settings(settings)
     cypher, params = _question_to_cypher(question, project)
     result = run_query(cfg, cypher, params)
-    print_kv("ask translation", {"model": model, "model_name": model_name, "cypher": cypher, "params": params})
+    print_kv("ask translation (stub)", {"model": model, "model_name": model_name, "cypher": cypher, "params": params})
     print_rows("ask result", result.rows)

@@ -40,8 +40,12 @@ def hotspots(
     cypher = (
         "MATCH (f:Function) "
         "WHERE ($project = '' OR f.project = $project) "
-        "RETURN f.project AS project, f.name AS function, f.line AS line "
-        "ORDER BY f.line DESC LIMIT 25"
+        "OPTIONAL MATCH (f)<-[:CALLS]-(inbound) "
+        "OPTIONAL MATCH (f)-[:CALLS]->(outbound) "
+        "WITH f, count(DISTINCT inbound) AS fan_in, count(DISTINCT outbound) AS fan_out "
+        "RETURN f.project AS project, f.name AS function, f.line AS line, "
+        "fan_in, fan_out, (fan_in + fan_out) AS coupling "
+        "ORDER BY coupling DESC LIMIT 25"
     )
     print_rows("analyze hotspots", run_query(cfg, cypher, {"project": project}).rows)
 

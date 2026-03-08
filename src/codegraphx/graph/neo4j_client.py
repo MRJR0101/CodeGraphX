@@ -1,14 +1,19 @@
 from __future__ import annotations
 
+import hashlib
+import json
 from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
+
+from neo4j import GraphDatabase
 
 if TYPE_CHECKING:
     from neo4j import Driver
 
 from codegraphx.core.config import RuntimeSettings
 from codegraphx.core.io import read_json, read_jsonl, write_json
+from codegraphx.core.snapshots import _event_identity
 
 
 @dataclass(frozen=True)
@@ -29,8 +34,6 @@ class LoadResult:
 
 
 def _driver(settings: RuntimeSettings) -> Driver:
-    from neo4j import GraphDatabase
-
     if not settings.neo4j_password:
         raise ValueError(
             "Neo4j password is required. Set NEO4J_PASSWORD or neo4j.password in settings."
@@ -71,24 +74,12 @@ def load_events(settings: RuntimeSettings, events_path: str) -> tuple[int, int]:
     return node_count, edge_count
 
 
-def _event_identity(row: dict[str, Any], index: int) -> str:
-    kind = str(row.get("kind", ""))
-    if kind == "node":
-        return f"node:{row.get('label', '')}:{row.get('uid', '')}"
-    if kind == "edge":
-        return (
-            f"edge:{row.get('type', '')}:{row.get('src_label', '')}:{row.get('src_uid', '')}:"
-            f"{row.get('dst_label', '')}:{row.get('dst_uid', '')}"
-        )
-    return f"unknown:{index}"
-
-
 def _event_hash(row: dict[str, Any]) -> str:
-    import hashlib
-    import json
-
     payload = json.dumps(row, sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+# _event_identity is imported from codegraphx.core.snapshots (canonical definition)
 
 
 def _prepare_incremental_batch(
@@ -258,6 +249,10 @@ def _merge_node(session: Any, row: dict[str, Any]) -> None:
 
 
 def _merge_edge(session: Any, row: dict[str, Any]) -> None:
+    # NOTE: MERGE on src/dst nodes here will create bare stub nodes (uid only, no props)
+    # if an edge event arrives before its node events. The event stream from run_extract
+    # always emits nodes before edges, so this is safe in normal operation. If you replay
+    # a partial or reordered events file, orphan nodes with missing properties may appear.
     typ = _safe_label(str(row.get("type", "RELATED_TO")))
     src_label = _safe_label(str(row.get("src_label", "Entity")))
     dst_label = _safe_label(str(row.get("dst_label", "Entity")))
