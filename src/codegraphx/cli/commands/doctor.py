@@ -58,6 +58,17 @@ def command(
         runtime = None
         checks.append({"check": "settings_loaded", "status": "fail", "detail": str(exc)})
 
+    if runtime is not None:
+        from codegraphx.core.stages import data_paths
+        paths = data_paths(runtime)
+        scan_exists = paths.scan.exists()
+        search_db_status = "pass" if paths.search_db.exists() else ("warn" if scan_exists else "skip")
+        search_db_detail = (
+            str(paths.search_db) if paths.search_db.exists()
+            else ("missing -- run `load` to build" if scan_exists else "no scan yet")
+        )
+        checks.append({"check": "search_db", "status": search_db_status, "detail": search_db_detail})
+
     for module in ("yaml", "neo4j", "typer", "rich"):
         checks.append(
             {

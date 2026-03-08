@@ -5,6 +5,7 @@ import typer
 from codegraphx.cli.output import print_kv
 from codegraphx.core.config import load_settings
 from codegraphx.core.io import write_json
+from codegraphx.core.search_index import build_search_index
 from codegraphx.core.snapshots import create_snapshot
 from codegraphx.core.stages import data_paths
 from codegraphx.graph.neo4j_client import bootstrap_schema, check_connection, load_events_incremental
@@ -41,6 +42,9 @@ def command(
             "loaded_edges": result.loaded_edges,
         },
     )
+    # Rebuild the FTS search index so `search` command is fast immediately.
+    build_search_index(paths.events, paths.search_db)
+
     snapshot_path = ""
     if not no_snapshot:
         state = result.state_hashes
