@@ -70,11 +70,43 @@ Get-Content data/events.jsonl -TotalCount 5   # Windows PowerShell
 
 ### Optional Neo4j Setup
 
+Copy the example env file and fill in your credentials:
+
 ```bash
 cp .env.example .env
+```
+
+**Option A -- Docker (recommended for local use):**
+
+```powershell
+# Start a Neo4j 5 container using credentials from .env
+.\start-neo4j.ps1
+```
+
+The script creates a container named `neo4j-cgx`, waits until bolt is ready,
+and prints the connection details. Run it any time you need Neo4j. To stop:
+
+```powershell
+docker stop neo4j-cgx
+```
+
+**Option B -- existing Neo4j instance:**
+
+Point `NEO4J_URI`, `NEO4J_USER`, and `NEO4J_PASSWORD` in your `.env` at the
+running instance.
+
+Then validate and load:
+
+```bash
 codegraphx doctor
 codegraphx load
 codegraphx query "MATCH (f:Function) RETURN f.name LIMIT 10"
+```
+
+After `load`, the `search` command uses a fast SQLite FTS index:
+
+```bash
+codegraphx search parse --index functions
 ```
 
 CodeGraphX loads `.env` automatically when referenced by `config/default.yaml`.

@@ -48,10 +48,14 @@ no-database smoke test.
 
 For changes that affect graph loading, Cypher, or `doctor` behavior:
 
-1. Copy `.env.example` to `.env`.
-2. Point the Neo4j variables at a reachable instance.
+1. Copy `.env.example` to `.env` and fill in credentials.
+2. Start Neo4j -- Docker is the easiest path:
+   ```powershell
+   .\start-neo4j.ps1
+   ```
 3. Run `python -m codegraphx doctor`.
 4. Run `python -m codegraphx load` against a generated `events.jsonl`.
+5. Confirm `data/search.db` is created and `search` returns results.
 
 ## Artifact Expectations
 
