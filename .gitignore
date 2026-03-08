@@ -45,6 +45,8 @@ tests/fixtures/mini_repos/**/uv_*.log
 
 # Local QA/build artifacts (managed)
 .pytest_tmp_qwf/
+check_neo4j.ps1
+check_syntax*.ps1
 
 # Internal ops/quality workflow files
 MISSINGMORE
