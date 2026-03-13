@@ -178,6 +178,9 @@ def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path
     updated_cache: dict[str, Any] = {}
     events: list[dict[str, Any]] = []
     project_functions: dict[str, dict[str, list[str]]] = {}
+    # Dir-scoped index: project -> rel_dir -> fn_name -> [uids]
+    # Used for CALLS_FUNCTION resolution to avoid project-wide name collisions.
+    project_dir_functions: dict[str, dict[str, dict[str, list[str]]]] = {}
     pending_fn_calls: list[tuple[str, str, list[str]]] = []
     cache_hits = 0
     cache_misses = 0
@@ -198,6 +201,10 @@ def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path
                 fn_uid = f"{file_uid}:{fn_name}:{fn_line}"
                 project_map = project_functions.setdefault(project, {})
                 project_map.setdefault(fn_name, []).append(fn_uid)
+                # Also index by directory for scoped resolution.
+                fn_dir = str(Path(rel_path).parent) if rel_path else ""
+                dir_map = project_dir_functions.setdefault(project, {}).setdefault(fn_dir, {})
+                dir_map.setdefault(fn_name, []).append(fn_uid)
 
         function_calls_raw = row.get("function_calls", [])
         if isinstance(function_calls_raw, list):
@@ -308,9 +315,15 @@ def run_extract(settings: RuntimeSettings, relations: bool = True) -> tuple[Path
 
     call_function_edges: set[tuple[str, str]] = set()
     for project, src_uid, called_list in pending_fn_calls:
-        project_map = project_functions.get(project, {})
+        # Resolve calls against same-directory functions only.
+        # src_uid format: {project}:{rel_path}:{fn_name}:{fn_line}
+        # Splitting on ":" gives [project, rel_path, fn_name, fn_line].
+        uid_parts = src_uid.split(":")
+        src_rel_path = uid_parts[1] if len(uid_parts) > 1 else ""
+        src_dir = str(Path(src_rel_path).parent) if src_rel_path else ""
+        dir_map = project_dir_functions.get(project, {}).get(src_dir, {})
         for called_name in called_list:
-            for target_uid in project_map.get(called_name, []):
+            for target_uid in dir_map.get(called_name, []):
                 if src_uid == target_uid:
                     continue
                 edge_key = (src_uid, target_uid)

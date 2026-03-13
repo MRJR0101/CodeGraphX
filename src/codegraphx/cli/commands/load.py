@@ -14,6 +14,11 @@ from codegraphx.graph.neo4j_client import bootstrap_schema, check_connection, lo
 def command(
     settings: str = typer.Option("config/default.yaml", help="Runtime settings YAML"),
     force_full: bool = typer.Option(False, "--force-full", help="Load all events and ignore incremental state"),
+    fresh: bool = typer.Option(
+        False, "--fresh",
+        help="Use CREATE instead of MERGE for edges (faster on empty graph). "
+             "Implies --force-full. Only safe when graph is freshly wiped.",
+    ),
     snapshot_label: str = typer.Option("", "--snapshot-label", help="Optional label for created snapshot"),
     no_snapshot: bool = typer.Option(False, "--no-snapshot", help="Skip snapshot creation"),
 ) -> None:
@@ -23,17 +28,22 @@ def command(
         raise typer.BadParameter(f"Neo4j connection failed: {msg}")
     bootstrap_schema(cfg)
     paths = data_paths(cfg)
+    # --fresh implies --force-full since CREATE doesn't do dedup
+    if fresh:
+        force_full = True
     result = load_events_incremental(
         cfg,
         events_path=str(paths.events),
         state_path=str(paths.load_state),
         force_full=force_full,
+        fresh=fresh,
     )
     write_json(
         paths.load_meta,
         {
             "events_file": str(paths.events),
             "force_full": force_full,
+            "fresh": fresh,
             "total_input_events": result.total_input_events,
             "unique_events": result.unique_events,
             "loaded_events": result.loaded_events,
