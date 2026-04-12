@@ -17,7 +17,7 @@ codegraphx = "codegraphx.__main__:main"
 
 [project.optional-dependencies]
 dev = [
-  "build>=1.2",
+  "build>=1.4.3",
   "mypy>=1.13",
   "pip-audit>=2.7",
   "pre-commit>=4.0",
@@ -28,7 +28,7 @@ dev = [
 
 [dependency-groups]
 dev = [
-  "build>=1.2",
+  "build>=1.4.3",
   "pytest>=8.0",
   "pytest-cov>=6.0",
   "ruff>=0.8",
