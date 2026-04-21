@@ -1,8 +1,16 @@
 # CodeGraphX runtime dependencies (matches pyproject.toml [project.dependencies])
+fastapi
+numpy
 neo4j>=5.0.0
+pydantic
 python-dotenv>=1.0.0
 PyYAML>=6.0.0
 rich>=13.0.0
+sentence-transformers
+tree-sitter
+tree-sitter-javascript
+tree-sitter-language-pack
+tree-sitter-python
 typer>=0.12,<1.0
 
 # Development / contributor tooling (matches pyproject.toml [dependency-groups] dev)

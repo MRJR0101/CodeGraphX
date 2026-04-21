@@ -1,29 +1,20 @@
-default:
-    @just --list
+default: just --list
 
-setup:
-    uv sync
+setup: uv sync
 
-lint:
-    uv run ruff check .
+lint: uv run ruff check .
 
-fix:
-    uv run ruff check . --fix
-    uv run ruff format .
+fix: uv run ruff check . --fix
+  uv run ruff format .
 
-typecheck:
-    uv run mypy src/
+typecheck: uv run mypy src/
 
-test:
-    uv run pytest
+test: uv run pytest
 
-coverage:
-    uv run pytest --cov=src --cov-report=term-missing --cov-fail-under=80
+coverage: uv run pytest --cov=src --cov-report=term-missing --cov-fail-under=80
 
-audit:
-    uv run pip-audit
+audit: uv run pip-audit
 
-build:
-    uv build
+build: uv build
 
 check: lint typecheck test audit

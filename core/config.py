@@ -2,9 +2,7 @@
 CodeGraphX 2.0 - Configuration
 Central configuration for all phases.
 """
-from pathlib import Path
 from pydantic import BaseModel, Field
-from typing import Optional
 
 
 class Neo4jConfig(BaseModel):

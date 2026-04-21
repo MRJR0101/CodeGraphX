@@ -12,7 +12,7 @@ by the load command after each successful load.
 
 from __future__ import annotations
 
-import json
+import re
 import sqlite3
 from pathlib import Path
 from typing import Any
@@ -38,6 +38,8 @@ CREATE TABLE IF NOT EXISTS search_meta (
     value TEXT NOT NULL
 );
 """
+
+_QUERY_TERM_RE = re.compile(r"[A-Za-z0-9_]+")
 
 def build_search_index(events_path: Path, db_path: Path) -> int:
     """Build (or rebuild) the SQLite FTS index from events.jsonl.
@@ -106,6 +108,11 @@ def query_search_index(
     if not _Path(str(db_path)).exists():
         return []
 
+    terms = _QUERY_TERM_RE.findall(query)
+    if not terms:
+        return []
+    match_query = " AND ".join(f'"{term}"' for term in terms)
+
     label_filter = ""
     if index == "functions":
         label_filter = "AND label = 'Function'"
@@ -113,10 +120,10 @@ def query_search_index(
         label_filter = "AND label IN ('Symbol', 'Module')"
 
     project_filter = ""
-    params: list[object] = [query, limit]
+    params: list[object] = [match_query, limit]
     if project:
         project_filter = "AND project = ?"
-        params = [query, project, limit]
+        params = [match_query, project, limit]
 
     sql = (
         "SELECT name, path, uid, label, project, rel_path "

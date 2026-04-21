@@ -42,7 +42,9 @@ function Read-JsonFile {
 
 Assert-Command "uv"
 
-$repoRoot = (Get-Location).Path
+# Pin to repo root (parent of the scripts directory) so this works from any CWD.
+$repoRoot = Split-Path -Parent $PSScriptRoot
+Set-Location -LiteralPath $repoRoot
 $tmpRoot = Join-Path ([System.IO.Path]::GetTempPath()) ("codegraphx_smoke_nodb_" + [Guid]::NewGuid().ToString("N"))
 $workRoot = Join-Path $tmpRoot "work"
 $fixtureSrc = Join-Path $repoRoot "tests\fixtures\mini_repos"

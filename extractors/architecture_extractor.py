@@ -5,18 +5,16 @@ Resolves imports, calls, and inheritance relationships.
 Computes fan_in, fan_out, instability metrics.
 """
 import os
-import ast as python_ast
 import re
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple, Set
 
-from codegraphx.core.models import (
+from core.models import (
     ASTNode, ArchNode, ArchRelationship, NodeLabel, RelationshipType,
     IngestionContext, generate_id,
 )
-from codegraphx.parsers.tree_sitter_parser import (
-    collect_nodes_by_type, parse_repository, count_functions, count_classes,
-    FUNCTION_TYPES, CLASS_TYPES,
+from parsers.tree_sitter_parser import (
+    collect_nodes_by_type, FUNCTION_TYPES, CLASS_TYPES,
 )
 
 
@@ -25,7 +23,7 @@ from codegraphx.parsers.tree_sitter_parser import (
 class ArchitectureExtractor:
     """Builds the Architectural Knowledge Graph from parsed AST nodes."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.nodes: Dict[str, ArchNode] = {}
         self.relationships: List[ArchRelationship] = []
         self._name_to_id: Dict[str, str] = {}  # qualified_name -> node_id
@@ -98,7 +96,7 @@ class ArchitectureExtractor:
         return node
 
     def _add_relationship(self, source_id: str, target_id: str,
-                          rel_type: RelationshipType, **props):
+                          rel_type: RelationshipType, **props: str) -> None:
         """Add a relationship between two nodes."""
         self.relationships.append(ArchRelationship(
             source_id=source_id,
@@ -124,9 +122,9 @@ class ArchitectureExtractor:
 
     # ── File Structure ────────────────────────────────────────────────────────
 
-    def _extract_file_structure(self, repo_path: str, repo_id: str):
+    def _extract_file_structure(self, repo_path: str, repo_id: str) -> None:
         """Walk directory tree to create Package/Module/File nodes."""
-        from codegraphx.core.config import config
+        from core.config import config
         exclude = set(config.parser.exclude_dirs)
         supported_exts = set()
         for exts in config.parser.supported_extensions.values():
@@ -168,7 +166,7 @@ class ArchitectureExtractor:
 
     # ── Definitions ───────────────────────────────────────────────────────────
 
-    def _extract_definitions(self, ast_root: ASTNode):
+    def _extract_definitions(self, ast_root: ASTNode) -> None:
         """Extract Class and Function definitions from AST."""
         file_path = ast_root.file_path
         file_id = self._file_to_id.get(file_path)
@@ -200,7 +198,7 @@ class ArchitectureExtractor:
 
     # ── Imports ───────────────────────────────────────────────────────────────
 
-    def _extract_imports(self, ast_root: ASTNode, repo_path: str):
+    def _extract_imports(self, ast_root: ASTNode, repo_path: str) -> None:
         """Extract import relationships. Resolve to internal or ExternalSymbol."""
         file_path = ast_root.file_path
         file_id = self._file_to_id.get(file_path)
@@ -267,14 +265,9 @@ class ArchitectureExtractor:
 
     # ── Calls ─────────────────────────────────────────────────────────────────
 
-    def _extract_calls(self, ast_root: ASTNode):
+    def _extract_calls(self, ast_root: ASTNode) -> None:
         """Extract function call relationships."""
-        file_path = ast_root.file_path
         call_nodes = collect_nodes_by_type(ast_root, {"call"})
-
-        # Get functions defined in this file
-        functions = collect_nodes_by_type(ast_root, FUNCTION_TYPES)
-        func_names = {f.name for f in functions if f.name}
 
         for call in call_nodes:
             caller_func = self._find_enclosing_function(call, ast_root)
@@ -319,7 +312,7 @@ class ArchitectureExtractor:
 
     # ── Inheritance ───────────────────────────────────────────────────────────
 
-    def _extract_inheritance(self, ast_root: ASTNode):
+    def _extract_inheritance(self, ast_root: ASTNode) -> None:
         """Extract class inheritance relationships."""
         classes = collect_nodes_by_type(ast_root, CLASS_TYPES)
 
@@ -346,7 +339,7 @@ class ArchitectureExtractor:
 
     # ── Metrics (Phase 2.4) ───────────────────────────────────────────────────
 
-    def _compute_metrics(self):
+    def _compute_metrics(self) -> None:
         """Compute fan_in, fan_out, instability for all nodes."""
         # Count incoming and outgoing relationships per node
         incoming: Dict[str, int] = {}
@@ -368,7 +361,7 @@ class ArchitectureExtractor:
 class ArchitectureValidator:
     """Validation queries for the Architectural Knowledge Graph."""
 
-    def __init__(self, extractor: ArchitectureExtractor):
+    def __init__(self, extractor: ArchitectureExtractor) -> None:
         self.nodes = extractor.nodes
         self.relationships = extractor.relationships
 
@@ -380,12 +373,12 @@ class ArchitectureValidator:
             if rel.type in (RelationshipType.DEPENDS_ON, RelationshipType.IMPORTS):
                 adj.setdefault(rel.source_id, set()).add(rel.target_id)
 
-        cycles = []
-        visited = set()
-        path = []
-        path_set = set()
+        cycles: List[List[str]] = []
+        visited: Set[str] = set()
+        path: List[str] = []
+        path_set: Set[str] = set()
 
-        def dfs(node_id: str):
+        def dfs(node_id: str) -> None:
             if node_id in path_set:
                 cycle_start = path.index(node_id)
                 cycle = [self.nodes[nid].name for nid in path[cycle_start:]]

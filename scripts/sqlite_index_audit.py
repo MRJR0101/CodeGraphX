@@ -8,31 +8,76 @@ import argparse
 import json
 import sqlite3
 from pathlib import Path
+from typing import Any, Dict, List, Set, Tuple
 
-RECOMMENDED_INDEXES: list[dict[str, object]] = [
+RECOMMENDED_INDEXES: List[Dict[str, Any]] = [
     {"table": "projects", "name": "idx_projects_path", "columns": ("path",)},
     {"table": "projects", "name": "idx_projects_line_count", "columns": ("line_count",)},
-    {"table": "projects", "name": "idx_projects_line_count_path", "columns": ("line_count", "path")},
-    {"table": "codegraphx_enrichment", "name": "idx_enrichment_source_path", "columns": ("source_path",)},
-    {"table": "codegraphx_enrichment", "name": "idx_enrichment_source_project", "columns": ("source_project",)},
-    {"table": "codegraphx_enrichment", "name": "idx_enrichment_updated_at", "columns": ("updated_at",)},
-    {"table": "codegraphx_file_signals", "name": "idx_file_signals_source_path", "columns": ("source_path",)},
-    {"table": "codegraphx_file_signals", "name": "idx_file_signals_collector", "columns": ("is_file_collector",)},
+    {
+        "table": "projects",
+        "name": "idx_projects_line_count_path",
+        "columns": ("line_count", "path"),
+    },
+    {
+        "table": "codegraphx_enrichment",
+        "name": "idx_enrichment_source_path",
+        "columns": ("source_path",),
+    },
+    {
+        "table": "codegraphx_enrichment",
+        "name": "idx_enrichment_source_project",
+        "columns": ("source_project",),
+    },
+    {
+        "table": "codegraphx_enrichment",
+        "name": "idx_enrichment_updated_at",
+        "columns": ("updated_at",),
+    },
+    {
+        "table": "codegraphx_file_signals",
+        "name": "idx_file_signals_source_path",
+        "columns": ("source_path",),
+    },
+    {
+        "table": "codegraphx_file_signals",
+        "name": "idx_file_signals_collector",
+        "columns": ("is_file_collector",),
+    },
     {
         "table": "codegraphx_file_signals",
         "name": "idx_file_signals_source_collector",
         "columns": ("source_path", "is_file_collector"),
     },
-    {"table": "codegraphx_file_signals", "name": "idx_file_signals_score", "columns": ("collector_score",)},
-    {"table": "codegraphx_project_signals", "name": "idx_project_signals_ratio", "columns": ("collector_ratio",)},
-    {"table": "codegraphx_project_intelligence", "name": "idx_intel_source_project", "columns": ("source_project",)},
+    {
+        "table": "codegraphx_file_signals",
+        "name": "idx_file_signals_score",
+        "columns": ("collector_score",),
+    },
+    {
+        "table": "codegraphx_project_signals",
+        "name": "idx_project_signals_ratio",
+        "columns": ("collector_ratio",),
+    },
+    {
+        "table": "codegraphx_project_intelligence",
+        "name": "idx_intel_source_project",
+        "columns": ("source_project",),
+    },
     {
         "table": "codegraphx_dependency_edges",
         "name": "idx_dep_source_internal",
         "columns": ("source_path", "is_internal"),
     },
-    {"table": "codegraphx_call_edges", "name": "idx_call_source_internal", "columns": ("source_path", "is_internal")},
-    {"table": "codegraphx_call_edges", "name": "idx_call_caller", "columns": ("caller_uid",)},
+    {
+        "table": "codegraphx_call_edges",
+        "name": "idx_call_source_internal",
+        "columns": ("source_path", "is_internal"),
+    },
+    {
+        "table": "codegraphx_call_edges",
+        "name": "idx_call_caller",
+        "columns": ("caller_uid",),
+    },
     {
         "table": "codegraphx_complexity_nodes",
         "name": "idx_complexity_source_score",
@@ -43,7 +88,11 @@ RECOMMENDED_INDEXES: list[dict[str, object]] = [
         "name": "idx_similarity_source_type",
         "columns": ("source_path", "pair_type"),
     },
-    {"table": "codegraphx_similarity_pairs", "name": "idx_similarity_score", "columns": ("similarity",)},
+    {
+        "table": "codegraphx_similarity_pairs",
+        "name": "idx_similarity_score",
+        "columns": ("similarity",),
+    },
 ]
 
 
@@ -68,12 +117,14 @@ def _table_columns(conn: sqlite3.Connection, table_name: str) -> set[str]:
     return {str(row[1]) for row in conn.execute(f"PRAGMA table_info({table_name})").fetchall()}
 
 
-def _read_indexes(conn: sqlite3.Connection, table_name: str) -> list[dict[str, object]]:
-    indexes: list[dict[str, object]] = []
+def _read_indexes(conn: sqlite3.Connection, table_name: str) -> List[Dict[str, Any]]:
+    indexes: List[Dict[str, Any]] = []
     for row in conn.execute(f"PRAGMA index_list({table_name})").fetchall():
         name = str(row[1])
         is_unique = int(row[2]) == 1
-        columns = tuple(str(col[2]) for col in conn.execute(f"PRAGMA index_info({name})").fetchall())
+        columns = tuple(
+            str(col[2]) for col in conn.execute(f"PRAGMA index_info({name})").fetchall()
+        )
         origin = str(row[3]) if len(row) >= 4 else ""
         partial = int(row[4]) == 1 if len(row) >= 5 else False
         indexes.append(
@@ -89,17 +140,18 @@ def _read_indexes(conn: sqlite3.Connection, table_name: str) -> list[dict[str, o
     return indexes
 
 
-def _has_equivalent_index(indexes: list[dict[str, object]], columns: tuple[str, ...]) -> bool:
+def _has_equivalent_index(indexes: List[Dict[str, Any]], columns: Tuple[str, ...]) -> bool:
     for idx in indexes:
-        idx_cols = tuple(idx.get("columns", ()))
+        idx_cols: Tuple[str, ...] = tuple(idx.get("columns", ()))
         if idx_cols[: len(columns)] == columns:
             return True
     return False
 
 
-def build_index_report(conn: sqlite3.Connection) -> dict[str, object]:
-    table_indexes: dict[str, list[dict[str, object]]] = {}
-    table_columns: dict[str, set[str]] = {}
+def build_index_report(conn: sqlite3.Connection) -> Dict[str, Any]:
+    """Analyze the database and report existing, missing, and skipped indexes."""
+    table_indexes: Dict[str, List[Dict[str, Any]]] = {}
+    table_columns: Dict[str, Set[str]] = {}
 
     for table in {str(r["table"]) for r in RECOMMENDED_INDEXES}:
         if not _table_exists(conn, table):
@@ -109,8 +161,8 @@ def build_index_report(conn: sqlite3.Connection) -> dict[str, object]:
         table_indexes[table] = _read_indexes(conn, table)
         table_columns[table] = _table_columns(conn, table)
 
-    missing: list[dict[str, object]] = []
-    skipped: list[dict[str, object]] = []
+    missing: List[Dict[str, Any]] = []
+    skipped: List[Dict[str, Any]] = []
 
     for rec in RECOMMENDED_INDEXES:
         table = str(rec["table"])
@@ -118,10 +170,14 @@ def build_index_report(conn: sqlite3.Connection) -> dict[str, object]:
         columns = tuple(str(c) for c in rec["columns"])
 
         if not _table_exists(conn, table):
-            skipped.append({"name": name, "table": table, "columns": columns, "reason": "table_missing"})
+            skipped.append(
+                {"name": name, "table": table, "columns": columns, "reason": "table_missing"}
+            )
             continue
         if not set(columns).issubset(table_columns[table]):
-            skipped.append({"name": name, "table": table, "columns": columns, "reason": "column_missing"})
+            skipped.append(
+                {"name": name, "table": table, "columns": columns, "reason": "column_missing"}
+            )
             continue
         if _has_equivalent_index(table_indexes[table], columns):
             continue
@@ -134,8 +190,9 @@ def build_index_report(conn: sqlite3.Connection) -> dict[str, object]:
     }
 
 
-def apply_missing_indexes(conn: sqlite3.Connection, missing: list[dict[str, object]]) -> list[dict[str, object]]:
-    applied: list[dict[str, object]] = []
+def apply_missing_indexes(conn: sqlite3.Connection, missing: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Execute CREATE INDEX statements for missing elements securely."""
+    applied: List[Dict[str, Any]] = []
     cur = conn.cursor()
     for idx in missing:
         name = str(idx["name"])
@@ -148,8 +205,8 @@ def apply_missing_indexes(conn: sqlite3.Connection, missing: list[dict[str, obje
     return applied
 
 
-def _render_text(report: dict[str, object]) -> str:
-    lines: list[str] = []
+def _render_text(report: Dict[str, Any]) -> str:
+    lines: List[str] = []
     existing = report["existing_indexes"]
     missing = report["recommended_missing"]
     skipped = report["recommended_skipped"]
@@ -162,7 +219,9 @@ def _render_text(report: dict[str, object]) -> str:
         lines.append(f"- {table}: {len(indexes)} index(es)")
         for idx in indexes:
             cols = ", ".join(idx["columns"])
-            lines.append(f"  - {idx['name']} ({cols}) unique={idx['unique']} origin={idx['origin']}")
+            lines.append(
+                f"  - {idx['name']} ({cols}) unique={idx['unique']} origin={idx['origin']}"
+            )
     lines.append("")
     lines.append(f"Missing recommended indexes: {len(missing)}")
     for idx in missing:
@@ -184,6 +243,7 @@ def _render_text(report: dict[str, object]) -> str:
 
 
 def main() -> None:
+    """Read arguments and route report builder/committer execution paths."""
     args = _parse_args()
     db_path = Path(args.db).resolve()
     if not db_path.exists():

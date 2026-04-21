@@ -40,4 +40,3 @@ def test_changed_lists_filter_only_node_types() -> None:
     assert len(file_rows) == 1
     assert fn_rows[0]["project"] in {"DemoA", "DemoB"}
     assert file_rows[0]["project"] == "DemoB"
-

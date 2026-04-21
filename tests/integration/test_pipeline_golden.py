@@ -99,4 +99,3 @@ def test_pipeline_golden_mini_repos(tmp_path: Path) -> None:
     assert extract_meta_second["cache_hits"] == 2
     assert extract_meta_second["cache_misses"] == 0
     assert extract_meta_second["events_total"] == 20
-

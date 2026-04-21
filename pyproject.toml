@@ -1,14 +1,22 @@
 [project]
 name = "codegraphx"
-version = "0.2.0"
+version = "0.3.0"
 description = "Deterministic local-first code intelligence CLI for code graph extraction and analysis"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+  "fastapi",
+  "numpy",
   "neo4j>=5.0.0",
+  "pydantic",
   "python-dotenv>=1.0.0",
   "PyYAML>=6.0.0",
   "rich>=13.0.0",
+  "sentence-transformers",
+  "tree-sitter",
+  "tree-sitter-javascript",
+  "tree-sitter-language-pack",
+  "tree-sitter-python",
   "typer>=0.12,<1.0",
 ]
 
@@ -45,13 +53,7 @@ build-backend = "hatchling.build"
 packages = ["src/codegraphx"]
 
 [tool.hatch.build.targets.sdist]
-include = [
-  "src/codegraphx",
-  "README.md",
-  "LICENSE",
-  "pyproject.toml",
-  "config",
-]
+include = ["src/codegraphx", "README.md", "LICENSE", "pyproject.toml", "config"]
 
 [tool.ruff]
 line-length = 120
@@ -89,7 +91,7 @@ select = ["E", "F", "W", "I", "UP", "S", "B", "SIM"]
 python_version = "3.11"
 strict = true
 files = ["src"]
-mypy_path = ["src"]
+mypy_path = ["src", "."]
 explicit_package_bases = true
 
 [[tool.mypy.overrides]]
@@ -105,7 +107,7 @@ testpaths = ["tests/unit", "tests/integration"]
 addopts = "--basetemp=.pytest_tmp --import-mode=importlib"
 
 [tool.coverage.run]
-source = ["."]
+source = ["src/codegraphx"]
 branch = true
 
 [tool.coverage.report]

@@ -4,28 +4,28 @@ Enriches nodes with docstrings, comments, summaries, and embeddings.
 Provides hybrid retrieval: vector similarity + graph expansion.
 """
 import re
-from typing import List, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
+
 import numpy as np
 
-from codegraphx.core.models import (
-    ArchNode, ArchRelationship, SemanticNode, NodeLabel,
-    RelationshipType, IngestionContext, generate_id,
-)
-from codegraphx.core.config import config
+from core.config import config
+from core.models import (ArchNode, ArchRelationship, IngestionContext,
+                         NodeLabel, RelationshipType, SemanticNode)
 
 
 class SemanticEnricher:
     """Phase 5.1-5.2: Enriches architectural nodes with semantic properties."""
 
-    def __init__(self, model_name: Optional[str] = None):
-        self._model = None
-        self._model_name = model_name or config.semantic.model_name
+    def __init__(self, model_name: Optional[str] = None) -> None:
+        self._model: Any = None
+        self._model_name = model_name or config.semantic.model_name  # type: ignore # pylint: disable=no-member
         self.semantic_nodes: Dict[str, SemanticNode] = {}
 
-    def _load_model(self):
+    def _load_model(self) -> None:
         """Lazy-load the embedding model."""
         if self._model is None:
             try:
+                # pylint: disable-next=import-outside-toplevel
                 from sentence_transformers import SentenceTransformer
                 self._model = SentenceTransformer(self._model_name)
             except ImportError:
@@ -97,7 +97,7 @@ class SemanticEnricher:
 
         Phase 5.2: Embed name + docstring + first N lines of body.
         """
-        max_lines = config.semantic.max_body_lines
+        max_lines = config.semantic.max_body_lines  # type: ignore # pylint: disable=no-member
         lines = code.split("\n")[:max_lines]
         body_text = "\n".join(lines)
 
@@ -118,9 +118,10 @@ class SemanticEnricher:
             return self._fallback_embed(text)
 
         try:
-            embedding = self._model.encode(text, convert_to_numpy=True)
-            return embedding.tolist()
-        except Exception:
+            # pylint: disable-next=union-attr
+            embedding = self._model.encode(text, convert_to_numpy=True) # type: ignore[union-attr, operator]
+            return embedding.tolist() # type: ignore[no-any-return, union-attr]
+        except Exception: # pylint: disable=broad-exception-caught
             return self._fallback_embed(text)
 
     def _fallback_embed(self, text: str, dim: int = 384) -> List[float]:
@@ -144,7 +145,7 @@ class HybridRetriever:
 
     def query(self, query_text: str,
               top_k: Optional[int] = None,
-              expansion_hops: Optional[int] = None) -> List[Dict]:
+              expansion_hops: Optional[int] = None) -> List[Dict[str, Any]]:
         """Hybrid retrieval pipeline.
 
         1. Generate query embedding
@@ -160,12 +161,13 @@ class HybridRetriever:
         Returns:
             List of dicts with node info and similarity scores.
         """
-        top_k = top_k or config.semantic.top_k
-        expansion_hops = expansion_hops or config.semantic.expansion_hops
+        top_k = top_k or config.semantic.top_k  # type: ignore # pylint: disable=no-member
+        expansion_hops = expansion_hops or config.semantic.expansion_hops  # type: ignore # pylint: disable=no-member
 
-        self._enricher._load_model()
+        self._enricher._load_model() # pylint: disable=protected-access
 
         # 1. Generate query embedding
+        # pylint: disable-next=protected-access
         query_embedding = np.array(self._enricher._embed(query_text))
         if len(query_embedding) == 0:
             return []
@@ -198,10 +200,11 @@ class HybridRetriever:
             arch_node = self.arch_nodes[node_id]
             sem_node = self.semantic_nodes.get(node_id)
 
+            label_str = arch_node.label.value if hasattr(arch_node.label, 'value') else str(arch_node.label)
             results.append({
                 "id": node_id,
                 "name": arch_node.name,
-                "label": arch_node.label.value if hasattr(arch_node.label, 'value') else str(arch_node.label),
+                "label": label_str,
                 "file_path": arch_node.file_path,
                 "similarity": score_map.get(node_id, 0.0),
                 "docstring": sem_node.docstring if sem_node else "",
@@ -220,10 +223,10 @@ class HybridRetriever:
             return 0.0
         return float(np.dot(a, b) / (norm_a * norm_b))
 
-    def _expand_graph(self, seed_ids: set, hops: int) -> set:
+    def _expand_graph(self, seed_ids: Set[str], hops: int) -> Set[str]:
         """Expand from seed nodes via CALLS and DEPENDS_ON relationships."""
         # Build adjacency
-        adj: Dict[str, set] = {}
+        adj: Dict[str, Set[str]] = {}
         expansion_types = {RelationshipType.CALLS, RelationshipType.DEPENDS_ON}
 
         for rel in self.relationships:
@@ -231,11 +234,11 @@ class HybridRetriever:
                 adj.setdefault(rel.source_id, set()).add(rel.target_id)
                 adj.setdefault(rel.target_id, set()).add(rel.source_id)
 
-        expanded = set()
-        frontier = set(seed_ids)
+        expanded: Set[str] = set()
+        frontier: Set[str] = set(seed_ids)
 
         for _ in range(hops):
-            next_frontier = set()
+            next_frontier: Set[str] = set()
             for node_id in frontier:
                 for neighbor in adj.get(node_id, []):
                     if neighbor not in seed_ids and neighbor not in expanded:

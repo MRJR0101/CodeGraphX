@@ -1,21 +1,33 @@
-# start-neo4j.ps1
-# Starts a Neo4j 5 container for CodeGraphX.
-# Reads credentials from .env in the same directory.
-# Safe to run repeatedly -- restarts container if it already exists.
-#
-# Usage:  .\start-neo4j.ps1
-# Stop:   docker stop neo4j-cgx
-# Wipe:   docker rm -f neo4j-cgx   (destroys all graph data)
+#Requires -Version 5.1
+<#
+.SYNOPSIS
+  Start a Neo4j 5 Docker container for CodeGraphX.
+.DESCRIPTION
+  Reads credentials from the .env beside this script. Safe to run repeatedly:
+  creates the container if missing, restarts it if stopped, leaves it alone
+  if already running. Waits for the bolt port to become ready before exiting.
 
-$CONTAINER = "neo4j-cgx"
-$IMAGE     = "neo4j:5"
-$BOLT_PORT = "7687"
-$HTTP_PORT = "7474"
+  Usage:  .\start-neo4j.ps1
+  Stop:   docker stop neo4j-cgx
+  Wipe:   docker rm -f neo4j-cgx   (destroys all graph data)
+#>
+[CmdletBinding()]
+param()
+
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Continue'
+
+Set-Location -LiteralPath $PSScriptRoot
+
+$CONTAINER = 'neo4j-cgx'
+$IMAGE     = 'neo4j:5'
+$BOLT_PORT = '7687'
+$HTTP_PORT = '7474'
 
 Write-Host "--- Neo4j startup for CodeGraphX ---"
 
 # Check Docker is running
-$dockerInfo = docker info 2>&1
+$null = docker info 2>&1
 if ($LASTEXITCODE -ne 0) {
     Write-Host "ERROR: Docker is not running. Open Docker Desktop and try again."
     exit 1

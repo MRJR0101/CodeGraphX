@@ -61,3 +61,17 @@ recommendations.json
 FEATURE_REPORT.md
 LOOP_REPORT.md
 docs/_incoming_root/
+
+# Cleanup quarantine folders (from structural cleanup passes)
+_CLEANUP_QUARANTINE_*/
+
+# Scratch / working notes at root
+Discussion.txt
+
+# Windows copy-paste duplicates
+* (1).*
+* (2).*
+* (3).*
+
+# Stray root-level Python monoliths kept in quarantine instead of tree
+# (none expected; add by name if they reappear)

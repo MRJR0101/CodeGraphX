@@ -17,10 +17,7 @@ def test_extract_emits_calls_function_edges(tmp_path: Path) -> None:
     repo = tmp_path / "repo"
     repo.mkdir(parents=True, exist_ok=True)
     (repo / "mod.py").write_text(
-        "def b():\n"
-        "    return 1\n\n"
-        "def c():\n"
-        "    return b()\n",
+        "def b():\n    return 1\n\ndef c():\n    return b()\n",
         encoding="utf-8",
     )
 
@@ -56,4 +53,3 @@ def test_extract_emits_calls_function_edges(tmp_path: Path) -> None:
 
     calls_symbol = [e for e in events if e.get("kind") == "edge" and e.get("type") == "CALLS"]
     assert calls_symbol, "expected at least one CALLS edge"
-

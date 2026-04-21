@@ -4,11 +4,10 @@ Natural language to Cypher translation with safety guards.
 Subgraph summarization pipeline.
 """
 import re
-import json
-from typing import Optional, Dict, List, Any
+from typing import Dict, List, Any
 
-from codegraphx.core.models import NodeLabel, RelationshipType, CPGRelationshipType
-from codegraphx.core.config import config
+from core.models import NodeLabel, RelationshipType, CPGRelationshipType
+from core.config import config
 
 
 # ── Schema Definition for LLM Context ────────────────────────────────────────
@@ -68,7 +67,7 @@ ALLOWED_RELATIONSHIPS = (
 class QueryValidator:
     """Phase 6.1: Validates generated Cypher queries for safety."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.forbidden = [clause.upper() for clause in config.llm.forbidden_clauses]
         self.max_nodes = config.llm.max_result_nodes
 
@@ -89,11 +88,16 @@ class QueryValidator:
                 errors.append(f"Forbidden clause detected: {clause}")
 
         # Check node limit
-        if "LIMIT" not in upper_query:
+        if "LIMIT " in upper_query:
+            # We don't want to parse fully, but we could cap limit digits if needed
+            # For phase 6, simply preventing duplicate LIMIT appending is enough.
+            pass
+        else:
             cypher = cypher.rstrip().rstrip(";") + f" LIMIT {self.max_nodes}"
 
         # Basic syntax check
-        if not cypher.strip().upper().startswith(("MATCH", "RETURN", "WITH", "OPTIONAL", "CALL", "UNWIND")):
+        valid_starts = ("MATCH", "RETURN", "WITH", "OPTIONAL", "CALL", "UNWIND")
+        if not cypher.strip().upper().startswith(valid_starts):
             errors.append("Query must start with MATCH, RETURN, WITH, OPTIONAL, CALL, or UNWIND")
 
         return {
@@ -112,7 +116,7 @@ class NLToCypherTranslator:
     any LLM backend (OpenAI, local models, etc).
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.validator = QueryValidator()
 
     def build_prompt(self, natural_language_query: str) -> str:
@@ -234,8 +238,8 @@ Keep the summary concise and actionable."""
 
         return prompt
 
-    def format_result_as_json(self, nodes: List[Dict],
-                              relationships: List[Dict]) -> Dict[str, Any]:
+    def format_result_as_json(self, nodes: List[Dict[str, Any]],
+                              relationships: List[Dict[str, Any]]) -> Dict[str, Any]:
         """Format query results as JSON for summarization.
 
         Args:

@@ -6,43 +6,42 @@ Augments the Architectural Graph with deep semantic structure:
 - Data flow: DEFINES, USES, DATA_DEPENDS_ON
 - Scope: intra-procedural only
 """
-from typing import List, Dict, Optional, Set
+from typing import List, Dict, Optional
 
-from codegraphx.core.models import (
+from core.models import (
     ASTNode, CPGNode, CPGRelationship, CPGNodeLabel, CPGRelationshipType,
     IngestionContext, generate_id,
 )
-from codegraphx.parsers.tree_sitter_parser import collect_nodes_by_type, FUNCTION_TYPES
+from parsers.tree_sitter_parser import collect_nodes_by_type, FUNCTION_TYPES
 
 
 # ── Node Type Mapping ─────────────────────────────────────────────────────────
 
 STATEMENT_TYPES = {
+    # Python
     "expression_statement", "return_statement", "assert_statement",
     "raise_statement", "pass_statement", "break_statement",
     "continue_statement", "delete_statement", "global_statement",
     "nonlocal_statement", "print_statement",
     # JS
-    "expression_statement", "return_statement", "throw_statement",
-    "variable_declaration", "lexical_declaration",
+    "throw_statement", "variable_declaration", "lexical_declaration",
 }
 
 EXPRESSION_TYPES = {
+    # Python
     "call", "binary_expression", "unary_expression", "comparison_operator",
     "boolean_operator", "not_operator", "conditional_expression",
     "subscript", "attribute", "slice",
     # JS
-    "call_expression", "binary_expression", "unary_expression",
-    "ternary_expression", "member_expression",
+    "call_expression", "ternary_expression", "member_expression",
 }
 
 CONTROL_TYPES = {
+    # Python
     "if_statement", "for_statement", "while_statement",
     "try_statement", "with_statement", "match_statement",
     # JS
-    "if_statement", "for_statement", "while_statement",
     "for_in_statement", "do_statement", "switch_statement",
-    "try_statement",
 }
 
 VARIABLE_TYPES = {"identifier"}
@@ -55,7 +54,7 @@ LITERAL_TYPES = {"string", "integer", "float", "true", "false", "none", "number"
 class CPGBuilder:
     """Builds Code Property Graph from AST nodes."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.nodes: Dict[str, CPGNode] = {}
         self.relationships: List[CPGRelationship] = []
         self._ast_to_cpg: Dict[str, str] = {}  # ast_node_id -> cpg_node_id
@@ -81,21 +80,21 @@ class CPGBuilder:
 
     # ── Function Processing ───────────────────────────────────────────────────
 
-    def _process_function(self, func_ast: ASTNode):
+    def _process_function(self, func_ast: ASTNode) -> None:
         """Process a single function: extract CPG nodes, control flow, data flow."""
         func_cpg_id = generate_id()
 
         # 1. Extract all CPG nodes from function body
         body_nodes = self._extract_cpg_nodes(func_ast, func_cpg_id)
 
-        # 2. Build AST_PARENT relationships
-        self._build_ast_parents(func_ast, func_cpg_id)
+        # 2. Build AST_PARENT relationships between concrete CPG nodes only.
+        self._build_ast_parents(func_ast, None)
 
         # 3. Build control flow graph
         self._build_control_flow(func_ast, body_nodes)
 
         # 4. Build data flow (define-use chains)
-        self._build_data_flow(func_ast, body_nodes)
+        self._build_data_flow(body_nodes)
 
     def _extract_cpg_nodes(self, ast_node: ASTNode,
                            parent_func_id: str) -> List[CPGNode]:
@@ -149,7 +148,7 @@ class CPGBuilder:
 
     # ── AST Parent Relationships ──────────────────────────────────────────────
 
-    def _build_ast_parents(self, ast_node: ASTNode, parent_cpg_id: Optional[str]):
+    def _build_ast_parents(self, ast_node: ASTNode, parent_cpg_id: Optional[str]) -> None:
         """Build AST_PARENT relationships."""
         current_cpg_id = self._ast_to_cpg.get(ast_node.id)
 
@@ -166,7 +165,7 @@ class CPGBuilder:
 
     # ── Control Flow ──────────────────────────────────────────────────────────
 
-    def _build_control_flow(self, func_ast: ASTNode, cpg_nodes: List[CPGNode]):
+    def _build_control_flow(self, func_ast: ASTNode, cpg_nodes: List[CPGNode]) -> None:
         """Build control flow graph for a function.
 
         Rules:
@@ -243,7 +242,7 @@ class CPGBuilder:
 
     # ── Data Flow ─────────────────────────────────────────────────────────────
 
-    def _build_data_flow(self, func_ast: ASTNode, cpg_nodes: List[CPGNode]):
+    def _build_data_flow(self, cpg_nodes: List[CPGNode]) -> None:
         """Build intra-procedural data flow: DEFINES, USES, DATA_DEPENDS_ON.
 
         Track assignments → DEFINES

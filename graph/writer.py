@@ -2,11 +2,10 @@
 CodeGraphX 2.0 - Graph Writer
 Persists Architectural and CPG data to Neo4j.
 """
-from typing import Dict, List, Optional
+from typing import Dict
 
 from codegraphx.core.models import (
     ArchNode, ArchRelationship, CPGNode, CPGRelationship,
-    NodeLabel, RelationshipType, CPGNodeLabel, CPGRelationshipType,
     IngestionContext, MetricsResult, SemanticNode,
 )
 from codegraphx.schema.neo4j_schema import Neo4jConnection

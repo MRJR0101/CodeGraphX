@@ -5,7 +5,7 @@ Pydantic models for AST nodes, architectural graph nodes, and CPG nodes.
 import uuid
 from enum import Enum
 from typing import Optional, List, Dict, Any
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -81,8 +81,7 @@ class ASTNode(BaseModel):
     children: List["ASTNode"] = Field(default_factory=list)
     language: Language = Language.PYTHON
 
-    class Config:
-        use_enum_values = True
+    model_config = ConfigDict(use_enum_values=True)
 
 
 # ── Phase 2: Architectural Graph Models ───────────────────────────────────────

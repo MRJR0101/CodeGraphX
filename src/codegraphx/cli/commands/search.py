@@ -77,6 +77,14 @@ def command(
             project=project,
             limit=limit,
         )
+        if not rows and paths.events.exists():
+            rows = _linear_search(
+                events_path=paths.events,
+                q=query.lower().strip(),
+                index=index,
+                project=project,
+                limit=limit,
+            )
     else:
         rows = _linear_search(
             events_path=paths.events,

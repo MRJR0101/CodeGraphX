@@ -2,7 +2,7 @@
 CodeGraphX 2.0 - Neo4j Schema Setup
 Phase 0.3: Database constraints, indexes, and initialization.
 """
-from typing import Optional
+from typing import Optional, Dict, List, Any
 from neo4j import GraphDatabase
 
 
@@ -37,58 +37,58 @@ class Neo4jConnection:
         self.uri = uri
         self.user = user
         self.password = password
-        self._driver = None
+        self._driver: Any = None
 
-    def connect(self):
+    def connect(self) -> 'Neo4jConnection':
         """Establish connection to Neo4j."""
         self._driver = GraphDatabase.driver(self.uri, auth=(self.user, self.password))
         self._driver.verify_connectivity()
         return self
 
-    def close(self):
+    def close(self) -> None:
         """Close the Neo4j driver."""
         if self._driver:
             self._driver.close()
             self._driver = None
 
     @property
-    def driver(self):
+    def driver(self) -> Any:
         if not self._driver:
             raise RuntimeError("Not connected. Call connect() first.")
         return self._driver
 
-    def session(self, **kwargs):
+    def session(self, **kwargs: Any) -> Any:
         """Get a new session."""
         return self.driver.session(**kwargs)
 
-    def initialize_schema(self):
+    def initialize_schema(self) -> None:
         """Apply all constraints and indexes."""
         with self.session() as session:
             for constraint in CONSTRAINTS:
-                session.run(constraint)
+                session.run(constraint)  # type: ignore[arg-type]
             for index in INDEXES:
-                session.run(index)
+                session.run(index)  # type: ignore[arg-type]
 
-    def reset_database(self):
+    def reset_database(self) -> None:
         """Wipe all nodes and relationships. Use with caution."""
         with self.session() as session:
-            session.run("MATCH (n) DETACH DELETE n")
+            session.run("MATCH (n) DETACH DELETE n")  # type: ignore[arg-type]
 
-    def execute_read(self, query: str, parameters: Optional[dict] = None):
+    def execute_read(self, query: str, parameters: Optional[Dict[str, Any]] = None) -> List[Dict[str, Any]]:
         """Execute a read-only query."""
         with self.session() as session:
-            result = session.run(query, parameters or {})
+            result = session.run(query, parameters or {})  # type: ignore[arg-type]
             return [record.data() for record in result]
 
-    def execute_write(self, query: str, parameters: Optional[dict] = None):
+    def execute_write(self, query: str, parameters: Optional[Dict[str, Any]] = None) -> Any:
         """Execute a write query."""
         with self.session() as session:
-            result = session.run(query, parameters or {})
+            result = session.run(query, parameters or {})  # type: ignore[arg-type]
             return result.consume()
 
-    def __enter__(self):
+    def __enter__(self) -> 'Neo4jConnection':
         self.connect()
         return self
 
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
         self.close()

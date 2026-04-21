@@ -79,8 +79,7 @@ def test_non_db_snapshot_delta_pipeline(tmp_path: Path) -> None:
 
     target = copied / "python_pkg_a" / "a.py"
     target.write_text(
-        target.read_text(encoding="utf-8")
-        + "\n\ndef subtract(a, b):\n    return a - b\n",
+        target.read_text(encoding="utf-8") + "\n\ndef subtract(a, b):\n    return a - b\n",
         encoding="utf-8",
     )
 
@@ -122,4 +121,3 @@ def test_non_db_snapshot_delta_pipeline(tmp_path: Path) -> None:
     changed_functions = report.get("changed_functions", [])
     assert isinstance(changed_functions, list)
     assert any(row.get("function") == "subtract" for row in changed_functions if isinstance(row, dict))
-

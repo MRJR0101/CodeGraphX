@@ -3,7 +3,7 @@
 [![CI](https://github.com/MRJR0101/CodeGraphX/actions/workflows/ci.yml/badge.svg)](https://github.com/MRJR0101/CodeGraphX/actions/workflows/ci.yml)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.2.0-orange)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.3.0-orange)](CHANGELOG.md)
 
 CodeGraphX is a local-first code intelligence CLI that scans repositories, parses
 source files into structured facts, emits deterministic graph events, and
@@ -53,13 +53,24 @@ cp config/projects.example.yaml config/projects.yaml
 
 2. Edit `config/projects.yaml` to point at one or more repositories.
 
-3. Run the pipeline:
+3. Run the pipeline. Either drive each stage individually:
 
 ```bash
 codegraphx scan
 codegraphx parse
 codegraphx extract
 ```
+
+...or use the one-shot orchestrator introduced in 0.3.0:
+
+```bash
+codegraphx pipeline run --skip-load
+```
+
+`pipeline run` chains scan -> parse -> extract (-> optional load) and writes
+a machine-readable manifest to `<out_dir>/pipeline_run_manifest.json`. Pass
+`--with-load` to include the Neo4j load stage; pass `--manifest PATH` to
+override the manifest location.
 
 4. Inspect the first few emitted events:
 
@@ -166,6 +177,7 @@ Source repo(s)
 | `parse` | Parse supported files into AST-like records |
 | `extract` | Convert parsed records into graph events |
 | `load` | Incrementally apply events to Neo4j |
+| `pipeline run` | One-shot scan -> parse -> extract (-> optional load) with JSON manifest |
 
 ### Analysis and Diffs
 
@@ -173,6 +185,7 @@ Source repo(s)
 |---------|---------|
 | `analyze metrics` | Function fan-in/fan-out style metrics |
 | `analyze hotspots` | High-line hotspots from loaded graph data |
+| `analyze churn-hotspots` | Churn-weighted hotspots combining events.jsonl with `git log --numstat` (no Neo4j) |
 | `analyze security` | Name-based security pattern queries |
 | `analyze debt` | Aggregate debt-style summaries |
 | `analyze refactor` | Name-filtered refactor candidates |
@@ -197,13 +210,25 @@ Source repo(s)
 | Command | Purpose |
 |---------|---------|
 | `doctor` | Validate config, imports, and optional Neo4j connectivity |
-| `completions` | Print shell-completion guidance |
+| `completions <shell>` | Emit a completion script for powershell/bash/zsh/fish |
 | `enrich backlog` | Rank candidate repos from a SQLite catalog |
 | `enrich chunk-scan` | Run chunked scans against a target root |
 | `enrich campaign` | Plan or execute ranked enrichment campaigns |
 | `enrich index-audit` | Audit recommended SQLite indexes |
 | `enrich collectors` | Compute collector-style project signals |
 | `enrich intelligence` | Compute similarity and intelligence signals |
+
+## Shell Completion (0.3.0+)
+
+PowerShell (recommended on Windows):
+
+```powershell
+codegraphx completions powershell | Out-File -Encoding utf8 $PROFILE.CurrentUserAllHosts
+. $PROFILE.CurrentUserAllHosts
+```
+
+bash / zsh / fish users can redirect the matching script into their
+shell-specific completion file and source it.
 
 ## Configuration
 

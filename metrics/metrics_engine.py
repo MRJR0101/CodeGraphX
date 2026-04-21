@@ -7,21 +7,21 @@ Separate metrics module computing:
 - Centrality (degree-based)
 - Risk heuristics
 """
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Set
 from collections import defaultdict
 
-from codegraphx.core.models import (
+from core.models import (
     ArchNode, ArchRelationship, CPGNode, CPGRelationship,
     MetricsResult, NodeLabel, RelationshipType,
-    CPGNodeLabel, CPGRelationshipType, IngestionContext,
+    CPGRelationshipType, IngestionContext,
 )
-from codegraphx.core.config import config
+from core.config import config
 
 
 class MetricsEngine:
     """Computes structural metrics and risk heuristics."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.results: Dict[str, MetricsResult] = {}
 
     def compute_all(self, ctx: IngestionContext) -> Dict[str, MetricsResult]:
@@ -67,7 +67,7 @@ class MetricsEngine:
 
                 # Risk flags
                 result.risk_flags = self._evaluate_risks(
-                    node, result, arch_nodes, arch_rels
+                    node, result, arch_rels
                 )
 
                 self.results[node.id] = result
@@ -116,8 +116,7 @@ class MetricsEngine:
 
     def _inheritance_depth(self, class_id: str,
                            arch_nodes: Dict[str, ArchNode],
-                           arch_rels: List[ArchRelationship],
-                           max_depth: int = 20) -> int:
+                           arch_rels: List[ArchRelationship]) -> int:
         """Compute max depth of inheritance chain."""
         # Build parent map
         parent_map: Dict[str, List[str]] = defaultdict(list)
@@ -132,6 +131,7 @@ class MetricsEngine:
             max_d = 0
             for parent_id in parent_map[node_id]:
                 max_d = max(max_d, 1 + depth(parent_id, visited))
+            visited.discard(node_id)
             return max_d
 
         return depth(class_id, set())
@@ -168,7 +168,6 @@ class MetricsEngine:
     # ── Risk Heuristics (Phase 4.2) ───────────────────────────────────────────
 
     def _evaluate_risks(self, node: ArchNode, metrics: MetricsResult,
-                        arch_nodes: Dict[str, ArchNode],
                         arch_rels: List[ArchRelationship]) -> List[str]:
         """Flag risk conditions."""
         flags = []
@@ -211,6 +210,7 @@ class MetricsEngine:
             max_d = 0
             for neighbor in adj.get(nid, []):
                 max_d = max(max_d, 1 + dfs(neighbor, visited))
+            # Backtrack per path so converging branches are measured correctly.
             visited.discard(nid)
             return max_d
 

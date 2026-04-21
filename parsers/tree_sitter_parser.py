@@ -8,15 +8,14 @@ Phase 1 Rules:
 """
 import os
 from pathlib import Path
-from typing import List, Optional, Dict, Tuple
+from typing import Dict, List, Optional, Set
 
-from tree_sitter import Language, Parser, Node
-import tree_sitter_python as tsp
 import tree_sitter_javascript as tsjs
+import tree_sitter_python as tsp
+from tree_sitter import Language, Node, Parser
 
-from codegraphx.core.models import ASTNode, Language as LangEnum, generate_id
-from codegraphx.core.config import config
-
+from core.config import config
+from core.models import ASTNode, generate_id
 
 # ── Language Registry ─────────────────────────────────────────────────────────
 
@@ -27,8 +26,8 @@ LANGUAGE_MAP: Dict[str, Language] = {
 
 EXTENSION_MAP: Dict[str, str] = {}
 for lang, exts in config.parser.supported_extensions.items():
-    for ext in exts:
-        EXTENSION_MAP[ext] = lang
+    for _ext in exts:
+        EXTENSION_MAP[_ext] = lang
 
 
 # ── Node types that carry names ──────────────────────────────────────────────
@@ -40,7 +39,7 @@ NAMED_NODE_TYPES = {
     # JavaScript
     "function_declaration", "class_declaration", "method_definition",
     "arrow_function", "variable_declarator",
-    "import_statement", "export_statement",
+    "export_statement",
 }
 
 FUNCTION_TYPES = {
@@ -96,7 +95,7 @@ def walk_tree(node: Node, source: bytes, file_path: str,
         file_path=file_path,
         start_line=node.start_point[0] + 1,  # 1-indexed
         end_line=node.end_point[0] + 1,
-        language=language,
+        language=language, # type: ignore[arg-type]
         children=[],
     )
 
@@ -126,8 +125,8 @@ def parse_file(file_path: str, language: Optional[str] = None) -> Optional[ASTNo
 
     # Determine language
     if language is None:
-        ext = path.suffix.lower()
-        language = EXTENSION_MAP.get(ext)
+        f_ext = path.suffix.lower()
+        language = EXTENSION_MAP.get(f_ext)
         if language is None:
             return None
 
@@ -177,9 +176,9 @@ def parse_repository(repo_path: str) -> List[ASTNode]:
 
         for fname in files:
             fpath = os.path.join(root, fname)
-            ext = Path(fname).suffix.lower()
+            f_ext = Path(fname).suffix.lower()
 
-            if ext not in EXTENSION_MAP:
+            if f_ext not in EXTENSION_MAP:
                 continue
 
             ast = parse_file(fpath)
@@ -207,7 +206,7 @@ def count_classes(ast_root: ASTNode) -> int:
     return count
 
 
-def collect_nodes_by_type(ast_root: ASTNode, node_types: set) -> List[ASTNode]:
+def collect_nodes_by_type(ast_root: ASTNode, node_types: Set[str]) -> List[ASTNode]:
     """Collect all nodes matching given types from the AST tree."""
     results = []
     if ast_root.type in node_types:

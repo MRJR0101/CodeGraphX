@@ -13,9 +13,8 @@ from pathlib import Path
 from typing import Optional, Dict, Any
 
 from codegraphx.core.models import IngestionContext, Language, generate_id
-from codegraphx.core.config import config
 from codegraphx.core.hardening import (
-    DeterminismChecker, PerformanceMonitor, QueryGuard,
+    DeterminismChecker, PerformanceMonitor,
 )
 from codegraphx.parsers.tree_sitter_parser import parse_repository, count_functions, count_classes
 from codegraphx.extractors.architecture_extractor import ArchitectureExtractor, ArchitectureValidator

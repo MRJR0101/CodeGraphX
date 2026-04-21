@@ -2,7 +2,6 @@
 Worker scaffold for asynchronous ingestion.
 """
 import time
-from typing import Dict, Any
 
 from ..config import platform_config
 from ..contracts import IngestionRequest

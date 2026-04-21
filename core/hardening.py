@@ -5,7 +5,7 @@ Query guards, determinism checks, and performance monitoring.
 import time
 import hashlib
 import json
-from typing import Optional, Dict, Any, Callable
+from typing import Dict, Any, Callable
 from functools import wraps
 
 from codegraphx.core.config import config
